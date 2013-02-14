@@ -2,23 +2,23 @@ package com.example.model;
 
 import java.util.List;
 
-public class Problem {
+public abstract class Problem {
 
 	private Integer id;
 	
 	private String type;
 	
-	private String word;
+	protected String word;
 	
-	private Integer startIndex;
+	protected Integer startIndex;
 	
-	private Integer endIndex;
+	protected Integer endIndex;
 	
-	private List<String> answers;
+	protected List<String> answers;
 	
-	private List<String> displayText;
+	protected List<String> displayText;
 	
-	private List<String> displayAnswers;
+	protected List<String> displayAnswers;
 	
 	public Problem() {
 		
@@ -96,4 +96,6 @@ public class Problem {
 	public void setDisplayAnswers(List<String> displayAnswers) {
 		this.displayAnswers = displayAnswers;
 	}
+	
+	public abstract void generateProblem();
 }

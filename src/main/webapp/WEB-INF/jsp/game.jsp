@@ -38,7 +38,11 @@
                 <h1>Sample project</h1>
             </div>
 
-
+            <div id="game-container">
+        
+            </div>
+            
+            <%@ include file="/WEB-INF/js/game.js" %>
             
         </div>
     </div>
