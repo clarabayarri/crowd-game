@@ -21,7 +21,8 @@ function ApplicationManager()
     
     
 	this.findProblem = function() {
-		getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",this.loadProblem);
+		var _this = this;
+        getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function() {_this.loadProblem;});
 	};
 	
 	this.loadProblem = function(req) {
