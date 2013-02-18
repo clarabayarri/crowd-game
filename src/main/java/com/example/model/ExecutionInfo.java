@@ -9,6 +9,10 @@ public class ExecutionInfo {
 	// Username
 	
 	private String contents;
+	
+	public ExecutionInfo(ExecutionResults results) {
+		
+	}
 
 	public Integer getTaskId() {
 		return taskId;

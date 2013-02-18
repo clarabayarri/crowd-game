@@ -5,11 +5,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
-import com.example.model.ExecutionInfo;
+import com.example.model.ExecutionResults;
 import com.example.model.Problem;
+import com.example.service.ExecutionService;
 import com.example.service.ProblemService;
 
 @Controller
@@ -18,6 +19,9 @@ public class GameController {
 
 	@Autowired
 	private ProblemService problemService;
+	
+	@Autowired
+	private ExecutionService executionService;
 	
 	@RequestMapping("/")
 	public String showGame(Map<String, Object> map) {
@@ -29,8 +33,9 @@ public class GameController {
 		return problemService.getProblem();
 	}
 	
-	public void saveExecution(ExecutionInfo execution) {
-		new RestTemplate().postForLocation("http://gentle-gorge-9660.herokuapp.com/API/execution", execution);
+	@RequestMapping(value = "/results", method = RequestMethod.POST)
+	public void saveExecution(ExecutionResults execution) {
+		executionService.saveExecutionResults(execution);
 	}
 	
 }

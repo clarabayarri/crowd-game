@@ -12,6 +12,8 @@
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    
     <!--
       IMPORTANT:
       This is Heroku specific styling. Remove to customize.
@@ -25,7 +27,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a href="/" class="brand">Crowd platform</a>
+            <a href="/" class="brand">Crowd game</a>
             <a href="/" class="brand" id="heroku">by <strong>Clara</strong></a>
         </div>
     </div>
@@ -39,10 +41,10 @@
             </div>
 
             <div id="game-container">
-        
+                <canvas id="game-canvas" width="800" height="500" style="background-color: #fff888;">You need HTML5 to see this :D</canvas>
             </div>
             
-            <%@ include file="/WEB-INF/js/game.js" %>
+            <%@ include file="/WEB-INF/js/gameJS.jsp" %>
             
         </div>
     </div>
