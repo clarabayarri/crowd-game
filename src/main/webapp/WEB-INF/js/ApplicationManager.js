@@ -22,14 +22,15 @@ function ApplicationManager()
     
 	this.findProblem = function() {
 		var _this = this;
-        getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function() {_this.loadProblem;});
+        this.getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function() {_this.loadProblem;});
 	};
 	
 	this.loadProblem = function(req) {
+        console.log(req.responseText);
 		this.problem = JSON.parse(req.responseText);
 		
 		this.gameController.startupGameController(this, this.problem);
-		
+		console.log("Start Game Controller");
 		this.startTime = new Date().getTime();
 	};
 	
@@ -40,7 +41,7 @@ function ApplicationManager()
     */
     this.startupApplicationManager = function()
     {
-        this.findProblemTemp();
+        this.findProblem();
         return this;
     }
     
@@ -69,7 +70,7 @@ function ApplicationManager()
     	postRequest(result, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
     }
 
-    function getRequest(reqUri, callback) {
+    this.getRequest = function(reqUri, callback) {
         var req = new XMLHttpRequest();
         req.open("GET", reqUri, true);
     
