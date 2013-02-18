@@ -67,6 +67,23 @@ function ApplicationManager()
     	
     	postRequest(result, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
     }
+
+    function getRequest(reqUri, callback) {
+        var req = new XMLHttpRequest();
+        req.open("GET", reqUri, true);
+    
+        req.onload = function() {
+            if (callback) {
+                try {
+                    callback(req);
+                } catch(e) {
+                    throw 'Req failed:\n' + reqUri + '\nException: ' + e + '\n';
+                }
+            }
+        };
+    
+        req.send();
+    }
     
     function postRequest(contents, reqUri, callback) {
     	var req = new XMLHttpRequest();
