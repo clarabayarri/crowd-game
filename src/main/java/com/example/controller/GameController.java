@@ -33,7 +33,7 @@ public class GameController {
 		return problemService.getProblem();
 	}
 	
-	@RequestMapping(value = "/results", method = RequestMethod.POST)
+	@RequestMapping(value = "/results")
 	public void saveExecution(ExecutionResults execution) {
 		executionService.saveExecutionResults(execution);
 	}

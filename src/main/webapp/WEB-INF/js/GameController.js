@@ -32,6 +32,10 @@ function GameController()
     	@type Problem
     */
     this.problem = null;
+    
+    this.attempts = 0;
+    
+    this.wrongAnswers = new Array();
 
     /**
         Initialises this object
@@ -55,6 +59,8 @@ function GameController()
         //this.applicationManager = new ApplicationManager().startupApplicationManager();
         
         this.gameObjects = new Array();
+        this.attempts = 0;
+        this.wrongAnswers = new Array();
         
         var wordLayout = new WordLayout();
         wordLayout.startupWordLayout(problem.displayText, this.canvas.width * 0.05, this.canvas.height * 0.20, this.canvas.width * 0.9, this.canvas.height * 0.25);
@@ -114,7 +120,7 @@ function GameController()
     }
     
     this.success = function() {
-    	this.applicationManager.onSuccess(0,"");
+    	this.applicationManager.onSuccess(this.attempts,this.wrongAnswers);
     	this.context2D.lineWidth=1;
     	this.context2D.fillStyle="#000000";
     	this.context2D.lineStyle="#000000";
@@ -126,6 +132,8 @@ function GameController()
     
     this.fail = function() {
     	var _this = this;
+    	this.wrongAnswers.push(this.gameObjects[0].getDisplayedWord());
     	setTimeout(function() {_this.reload();}, 1000);
+    	this.attempts += 1;
     };
 }

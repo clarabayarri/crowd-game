@@ -26,11 +26,9 @@ function ApplicationManager()
 	};
 	
 	this.loadProblem = function(req) {
-        console.log(req.responseText);
-		this.problem = JSON.parse(req.responseText);
+        this.problem = JSON.parse(req.responseText);
 		
 		this.gameController.startupGameController(this, this.problem);
-		console.log("Start Game Controller");
 		this.startTime = new Date().getTime();
 	};
 	
@@ -56,7 +54,7 @@ function ApplicationManager()
     	this.sendResults(time, intents, answers);
     	
     	var _this = this;
-    	setTimeout(function() {_this.findProblemTemp();}, 2000);
+    	setTimeout(function() {_this.findProblem();}, 2000);
     }
     
     this.sendResults = function(/**Number*/time, /**Number*/intents, /**Array*/answers) {
@@ -68,12 +66,14 @@ function ApplicationManager()
     	var coded = JSON.stringify(result);
     	
     	postRequest(result, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
+    	console.log(this.problem.id);
+    	console.log(coded);
     }
 
     this.getRequest = function(reqUri, callback) {
         var req = new XMLHttpRequest();
         req.open("GET", reqUri, true);
-    
+    	//req.open("GET", "task.php", true);
         req.onload = function() {
             if (callback) {
                 try {
@@ -90,8 +90,9 @@ function ApplicationManager()
     function postRequest(contents, reqUri, callback) {
     	var req = new XMLHttpRequest();
     	req.open("POST", reqUri, true);
-    	
+    	//req.open("POST", "results.php", true);
     	req.onload = function() {
+    		console.log(req);
     		if (callback) {
     			try {
     				callback(req);

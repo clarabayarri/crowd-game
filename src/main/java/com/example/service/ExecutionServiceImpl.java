@@ -23,7 +23,7 @@ public class ExecutionServiceImpl implements ExecutionService {
 	@Override
 	public void saveExecutionResults(ExecutionResults results) {
 		ExecutionInfo executionInfo = new ExecutionInfo(results);
-
+		System.out.println(executionInfo);
 		getTemplate().postForLocation("http://gentle-gorge-9660.herokuapp.com/API/execution", executionInfo);
 
 	}
