@@ -1,4 +1,4 @@
-package com.example.model;
+package com.crowdgame.model;
 
 import java.io.IOException;
 import java.util.List;

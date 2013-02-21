@@ -1,9 +1,11 @@
-package com.example.model;
+package com.crowdgame.model;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.crowdgame.model.ExecutionInfo;
+import com.crowdgame.model.ExecutionResults;
 import com.google.common.collect.Lists;
 
 public class ExecutionInfoTest {

@@ -1,8 +1,8 @@
-package com.example.factory;
+package com.crowdgame.factory;
 
-import com.example.model.InsertionProblem;
-import com.example.model.Problem;
-import com.example.model.TaskInfo;
+import com.crowdgame.model.InsertionProblem;
+import com.crowdgame.model.Problem;
+import com.crowdgame.model.TaskInfo;
 
 public class ProblemFactory {
 

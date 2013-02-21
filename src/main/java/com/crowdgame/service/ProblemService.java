@@ -1,6 +1,6 @@
-package com.example.service;
+package com.crowdgame.service;
 
-import com.example.model.Problem;
+import com.crowdgame.model.Problem;
 
 public interface ProblemService {
 

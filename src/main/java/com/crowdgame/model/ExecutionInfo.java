@@ -1,4 +1,4 @@
-package com.example.model;
+package com.crowdgame.model;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;

@@ -1,11 +1,11 @@
-package com.example.service;
+package com.crowdgame.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.factory.ProblemFactory;
-import com.example.model.Problem;
-import com.example.model.TaskInfo;
+import com.crowdgame.factory.ProblemFactory;
+import com.crowdgame.model.Problem;
+import com.crowdgame.model.TaskInfo;
 
 @Service
 public class ProblemServiceImpl implements ProblemService {

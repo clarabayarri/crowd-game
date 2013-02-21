@@ -1,10 +1,10 @@
-package com.example.service;
+package com.crowdgame.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.model.ExecutionInfo;
-import com.example.model.ExecutionResults;
+import com.crowdgame.model.ExecutionInfo;
+import com.crowdgame.model.ExecutionResults;
 
 @Service
 public class ExecutionServiceImpl implements ExecutionService {

@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.crowdgame.controller;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import java.util.HashMap;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import com.crowdgame.controller.GameController;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {

@@ -1,4 +1,4 @@
-package com.example.model;
+package com.crowdgame.model;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.crowdgame.model.TaskInfo;
 
 
 

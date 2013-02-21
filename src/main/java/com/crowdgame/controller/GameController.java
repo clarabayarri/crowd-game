@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.crowdgame.controller;
 
 import java.util.Map;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.example.model.ExecutionResults;
-import com.example.model.Problem;
-import com.example.service.ExecutionService;
-import com.example.service.ProblemService;
+import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.model.Problem;
+import com.crowdgame.service.ExecutionService;
+import com.crowdgame.service.ProblemService;
 
 @Controller
 @RequestMapping("/game")

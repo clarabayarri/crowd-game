@@ -1,4 +1,4 @@
-package com.example.service;
+package com.crowdgame.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,8 +12,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.model.Problem;
-import com.example.model.TaskInfo;
+import com.crowdgame.model.Problem;
+import com.crowdgame.model.TaskInfo;
+import com.crowdgame.service.ProblemServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProblemServiceImplTest {
