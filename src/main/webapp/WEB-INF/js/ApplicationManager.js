@@ -65,7 +65,7 @@ function ApplicationManager()
     	result.wrongAnswers = answers;
     	var coded = JSON.stringify(result);
     	
-    	postRequest(result, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
+    	postRequestAjax(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
     	console.log(this.problem.id);
     	console.log(coded);
     }
@@ -103,6 +103,21 @@ function ApplicationManager()
     	};
     	
     	req.send(contents);
+    }
+    
+    function postRequestAjax(contents, reqUri, callback) {
+    	$.ajax({
+    	    type: "POST",
+    	    url: reqUri,
+    	    data: contents,
+    	    contentType: "application/json",      
+    	    error: function(xhr, status, error) { 
+    	        alert("Error processing your request: \n" + status + " : " + error);
+    	    },
+    	    success: function(response){
+    	        
+    	    }
+    	});
     }
     
 }

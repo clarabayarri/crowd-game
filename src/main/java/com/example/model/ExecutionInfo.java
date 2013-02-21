@@ -8,10 +8,6 @@ public class ExecutionInfo {
 
 	private Integer taskId;
 	
-	// Project ID
-	
-	// Username
-	
 	private String contents;
 	
 	public ExecutionInfo(ExecutionResults results) {

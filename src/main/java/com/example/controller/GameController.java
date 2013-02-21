@@ -37,5 +37,4 @@ public class GameController {
 	public void saveExecution(@RequestBody ExecutionResults execution) {
 		executionService.saveExecutionResults(execution);
 	}
-	
 }
