@@ -13,21 +13,26 @@ function AnswerLayout()
     */
     this.answers = null;
     
-    this.startupAnswerLayout = function(/**Array*/ answers, /**Number*/ x, /**Number*/ y, /**Number*/ width, /**Number*/ height) {
-    	this.startupGameObject(x, y, width, height);
+    this.init = function(/**Array*/ answers, /**Bounds*/ bounds) {
+    	this.startupGameObject(bounds);
     	this.answers = answers;
     	
-    	var childSize = Math.min(this.width * 0.95 / this.answers.length, this.height * 0.9);
+    	this.loadChildren();
+    	return this;
+    }
+    
+    this.loadChildren = function() {
+    	var childSize = Math.min(this.bounds.width * 0.95 / this.answers.length, this.bounds.height * 0.9);
     	var padding = childSize * 0.05;
-    	var childrenY = (this.height * 0.9 - childSize);
-    	var childrenX = (this.width - childSize*this.answers.length - padding * (this.answers.length)) / 2;
+    	var childrenY = (this.bounds.height * 0.9 - childSize);
+    	var childrenX = (this.bounds.width - childSize*this.answers.length - padding * (this.answers.length)) / 2;
     	for(var i = 0; i < this.answers.length; ++i) {
-    		var child = new WordCube();
-    		child.startupWordCube(this.answers[i], this.x + childrenX + ((childSize + padding)*i) + padding, this.y + childrenY + padding, childSize - padding, childSize - padding);
+    		var childOrigin = new Point().init(this.bounds.origin.x + childrenX + ((childSize + padding)*i) + padding, this.bounds.origin.y + childrenY + padding);
+    		var childBounds = new Bounds().init(childOrigin, childSize - padding, childSize - padding);
+    		var child = new WordCube().startupWordCube(this.answers[i], childBounds);
     		this.children.push(child);
     	}
     	
-    	return this;
     }
     
     /**
@@ -37,10 +42,10 @@ function AnswerLayout()
     {
         // draw own background
         context.fillStyle = "rgba(218, 119, 117, 1.0)";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
         
         context.fillStyle = "rgba(210, 19, 117, 1.0)";
-        context.fillRect(this.x, this.y + this.height * 0.9, this.width, this.height*0.1);
+        context.fillRect(this.bounds.origin.x, this.bounds.origin.y + this.bounds.height * 0.9, this.bounds.width, this.bounds.height*0.1);
         
         // then draw the children
         for (x in this.children)
@@ -56,7 +61,7 @@ function AnswerLayout()
     
     this.getClickedAnswer = function (/**Number*/ x, /**Number*/ y) {
     	for (var child in this.children) {
-    		if (this.children[child].containsPoint(x,y)) {
+    		if (this.children[child].bounds.containsPoint(x,y)) {
     			return this.children[child].letter;
     		}
     	}

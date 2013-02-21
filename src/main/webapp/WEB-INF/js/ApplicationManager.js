@@ -65,7 +65,7 @@ function ApplicationManager()
     	result.wrongAnswers = answers;
     	var coded = JSON.stringify(result);
     	
-    	postRequestAjax(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
+    	postRequest(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
     	console.log(this.problem.id);
     	console.log(coded);
     }
@@ -88,34 +88,18 @@ function ApplicationManager()
     }
     
     function postRequest(contents, reqUri, callback) {
-    	var req = new XMLHttpRequest();
-    	req.open("POST", reqUri, true);
-    	//req.open("POST", "results.php", true);
-    	req.onload = function() {
-    		console.log(req);
-    		if (callback) {
-    			try {
-    				callback(req);
-    			} catch(e) {
-    				throw 'Req failed:\n' + reqUri + '\nException: ' + e + '\n';
-    			}
-    		}
-    	};
-    	
-    	req.send(contents);
-    }
-    
-    function postRequestAjax(contents, reqUri, callback) {
     	$.ajax({
     	    type: "POST",
     	    url: reqUri,
     	    data: contents,
     	    contentType: "application/json",      
     	    error: function(xhr, status, error) { 
-    	        alert("Error processing your request: \n" + status + " : " + error);
+    	        console.log("Error processing your request: \n" + status + " : " + error);
     	    },
     	    success: function(response){
-    	        
+    	        if (callback) {
+    	        	callback(response);
+    	        }
     	    }
     	});
     }

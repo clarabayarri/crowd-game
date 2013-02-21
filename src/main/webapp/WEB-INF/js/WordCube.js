@@ -8,9 +8,10 @@ function WordCube()
     */
     this.letter = null;
     
-    this.startupWordCube = function(/**String*/ letter, /**Number*/ x, /**Number*/ y, /**Number*/ width, /**Number*/ height) {
-    	this.startupGameObject(x, y, width, height);
+    this.startupWordCube = function(/**String*/ letter, /**Bounds*/ bounds) {
+    	this.startupGameObject(bounds);
     	this.letter = letter;
+    	return this;
     }
     
     /**
@@ -21,7 +22,7 @@ function WordCube()
     	if (this.letter != " ") {
     		// draw tile
     		context.fillStyle = "rgba(248, 238, 207, 1.0)";
-    		context.fillRect(this.x, this.y, this.width, this.height);
+    		context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
     		
     		// draw text
     		context.lineWidth=1;
@@ -30,7 +31,8 @@ function WordCube()
     		context.font="bold 36px sans-serif";
     		context.textAlign = "center";
     		context.textBaseline = "middle";
-    		context.fillText(this.letter, this.x + this.width / 2, this.y + this.height / 2);
+    		var center = this.bounds.center();
+    		context.fillText(this.letter, center.x, center.y);
     	}
         
     };

@@ -18,24 +18,13 @@ function WordLayout()
     */
     this.displayedWord = new Array();
     
-    this.startupWordLayout = function(/**Array*/ word, /**Number*/ x, /**Number*/ y, /**Number*/ width, /**Number*/ height) {
-    	this.startupGameObject(x, y, width, height);
+    this.init = function(/**Array*/ word, /**Bounds*/ bounds) {
+    	this.startupGameObject(bounds);
     	this.word = word;
     	
     	this.loadOriginalWord();
     	
     	return this;
-    }
-    
-    function initChildren() {
-    	var childSize = Math.min(this.width / this.word.length, this.height);
-    	var childrenY = 0;
-    	var childrenX = (this.width - childSize*this.word.length) / 2;
-    	for(var i = 0; i < this.word.length; ++i) {
-    		var child = new WordCube();
-    		child.startupWordCube(this.word[i], this.x + childrenX*i, this.y + childrenY, childSize, childSize);
-    		this.children.push(child);
-    	}
     }
     
     /**
@@ -45,7 +34,7 @@ function WordLayout()
     {
         // draw own background
         context.fillStyle = "rgba(218, 119, 117, 1.0)";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
         
         // then draw the children
         for (x in this.children)
@@ -69,13 +58,14 @@ function WordLayout()
     this.loadOriginalWord = function() {
     	this.displayedWord.splice(0, this.displayedWord.length);
     	this.children.splice(0, this.children.length);
-    	var childSize = Math.min(this.width / this.word.length, this.height);
-    	var childrenY = (this.height - childSize) / 2;
-    	var childrenX = (this.width - childSize*this.word.length) / 2;
+    	var childSize = Math.min(this.bounds.width / this.word.length, this.bounds.height);
+    	var childrenY = (this.bounds.height - childSize) / 2;
+    	var childrenX = (this.bounds.width - childSize*this.word.length) / 2;
     	var padding = childSize * 0.05;
     	for(var i = 0; i < this.word.length; ++i) {
-    		var child = new WordCube();
-    		child.startupWordCube(this.word[i], this.x + childrenX + (childSize*i) + padding, this.y + childrenY + padding, childSize - 2*padding, childSize - 2*padding);
+    		var childOrigin = new Point().init(this.bounds.origin.x + childrenX + (childSize*i) + padding, this.bounds.origin.y + childrenY + padding);
+    		var childBounds = new Bounds().init(childOrigin, childSize - 2*padding, childSize - 2*padding);
+    		var child = new WordCube().startupWordCube(this.word[i], childBounds);
     		this.children.push(child);
     		this.displayedWord.push(this.word[i]);
     	}

@@ -50,29 +50,30 @@ function GameController()
         this.backBuffer.width = this.canvas.width;
         this.backBuffer.height = this.canvas.height;
         this.backBufferContext2D = this.backBuffer.getContext('2d');
-        
         this.problem = problem;
-        
         this.applicationManager = applicationManager;
         
-        // create a new ApplicationManager
-        //this.applicationManager = new ApplicationManager().startupApplicationManager();
-        
-        this.gameObjects = new Array();
-        this.attempts = 0;
-        this.wrongAnswers = new Array();
-        
-        var wordLayout = new WordLayout();
-        wordLayout.startupWordLayout(problem.displayText, this.canvas.width * 0.05, this.canvas.height * 0.20, this.canvas.width * 0.9, this.canvas.height * 0.25);
-        this.gameObjects.push(wordLayout);
-        
-        var answerLayout = new AnswerLayout();
-        answerLayout.startupAnswerLayout(problem.displayAnswers, this.canvas.width* 0.15, this.canvas.height * 0.6, this.canvas.width * 0.7, this.canvas.height * 0.2);
-        this.gameObjects.push(answerLayout);
+        this.loadChildren();
         
         this.draw();
         
         return this;        
+    }
+    
+    this.loadChildren = function() {
+    	this.gameObjects = new Array();
+    	this.attempts = 0;
+    	this.wrongAnswers = new Array();
+    	
+    	var wordLayoutOrigin = new Point().init(this.canvas.width * 0.05, this.canvas.height * 0.20);
+    	var wordLayoutBounds = new Bounds().init(wordLayoutOrigin, this.canvas.width * 0.9, this.canvas.height * 0.25);
+    	var wordLayout = new WordLayout().init(this.problem.displayText, wordLayoutBounds);
+    	this.gameObjects.push(wordLayout);
+    	
+    	var answerLayoutOrigin = new Point().init(this.canvas.width* 0.15, this.canvas.height * 0.6);
+    	var answerLayoutBounds = new Bounds().init(answerLayoutOrigin, this.canvas.width * 0.7, this.canvas.height * 0.2);
+    	var answerLayout = new AnswerLayout().init(this.problem.displayAnswers, answerLayoutBounds);
+    	this.gameObjects.push(answerLayout);
     }
     
     
