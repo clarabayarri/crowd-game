@@ -22,4 +22,8 @@ function GameObject()
         this.bounds = bounds;
         return this;
     }
+    
+    this.moveTo = function(/**Point*/ point) {
+    	this.bounds.origin = point;
+    }
 }

@@ -4,8 +4,22 @@ var applicationManager = null;
 
 $('#game-canvas').click(function(e)
 {
-	// Mouse down location
 	applicationManager.onClick(e);
+});
+
+$('#game-canvas').mousedown(function(e)
+{
+	applicationManager.onMouseDown(e);
+});
+
+$('#game-canvas').mousemove(function(e)
+{
+	applicationManager.onMouseMove(e);
+});
+
+$('#game-canvas').mouseup(function(e)
+{
+	applicationManager.onMouseUp(e);
 });
 
 function init() {

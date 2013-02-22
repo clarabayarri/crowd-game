@@ -8,10 +8,19 @@ function WordCube()
     */
     this.letter = null;
     
-    this.startupWordCube = function(/**String*/ letter, /**Bounds*/ bounds) {
+    this.draggable = false;
+    this.visible = true;
+    
+    this.startupWordCube = function(/**String*/ letter, /**Bounds*/ bounds, /**Boolean*/ draggable) {
     	this.startupGameObject(bounds);
     	this.letter = letter;
     	return this;
+    }
+    
+    this.copy = function() {
+    	var newOrigin = new Point().init(this.bounds.origin.x, this.bounds.origin.y);
+    	var newBounds = new Bounds().init(newOrigin, this.bounds.width, this.bounds.height);
+    	return new WordCube().startupWordCube(this.letter, newBounds);
     }
     
     /**
@@ -19,7 +28,7 @@ function WordCube()
     */
     this.draw = function (/**CanvasRenderingContext2D*/ context)
     {
-    	if (this.letter != " ") {
+    	if (this.visible && this.letter != " ") {
     		// draw tile
     		context.fillStyle = "rgba(248, 238, 207, 1.0)";
     		context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
@@ -44,5 +53,13 @@ function WordCube()
     	if (y > this.y + this.height) return false;
     	return true;
     };
+    
+    this.hide = function() {
+    	this.visible = false;
+    }
+    
+    this.show = function() {
+    	this.visible = true;
+    }
 }
 WordCube.prototype = new GameObject;

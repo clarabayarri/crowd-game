@@ -36,6 +36,9 @@ function GameController()
     this.attempts = 0;
     
     this.wrongAnswers = new Array();
+    
+    this.initialClickPointDifference = new Point();
+    this.moving = false;
 
     /**
         Initialises this object
@@ -100,9 +103,10 @@ function GameController()
     };
     
     this.onClick = function(e) {
-    	var x = e.pageX - this.canvas.getBoundingClientRect().left;
-    	var y = e.pageY - this.canvas.getBoundingClientRect().toprecision;
-    	var answer = this.gameObjects[1].getClickedAnswer(x,y);
+    	var clickPoint = this.getEventPosition(e);
+    	var answer = this.gameObjects[1].getClickedAnswer(clickPoint);
+    	this.moving = false;
+    	this.gameObjects[1].hideChildUnderPoint(clickPoint);
     	if (answer != null) {
     		this.gameObjects[0].setChosenAnswer(answer);
     		this.draw();
@@ -113,6 +117,57 @@ function GameController()
     			this.fail();
     		}
     	}
+    }
+    
+    this.onMouseDown = function(e) {
+    	var clickPoint = this.getEventPosition(e);
+    	var touchedTile = this.gameObjects[1].getClickedTile(clickPoint);
+    	if (touchedTile != null) {
+    		this.initialClickPointDifference = new Point().init(clickPoint.x - touchedTile.bounds.origin.x, clickPoint.y - touchedTile.bounds.origin.y);
+    		this.moving = true;
+    	}
+    }
+    
+    this.onMouseMove = function(e) {
+    	if (this.moving) {
+    		var clickPoint = this.getEventPosition(e);
+    		if (this.gameObjects.length < 3) {
+    			var touchedTile = this.gameObjects[1].getClickedTile(clickPoint);
+    			if (touchedTile != null) {
+    				this.gameObjects.push(touchedTile);
+    				this.gameObjects[2].moveTo(new Point().init(clickPoint.x - this.initialClickPointDifference.x, clickPoint.y - this.initialClickPointDifference.y));
+    				this.gameObjects[1].hideChildUnderPoint(clickPoint);
+    			}
+    		} else {
+    			this.gameObjects[2].moveTo(new Point().init(clickPoint.x - this.initialClickPointDifference.x, clickPoint.y - this.initialClickPointDifference.y));
+    		}
+    		this.draw();
+    	}
+    }
+    
+    this.onMouseUp = function(e) {
+    	if (this.moving && this.gameObjects.length > 2) {
+    		var clickPoint = this.getEventPosition(e);
+    		var answer = this.gameObjects[2].letter;
+    		this.gameObjects.pop();
+    		this.moving = false;
+    		
+    		this.gameObjects[0].setChosenAnswer(answer);
+    		this.moving = false;
+    		this.draw();
+    		
+    		if (this.gameObjects[0].getDisplayedWord() == this.problem.word) {
+    			this.success();
+    		} else {
+    			this.fail();
+    		}
+    	}
+    }
+    
+    this.getEventPosition = function(e) {
+    	var x = e.pageX - this.canvas.getBoundingClientRect().left;
+    	var y = e.pageY - this.canvas.getBoundingClientRect().top;
+    	return new Point().init(x, y);
     }
     
     this.reload = function() {
@@ -136,5 +191,6 @@ function GameController()
     	this.wrongAnswers.push(this.gameObjects[0].getDisplayedWord());
     	setTimeout(function() {_this.reload();}, 1000);
     	this.attempts += 1;
+    	this.gameObjects[1].showAllChildren();
     };
 }

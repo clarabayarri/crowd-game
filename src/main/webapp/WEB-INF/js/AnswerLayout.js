@@ -59,14 +59,36 @@ function AnswerLayout()
     };
     
     
-    this.getClickedAnswer = function (/**Number*/ x, /**Number*/ y) {
+    this.getClickedAnswer = function (/**Point*/ point) {
+    	var clickedTile = this.getClickedTile(point);
+    	if (clickedTile != null) return clickedTile.letter;
+    	return null;
+    };
+    
+    this.getClickedTile = function(/**Point*/ point) {
     	for (var child in this.children) {
-    		if (this.children[child].bounds.containsPoint(x,y)) {
-    			return this.children[child].letter;
+    		if (this.children[child].bounds.containsPoint(point)) {
+    			return this.children[child].copy();
     		}
     	}
     	return null;
-    };
+    }
+    
+    this.hideChildUnderPoint = function(/**Point*/ point) {
+    	for (var child in this.children) {
+    		if (this.children[child].bounds.containsPoint(point)) {
+    			this.children[child].hide();
+    		}
+    	}
+    }
+    
+    this.showAllChildren = function() {
+    	for (var child in this.children) {
+    		if (!this.children[child].visible) {
+    			this.children[child].show();
+    		}
+    	}
+    }
     
 }
 

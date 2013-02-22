@@ -26,11 +26,11 @@ function Bounds()
     	return this;
     }
     
-    this.containsPoint = function (/**Number*/ x, /**Number*/ y) {
-    	if (x < this.origin.x) return false;
-    	if (y < this.origin.y) return false;
-    	if (x > this.origin.x + this.width) return false;
-    	if (y > this.origin.y + this.height) return false;
+    this.containsPoint = function (/**Point*/ point) {
+    	if (point.x < this.origin.x) return false;
+    	if (point.y < this.origin.y) return false;
+    	if (point.x > this.origin.x + this.width) return false;
+    	if (point.y > this.origin.y + this.height) return false;
     	return true;
     };
     

@@ -39,13 +39,31 @@ function ApplicationManager()
     */
     this.startupApplicationManager = function()
     {
-        this.findProblem();
+        this.findProblemTemp();
         return this;
     }
     
     this.onClick = function(e) {
     	if (this.gameController != null) {
     		this.gameController.onClick(e);
+    	}
+    }
+    
+    this.onMouseDown = function(e) {
+    	if (this.gameController != null) {
+    		this.gameController.onMouseDown(e);
+    	}
+    }
+    
+    this.onMouseMove = function(e) {
+    	if (this.gameController != null) {
+    		this.gameController.onMouseMove(e);
+    	}
+    }
+    
+    this.onMouseUp = function(e) {
+    	if (this.gameController != null) {
+    		this.gameController.onMouseUp(e);
     	}
     }
     

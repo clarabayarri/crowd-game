@@ -19,12 +19,4 @@ function Point()
     	this.y = y;
     	return this;
     }
-    
-    this.sumPoint = function(/**Point*/ point) {
-    	return new Point().init(this.x + point.x, this.y + point.y);
-    }
-    
-    this.sumValue = function(/**Number*/ x, /**Number*/ y) {
-    	return new Point().init(this.x + x, this.y + y);
-    }
 }
