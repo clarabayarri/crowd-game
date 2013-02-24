@@ -3,16 +3,15 @@
 */
 function WordCube()
 {
-    /** An array of strings representing the letters
-    	@type Array
-    */
+    this.id = 0;
+    
     this.letter = null;
     
-    this.draggable = false;
     this.visible = true;
     
-    this.startupWordCube = function(/**String*/ letter, /**Bounds*/ bounds, /**Boolean*/ draggable) {
+    this.startupWordCube = function(/**Number*/ id, /**String*/ letter, /**Bounds*/ bounds) {
     	this.startupGameObject(bounds);
+    	this.id = id;
     	this.letter = letter;
     	return this;
     }
@@ -20,7 +19,7 @@ function WordCube()
     this.copy = function() {
     	var newOrigin = new Point().init(this.bounds.origin.x, this.bounds.origin.y);
     	var newBounds = new Bounds().init(newOrigin, this.bounds.width, this.bounds.height);
-    	return new WordCube().startupWordCube(this.letter, newBounds);
+    	return new WordCube().startupWordCube(this.id, this.letter, newBounds);
     }
     
     /**
@@ -53,13 +52,5 @@ function WordCube()
     	if (y > this.y + this.height) return false;
     	return true;
     };
-    
-    this.hide = function() {
-    	this.visible = false;
-    }
-    
-    this.show = function() {
-    	this.visible = true;
-    }
 }
 WordCube.prototype = new GameObject;

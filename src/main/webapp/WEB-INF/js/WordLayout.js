@@ -3,24 +3,13 @@
 */
 function WordLayout()
 {
-    /** An array of game objects 
-        @type Array
-    */
-    this.children = new Array();
-    
-    /** An array of strings representing the letters
-    	@type Array
-    */
-    this.word = null;
-    
     /** An array of strings representing the displayed letters
     	@type Array
     */
     this.displayedWord = new Array();
     
-    this.init = function(/**Array*/ word, /**Bounds*/ bounds) {
-    	this.startupGameObject(bounds);
-    	this.word = word;
+    this.init = function(/**Array*/ letters, /**Bounds*/ bounds) {
+    	this.startupTileLayout(letters, bounds);
     	
     	this.loadOriginalWord();
     	
@@ -47,38 +36,92 @@ function WordLayout()
     };
     
     this.setChosenAnswer = function(/**String */ answer) {
-    	for (var child in this.word) {
-    		if (this.word[child] == " ") {
+    	for (var child in this.letters) {
+    		if (this.letters[child] == " ") {
     			this.children[child].letter = answer;
     			this.displayedWord[child] = answer;
     		}
     	}
     };
     
+    this.appendChosenAnswer = function(/**String */ answer) {
+    	var lastChild = this.children[this.children.length -1];
+    	var childOrigin = new Point().init(lastChild.bounds.origin.x + lastChild.bounds.width + 2 * lastChild.bounds.width * 0.05, lastChild.bounds.origin.y);
+    	var childBounds = new Bounds().init(childOrigin, lastChild.bounds.width, lastChild.bounds.height);
+    	var child = new WordCube().startupWordCube(lastChild.id + 1, answer, childBounds);
+    	this.children.push(child);
+    	this.displayedWord.push(answer);
+    }
+    
+    this.setChosenAnswerForTileUnderPoint = function(/**Point*/ point, /**String */ answer) {
+    	for (var child in this.children) {
+    		if (this.children[child].bounds && this.children[child].bounds.containsPoint(point)) {
+    			this.children[child].letter = answer;
+    			this.displayedWord[child] = answer;
+    			return;
+    		}
+    	}
+    };
+    
     this.loadOriginalWord = function() {
     	this.displayedWord.splice(0, this.displayedWord.length);
+    	for(var i = 0; i < this.letters.length; ++i) {
+    		this.displayedWord.push(this.letters[i]);
+    	}
+    	this.loadChildren();
+    }
+    
+    this.loadChildren = function() {
     	this.children.splice(0, this.children.length);
-    	var childSize = Math.min(this.bounds.width / this.word.length, this.bounds.height);
+    	var childSize = Math.min(this.bounds.width / this.displayedWord.length, this.bounds.height);
     	var childrenY = (this.bounds.height - childSize) / 2;
-    	var childrenX = (this.bounds.width - childSize*this.word.length) / 2;
+    	var childrenX = (this.bounds.width - childSize*this.displayedWord.length) / 2;
     	var padding = childSize * 0.05;
-    	for(var i = 0; i < this.word.length; ++i) {
+    	for(var i = 0; i < this.displayedWord.length; ++i) {
     		var childOrigin = new Point().init(this.bounds.origin.x + childrenX + (childSize*i) + padding, this.bounds.origin.y + childrenY + padding);
     		var childBounds = new Bounds().init(childOrigin, childSize - 2*padding, childSize - 2*padding);
-    		var child = new WordCube().startupWordCube(this.word[i], childBounds);
+    		var child = new WordCube().startupWordCube(i, this.displayedWord[i], childBounds);
     		this.children.push(child);
-    		this.displayedWord.push(this.word[i]);
     	}
     }
     
     this.getDisplayedWord = function() {
     	var text = "";
     	for (var i = 0; i < this.displayedWord.length; ++i) {
-    		text = text + this.displayedWord[i];
+    		if (this.children[i].visible) {
+    			text = text + this.displayedWord[i];
+    		}
     	}
     	return text;
     };
     
+    this.removeChildWithId = function(/**Number*/ id) {
+    	for (var child in this.children) {
+    		if (this.children[child].id == id) {
+    			this.displayedWord.splice(child,1);
+    			this.loadChildren();
+    			return;
+    		}
+    	}
+    }
+    
+    this.getCutIndexForPoint = function(/**Point*/ point) {
+    	if (point.x >= this.bounds.origin.x && point.x <= this.bounds.origin.x + this.bounds.width) {
+    		var index = 0;
+    		for (var i = 0; i < this.children.length; ++i) {
+    			if (point.x > this.children[i].bounds.origin.x + (this.children[i].bounds.width / 2)) {
+    				++index;
+    			}
+    		}
+    		return index;
+    	}
+    }
+    
+    this.addSpaceAtIndex = function(/**Number*/ index) {
+    	this.displayedWord.splice(index, 0, " ");
+    	this.loadChildren();
+    }
+    
 }
 
-WordLayout.prototype = new GameObject;
+WordLayout.prototype = new TileLayout;

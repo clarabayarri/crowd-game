@@ -14,8 +14,11 @@ function ApplicationManager()
 	
     this.findProblemTemp = function() {
         var req = new Object();
-        req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["e","a","b","r"]}';
-        
+        //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["e","i","o","u"]}';
+        //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
+        //req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
+        //req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
+        req.responseText = '{"id":299,"type":"separation","word":"no ves","displayText":["n","o","v","e","s"],"displayAnswers":[]}';
         this.loadProblem(req);
     };
     
@@ -28,7 +31,18 @@ function ApplicationManager()
 	this.loadProblem = function(req) {
         this.problem = JSON.parse(req.responseText);
 		
-		this.gameController.startupGameController(this, this.problem);
+		if (this.problem.type == 'insertion') {
+			this.gameController = new InsertionGameController().startupInsertionGameController(this, this.problem);
+		} else if (this.problem.type == 'omission') {
+			this.gameController = new OmissionGameController().startupOmissionGameController(this, this.problem);
+		} else if (this.problem.type == 'substitution') {
+			this.gameController = new SubstitutionGameController().startupSubstitutionGameController(this, this.problem);
+		} else if (this.problem.type == 'derivation') {
+			this.gameController = new DerivationGameController().startupDerivationGameController(this, this.problem);
+		} else if (this.problem.type == 'separation') {
+			this.gameController = new SeparationGameController().startupSeparationGameController(this, this.problem);
+		}
+		
 		this.startTime = new Date().getTime();
 	};
 	

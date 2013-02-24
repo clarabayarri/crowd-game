@@ -39,6 +39,10 @@ function GameController()
     
     this.initialClickPointDifference = new Point();
     this.moving = false;
+    
+    this.wordLayout = null;
+    this.answerLayout = null;
+    this.movingTile = null;
 
     /**
         Initialises this object
@@ -56,27 +60,11 @@ function GameController()
         this.problem = problem;
         this.applicationManager = applicationManager;
         
-        this.loadChildren();
-        
-        this.draw();
+        this.gameObjects = new Array();
+        this.attempts = 0;
+        this.wrongAnswers = new Array();
         
         return this;        
-    }
-    
-    this.loadChildren = function() {
-    	this.gameObjects = new Array();
-    	this.attempts = 0;
-    	this.wrongAnswers = new Array();
-    	
-    	var wordLayoutOrigin = new Point().init(this.canvas.width * 0.05, this.canvas.height * 0.20);
-    	var wordLayoutBounds = new Bounds().init(wordLayoutOrigin, this.canvas.width * 0.9, this.canvas.height * 0.25);
-    	var wordLayout = new WordLayout().init(this.problem.displayText, wordLayoutBounds);
-    	this.gameObjects.push(wordLayout);
-    	
-    	var answerLayoutOrigin = new Point().init(this.canvas.width* 0.15, this.canvas.height * 0.6);
-    	var answerLayoutBounds = new Bounds().init(answerLayoutOrigin, this.canvas.width * 0.7, this.canvas.height * 0.2);
-    	var answerLayout = new AnswerLayout().init(this.problem.displayAnswers, answerLayoutBounds);
-    	this.gameObjects.push(answerLayout);
     }
     
     
@@ -88,6 +76,8 @@ function GameController()
         // clear the drawing contexts
         this.backBufferContext2D.clearRect(0, 0, this.backBuffer.width, this.backBuffer.height);
         this.context2D.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // draw background
         
         // then draw the game objects
         for (x in this.gameObjects)
@@ -102,65 +92,11 @@ function GameController()
         this.context2D.drawImage(this.backBuffer, 0, 0);
     };
     
-    this.onClick = function(e) {
-    	var clickPoint = this.getEventPosition(e);
-    	var answer = this.gameObjects[1].getClickedAnswer(clickPoint);
-    	this.moving = false;
-    	this.gameObjects[1].hideChildUnderPoint(clickPoint);
-    	if (answer != null) {
-    		this.gameObjects[0].setChosenAnswer(answer);
-    		this.draw();
-    		
-    		if (this.gameObjects[0].getDisplayedWord() == this.problem.word) {
-    			this.success();
-    		} else {
-    			this.fail();
-    		}
-    	}
-    }
-    
-    this.onMouseDown = function(e) {
-    	var clickPoint = this.getEventPosition(e);
-    	var touchedTile = this.gameObjects[1].getClickedTile(clickPoint);
-    	if (touchedTile != null) {
-    		this.initialClickPointDifference = new Point().init(clickPoint.x - touchedTile.bounds.origin.x, clickPoint.y - touchedTile.bounds.origin.y);
-    		this.moving = true;
-    	}
-    }
-    
-    this.onMouseMove = function(e) {
-    	if (this.moving) {
-    		var clickPoint = this.getEventPosition(e);
-    		if (this.gameObjects.length < 3) {
-    			var touchedTile = this.gameObjects[1].getClickedTile(clickPoint);
-    			if (touchedTile != null) {
-    				this.gameObjects.push(touchedTile);
-    				this.gameObjects[2].moveTo(new Point().init(clickPoint.x - this.initialClickPointDifference.x, clickPoint.y - this.initialClickPointDifference.y));
-    				this.gameObjects[1].hideChildUnderPoint(clickPoint);
-    			}
-    		} else {
-    			this.gameObjects[2].moveTo(new Point().init(clickPoint.x - this.initialClickPointDifference.x, clickPoint.y - this.initialClickPointDifference.y));
-    		}
-    		this.draw();
-    	}
-    }
-    
-    this.onMouseUp = function(e) {
-    	if (this.moving && this.gameObjects.length > 2) {
-    		var clickPoint = this.getEventPosition(e);
-    		var answer = this.gameObjects[2].letter;
-    		this.gameObjects.pop();
-    		this.moving = false;
-    		
-    		this.gameObjects[0].setChosenAnswer(answer);
-    		this.moving = false;
-    		this.draw();
-    		
-    		if (this.gameObjects[0].getDisplayedWord() == this.problem.word) {
-    			this.success();
-    		} else {
-    			this.fail();
-    		}
+    this.checkForSuccess = function() {
+    	if (this.wordLayout.getDisplayedWord() == this.problem.word) {
+    		this.success();
+    	} else {
+    		this.fail();
     	}
     }
     
@@ -171,9 +107,17 @@ function GameController()
     }
     
     this.reload = function() {
-    	this.gameObjects[0].loadOriginalWord();
+    	this.reloadInternal();
+    	if (this.wordLayout) {
+    		this.wordLayout.loadOriginalWord();
+    	}
+    	if (this.answerLayout) {
+    		this.answerLayout.showAllChildren();
+    	}
     	this.draw();
     }
+    
+    this.reloadInternal = function() {}
     
     this.success = function() {
     	this.applicationManager.onSuccess(this.attempts,this.wrongAnswers);
@@ -188,9 +132,9 @@ function GameController()
     
     this.fail = function() {
     	var _this = this;
-    	this.wrongAnswers.push(this.gameObjects[0].getDisplayedWord());
+    	this.wrongAnswers.push(this.wordLayout.getDisplayedWord());
     	setTimeout(function() {_this.reload();}, 1000);
     	this.attempts += 1;
-    	this.gameObjects[1].showAllChildren();
+    	
     };
 }

@@ -11,6 +11,8 @@ function GameObject()
     */
     this.bounds = null;
     
+    this.visible = true;
+    
     /**
         Initialises the object, and adds it to the list of objects held by the GameObjectManager.
         @param x        The position on the X axis
@@ -25,5 +27,13 @@ function GameObject()
     
     this.moveTo = function(/**Point*/ point) {
     	this.bounds.origin = point;
+    }
+    
+    this.hide = function() {
+    	this.visible = false;
+    }
+    
+    this.show = function() {
+    	this.visible = true;
     }
 }
