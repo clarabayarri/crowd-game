@@ -12,6 +12,7 @@ function VerticalAnswerLayout()
     }
     
     this.loadChildren = function() {
+    	this.children.splice(0, this.children.length);
     	var childWidth = this.bounds.width;
     	var childHeight = this.bounds.height / this.letters.length;
     	var childrenX = (this.bounds.width - childWidth) / 2;

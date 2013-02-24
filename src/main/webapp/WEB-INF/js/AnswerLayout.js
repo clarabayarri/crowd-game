@@ -12,6 +12,7 @@ function AnswerLayout()
     }
     
     this.loadChildren = function() {
+    	this.children.splice(0,this.children.length);
     	var childSize = Math.min(this.bounds.width * 0.95 / this.letters.length, this.bounds.height * 0.9);
     	var padding = childSize * 0.05;
     	var childrenY = (this.bounds.height * 0.9 - childSize);
