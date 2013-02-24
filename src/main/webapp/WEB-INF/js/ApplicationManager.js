@@ -39,7 +39,7 @@ function ApplicationManager()
     */
     this.startupApplicationManager = function()
     {
-        this.findProblemTemp();
+        this.findProblem();
         return this;
     }
     
