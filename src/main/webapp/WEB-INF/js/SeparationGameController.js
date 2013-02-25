@@ -26,8 +26,7 @@ function SeparationGameController()
     	this.wordLayout = wordLayout;
     }
     
-    this.onClick = function(e) {
-    	var clickPoint = this.getEventPosition(e);
+    this.onClickInternal = function(/**Point*/ clickPoint) {
     	var answer = this.wordLayout.getCutIndexForPoint(clickPoint);
     	this.moving = false;
     	if (answer != null) {
@@ -38,8 +37,7 @@ function SeparationGameController()
     	}
     }
     
-    this.onMouseDown = function(e) {
-    	var clickPoint = this.getEventPosition(e);
+    this.onMouseDownInternal = function(/**Point*/ clickPoint) {
     	var touchedTile = this.wordLayout.getClickedTile(clickPoint);
     	if (touchedTile != null) {
     		this.initialClickPointDifference = clickPoint;
@@ -47,16 +45,15 @@ function SeparationGameController()
     	}
     }
     
-    this.onMouseMove = function(e) {
+    this.onMouseMoveInternal = function(/**Point*/ clickPoint) {
     	
     }
     
-    this.onMouseUp = function(e) {
+    this.onMouseUpInternal = function(/**Point*/ point) {
     	if (this.moving) {
     		this.moving = false;
-    		var clickPoint = this.getEventPosition(e);
-    		var midPoint = new Point().init(this.initialClickPointDifference.x + (clickPoint.x - this.initialClickPointDifference.x)/2, this.initialClickPointDifference.y + (clickPoint.y - this.initialClickPointDifference.y)/2);
-    		var answer = this.wordLayout.getCutIndexForPoint(clickPoint);
+    		var midPoint = new Point().init(this.initialClickPointDifference.x + (point.x - this.initialClickPointDifference.x)/2, this.initialClickPointDifference.y + (point.y - this.initialClickPointDifference.y)/2);
+    		var answer = this.wordLayout.getCutIndexForPoint(midPoint);
     		if (answer != null) {
     			this.wordLayout.addSpaceAtIndex(answer);
     			this.draw();

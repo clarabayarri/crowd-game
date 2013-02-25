@@ -31,6 +31,9 @@ function GameController()
     /** The problem to be displayed
     	@type Problem
     */
+    
+    this.touchEnabled = true;
+    
     this.problem = null;
     
     this.attempts = 0;
@@ -100,6 +103,42 @@ function GameController()
     	}
     }
     
+    this.onClick = function(e) {
+    	if (this.touchEnabled) {
+    		var clickPoint = this.getEventPosition(e);
+    		this.onClickInternal(clickPoint);
+    	}
+    }
+    
+    this.onClickInternal = function(/**Point*/ clickPoint) {}
+    
+    this.onMouseDown = function(e) {
+    	if (this.touchEnabled) {
+    		var clickPoint = this.getEventPosition(e);
+    		this.onMouseDownInternal(clickPoint);
+    	}
+    }
+    
+    this.onMouseDownInternal = function(/**Point*/ clickPoint) {}
+    
+    this.onMouseMove = function(e) {
+    	if (this.touchEnabled) {
+    		var clickPoint = this.getEventPosition(e);
+    		this.onMouseMoveInternal(clickPoint);
+    	}
+    }
+    
+    this.onMouseMoveInternal = function(/**Point*/ clickPoint) {}
+    
+    this.onMouseUp = function(e) {
+    	if (this.touchEnabled) {
+    		var clickPoint = this.getEventPosition(e);
+    		this.onMouseUpInternal(clickPoint);
+    	}
+    }
+    
+    this.onMouseUpInternal = function(/**Point*/ clickPoint) {}
+    
     this.getEventPosition = function(e) {
     	var x = e.pageX - this.canvas.getBoundingClientRect().left;
     	var y = e.pageY - this.canvas.getBoundingClientRect().top;
@@ -108,6 +147,7 @@ function GameController()
     
     this.reload = function() {
     	this.reloadInternal();
+    	this.touchEnabled = true;
     	if (this.wordLayout) {
     		this.wordLayout.loadOriginalWord();
     	}
@@ -120,6 +160,7 @@ function GameController()
     this.reloadInternal = function() {}
     
     this.success = function() {
+    	this.touchEnabled = false;
     	this.applicationManager.onSuccess(this.attempts,this.wrongAnswers);
     	this.context2D.lineWidth=1;
     	this.context2D.fillStyle="#000000";
@@ -133,6 +174,7 @@ function GameController()
     this.fail = function() {
     	var _this = this;
     	this.wrongAnswers.push(this.wordLayout.getDisplayedWord());
+    	this.touchEnabled = false;
     	setTimeout(function() {_this.reload();}, 1000);
     	this.attempts += 1;
     	

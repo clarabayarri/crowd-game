@@ -26,8 +26,7 @@ function OmissionGameController()
     	this.wordLayout = wordLayout;
     }
     
-    this.onClick = function(e) {
-    	var clickPoint = this.getEventPosition(e);
+    this.onClickInternal = function(/**Point*/ clickPoint) {
     	var answer = this.wordLayout.getClickedTile(clickPoint);
     	this.moving = false;
     	if (answer != null) {
@@ -38,8 +37,7 @@ function OmissionGameController()
     	}
     }
     
-    this.onMouseDown = function(e) {
-    	var clickPoint = this.getEventPosition(e);
+    this.onMouseDownInternal = function(/**Point*/ clickPoint) {
     	var touchedTile = this.wordLayout.getClickedTile(clickPoint);
     	if (touchedTile != null) {
     		this.initialClickPointDifference = new Point().init(clickPoint.x - touchedTile.bounds.origin.x, clickPoint.y - touchedTile.bounds.origin.y);
@@ -47,9 +45,8 @@ function OmissionGameController()
     	}
     }
     
-    this.onMouseMove = function(e) {
+    this.onMouseMoveInternal = function(/**Point*/ clickPoint) {
     	if (this.moving) {
-    		var clickPoint = this.getEventPosition(e);
     		if (!this.movingTile) {
     			var touchedTile = this.wordLayout.getClickedTile(clickPoint);
     			if (touchedTile != null) {
@@ -65,7 +62,7 @@ function OmissionGameController()
     	}
     }
     
-    this.onMouseUp = function(e) {
+    this.onMouseUpInternal = function(/**Point*/ point) {
     	if (this.moving && this.movingTile) {
     		this.gameObjects.pop();
     		

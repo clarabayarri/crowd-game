@@ -32,8 +32,7 @@ function DerivationGameController()
     	this.answerLayout = answerLayout;
     }
     
-    this.onClick = function(e) {
-    	var clickPoint = this.getEventPosition(e);
+    this.onClickInternal = function(/**Point*/ clickPoint) {
     	var answer = this.answerLayout.getClickedTile(clickPoint);
     	this.moving = false;
     	if (answer != null) {
@@ -46,8 +45,7 @@ function DerivationGameController()
     	}
     }
     
-    this.onMouseDown = function(e) {
-    	var clickPoint = this.getEventPosition(e);
+    this.onMouseDownInternal = function(/**Point*/ clickPoint) {
     	var touchedTile = this.answerLayout.getClickedTile(clickPoint);
     	if (touchedTile != null) {
     		this.initialClickPointDifference = new Point().init(clickPoint.x - touchedTile.bounds.origin.x, clickPoint.y - touchedTile.bounds.origin.y);
@@ -55,9 +53,8 @@ function DerivationGameController()
     	}
     }
     
-    this.onMouseMove = function(e) {
+    this.onMouseMoveInternal = function(/**Point*/ clickPoint) {
     	if (this.moving) {
-    		var clickPoint = this.getEventPosition(e);
     		if (!this.movingTile) {
     			var touchedTile = this.answerLayout.getClickedTile(clickPoint);
     			if (touchedTile != null) {
@@ -73,7 +70,7 @@ function DerivationGameController()
     	}
     }
     
-    this.onMouseUp = function(e) {
+    this.onMouseUpInternal = function(/**Point*/ point) {
     	if (this.moving && this.movingTile) {
     		var answer = this.movingTile.letter;
     		this.gameObjects.pop();
