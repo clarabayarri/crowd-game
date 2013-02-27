@@ -46,6 +46,7 @@ function GameController()
     this.wordLayout = null;
     this.answerLayout = null;
     this.movingTile = null;
+    this.continueDialog = null;
 
     /**
         Initialises this object
@@ -104,8 +105,10 @@ function GameController()
     }
     
     this.onClick = function(e) {
-    	if (this.touchEnabled) {
-    		var clickPoint = this.getEventPosition(e);
+    	var clickPoint = this.getEventPosition(e);
+    	if (this.continueDialog) {
+    		this.checkForContinue(clickPoint);
+    	} else if (this.touchEnabled) {
     		this.onClickInternal(clickPoint);
     	}
     }
@@ -145,6 +148,12 @@ function GameController()
     	return new Point().init(x, y);
     }
     
+    this.checkForContinue = function(/**Point*/ clickPoint) {
+    	if (this.continueDialog.onClick(clickPoint)) {
+    		this.applicationManager.onContinue();
+    	}
+    }
+    
     this.reload = function() {
     	this.reloadInternal();
     	this.touchEnabled = true;
@@ -162,13 +171,13 @@ function GameController()
     this.success = function() {
     	this.touchEnabled = false;
     	this.applicationManager.onSuccess(this.attempts,this.wrongAnswers);
-    	this.context2D.lineWidth=1;
-    	this.context2D.fillStyle="#000000";
-    	this.context2D.lineStyle="#000000";
-    	this.context2D.font="bold 66px sans-serif";
-    	this.context2D.textAlign = "center";
-    	this.context2D.textBaseline = "middle";
-    	this.context2D.fillText("BIEN!", this.canvas.width / 2, this.canvas.height / 2);
+    	
+    	var continueOrigin = new Point().init(this.canvas.width * 0.1, this.canvas.height * 0.2);
+    	var continueBounds = new Bounds().init(continueOrigin, this.canvas.width * 0.8, this.canvas.height * 0.6);
+    	
+    	this.continueDialog = new ContinueDialog().init(this.problem.word, continueBounds);
+    	this.gameObjects.push(this.continueDialog);
+    	this.draw();
     };
     
     this.fail = function() {

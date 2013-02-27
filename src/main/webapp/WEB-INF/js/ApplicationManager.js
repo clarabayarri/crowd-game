@@ -7,18 +7,19 @@ function ApplicationManager()
 	
 	this.gameController = new GameController();
 	
-	
 	this.problem = null;
 	
 	this.startTime = null;
+	
+	this.continue = true;
 	
     this.findProblemTemp = function() {
         var req = new Object();
         //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
         //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
-        //req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
+        req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
         //req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
-        req.responseText = '{"id":299,"type":"separation","word":"no ves","displayText":["n","o","v","e","s"],"displayAnswers":[]}';
+        //req.responseText = '{"id":299,"type":"separation","word":"no ves","displayText":["n","o","v","e","s"],"displayAnswers":[]}';
         this.loadProblem(req);
     };
     
@@ -31,6 +32,10 @@ function ApplicationManager()
 	this.loadProblem = function(req) {
         this.problem = JSON.parse(req.responseText);
 		
+		if (this.continue) this.loadGameController();
+	};
+	
+	this.loadGameController = function() {
 		if (this.problem.type == 'insertion') {
 			this.gameController = new InsertionGameController().startupInsertionGameController(this, this.problem);
 		} else if (this.problem.type == 'omission') {
@@ -43,8 +48,9 @@ function ApplicationManager()
 			this.gameController = new SeparationGameController().startupSeparationGameController(this, this.problem);
 		}
 		
+		this.continue = false;
 		this.startTime = new Date().getTime();
-	};
+	}
 	
 	
     /**
@@ -84,9 +90,17 @@ function ApplicationManager()
     this.onSuccess = function(/**Number*/intents, /**Array*/answers) {
     	var time = (new Date().getTime()) - this.startTime;
     	this.sendResults(time, intents, answers);
+    	this.problem = null;
     	
     	var _this = this;
     	setTimeout(function() {_this.findProblem();}, 2000);
+    }
+    
+    this.onContinue = function() {
+    	this.continue = true;
+    	if (this.problem) {
+    		this.loadGameController();
+    	}
     }
     
     this.sendResults = function(/**Number*/time, /**Number*/intents, /**Array*/answers) {

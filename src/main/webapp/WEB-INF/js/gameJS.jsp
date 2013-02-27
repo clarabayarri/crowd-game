@@ -7,6 +7,8 @@
 	<%@ include file="/WEB-INF/js/WordLayout.js" %>
 	<%@ include file="/WEB-INF/js/AnswerLayout.js" %>
 	<%@ include file="/WEB-INF/js/VerticalAnswerLayout.js" %>
+	<%@ include file="/WEB-INF/js/ContinueButton.js" %>
+	<%@ include file="/WEB-INF/js/ContinueDialog.js" %>
 	<%@ include file="/WEB-INF/js/GameController.js" %>
 	<%@ include file="/WEB-INF/js/InsertionGameController.js" %>
 	<%@ include file="/WEB-INF/js/OmissionGameController.js" %>
