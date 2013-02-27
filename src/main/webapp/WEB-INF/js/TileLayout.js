@@ -31,8 +31,9 @@ function TileLayout()
     
     this.hideChildWithId = function(/**Number*/ id) {
     	for (var child in this.children) {
-    		if (this.children[child].id && this.children[child].id == id) {
+    		if (this.children[child].id === id) {
     			this.children[child].hide();
+    			return;
     		}
     	}
     }

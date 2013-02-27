@@ -16,6 +16,8 @@ function GameController()
         @type HTMLCanvasElement
     */
     this.canvas = null;
+    this.canvasOffsetX = 0;
+    this.canvasOffsetY = 0;
     /** A reference to the 2D context of the canvas element
         @type CanvasRenderingContext2D
     */
@@ -64,6 +66,9 @@ function GameController()
         this.problem = problem;
         this.applicationManager = applicationManager;
         
+        this.canvasOffsetX = this.canvas.getBoundingClientRect().left;
+        this.canvasOffsetY = this.canvas.getBoundingClientRect().top;
+         
         this.gameObjects = new Array();
         this.attempts = 0;
         this.wrongAnswers = new Array();
@@ -106,6 +111,7 @@ function GameController()
     
     this.onClick = function(e) {
     	var clickPoint = this.getEventPosition(e);
+    	
     	if (this.continueDialog) {
     		this.checkForContinue(clickPoint);
     	} else if (this.touchEnabled) {
@@ -143,8 +149,8 @@ function GameController()
     this.onMouseUpInternal = function(/**Point*/ clickPoint) {}
     
     this.getEventPosition = function(e) {
-    	var x = e.pageX - this.canvas.getBoundingClientRect().left;
-    	var y = e.pageY - this.canvas.getBoundingClientRect().top;
+    	var x = e.pageX - this.canvasOffsetX;
+    	var y = e.pageY - this.canvasOffsetY;
     	return new Point().init(x, y);
     }
     

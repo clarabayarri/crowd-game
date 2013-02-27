@@ -41,7 +41,7 @@ function AnswerLayout()
         // then draw the children
         for (x in this.children)
         {
-            if (this.children[x].draw)
+            if (this.children[x].draw && this.children[x].visible)
             {
                 this.children[x].draw(context);
             }
