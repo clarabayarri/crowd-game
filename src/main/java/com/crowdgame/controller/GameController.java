@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.crowdgame.model.ExecutionResults;
-import com.crowdgame.model.Problem;
+import com.crowdgame.model.ProblemOutput;
 import com.crowdgame.service.ExecutionService;
 import com.crowdgame.service.ProblemService;
 
@@ -31,8 +31,8 @@ public class GameController {
 	}
 	
 	@RequestMapping("/problem")
-	public @ResponseBody Problem getTask() {
-		return problemService.getProblem();
+	public @ResponseBody ProblemOutput getTask() {
+		return new ProblemOutput(problemService.getProblem());
 	}
 	
 	@RequestMapping(value = "/results")

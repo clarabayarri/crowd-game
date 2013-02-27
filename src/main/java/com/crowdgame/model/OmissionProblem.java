@@ -8,7 +8,7 @@ public class OmissionProblem extends Problem {
 		super();
 	}
 	
-	public OmissionProblem(TaskInfo info) {
+	public OmissionProblem(TaskInput info) {
 		super(info);
 	}
 	

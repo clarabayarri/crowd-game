@@ -8,7 +8,7 @@ public class SeparationProblem extends Problem {
 		super();
 	}
 	
-	public SeparationProblem(TaskInfo info) {
+	public SeparationProblem(TaskInput info) {
 		super(info);
 	}
 	

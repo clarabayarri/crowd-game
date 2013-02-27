@@ -7,13 +7,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.crowdgame.model.TaskInfo;
+import com.crowdgame.model.TaskInput;
 
 
 
-public class TaskInfoTest {
+public class TaskInputTest {
 
-	private TaskInfo task = new TaskInfo();
+	private TaskInput task = new TaskInput();
 	
 	private static final String problemType = "insertion";
 	private static final String problemWord = "palabra";

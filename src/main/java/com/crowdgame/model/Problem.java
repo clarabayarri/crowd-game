@@ -24,7 +24,7 @@ public abstract class Problem {
 		
 	}
 	
-	public Problem(TaskInfo task) {
+	public Problem(TaskInput task) {
 		this.id = task.getId();
 		this.type = task.getType();
 		this.word = task.getWord();

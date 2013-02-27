@@ -6,11 +6,11 @@ import com.crowdgame.model.OmissionProblem;
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.SeparationProblem;
 import com.crowdgame.model.SubstitutionProblem;
-import com.crowdgame.model.TaskInfo;
+import com.crowdgame.model.TaskInput;
 
 public class ProblemFactory {
 
-	public Problem createProblem(TaskInfo info) {
+	public Problem createProblem(TaskInput info) {
 		Problem problem;
 		if ("insertion".equals(info.getType())) {
 			problem = new InsertionProblem(info);

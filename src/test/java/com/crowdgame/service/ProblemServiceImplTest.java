@@ -13,7 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.crowdgame.model.Problem;
-import com.crowdgame.model.TaskInfo;
+import com.crowdgame.model.TaskInput;
 import com.crowdgame.service.ProblemServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -28,16 +28,16 @@ public class ProblemServiceImplTest {
 	@Before
 	public void setUp() {
 	    MockitoAnnotations.initMocks(this);
-	    TaskInfo info = new TaskInfo();
+	    TaskInput info = new TaskInput();
 		info.setContents("{\"type\":\"insertion\",\"word\":\"palabra\", \"startIndex\":3, \"endIndex\":3, \"answers\":[\"a\", \"b\"]}");
-		Mockito.when(template.getForObject(Mockito.anyString(), Mockito.eq(TaskInfo.class))).thenReturn(info);
+		Mockito.when(template.getForObject(Mockito.anyString(), Mockito.eq(TaskInput.class))).thenReturn(info);
 	}
 	
 	@Test
 	public void testGetProblemCallsAPI() {
 		service.getProblem();
 	
-		Mockito.verify(template).getForObject(Mockito.anyString(), Mockito.eq(TaskInfo.class));
+		Mockito.verify(template).getForObject(Mockito.anyString(), Mockito.eq(TaskInput.class));
 	}
 	
 	@Test

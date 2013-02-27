@@ -10,7 +10,7 @@ public class SubstitutionProblem extends Problem {
 		super();
 	}
 	
-	public SubstitutionProblem(TaskInfo info) {
+	public SubstitutionProblem(TaskInput info) {
 		super(info);
 	}
 	

@@ -10,7 +10,7 @@ public class InsertionProblem extends Problem {
 		super();
 	}
 	
-	public InsertionProblem(TaskInfo info) {
+	public InsertionProblem(TaskInput info) {
 		super(info);
 	}
 

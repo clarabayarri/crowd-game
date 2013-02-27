@@ -5,7 +5,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.crowdgame.factory.ProblemFactory;
 import com.crowdgame.model.Problem;
-import com.crowdgame.model.TaskInfo;
+import com.crowdgame.model.TaskInput;
 
 @Service
 public class ProblemServiceImpl implements ProblemService {
@@ -33,7 +33,7 @@ public class ProblemServiceImpl implements ProblemService {
 	}
 	
 	public Problem getProblem() {
-		TaskInfo task = getTemplate().getForObject("http://gentle-gorge-9660.herokuapp.com/API/task", TaskInfo.class);
+		TaskInput task = getTemplate().getForObject("http://gentle-gorge-9660.herokuapp.com/API/task", TaskInput.class);
 		return getFactory().createProblem(task);
 	}
 	

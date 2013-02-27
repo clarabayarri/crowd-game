@@ -10,7 +10,7 @@ public class DerivationProblem extends Problem {
 		super();
 	}
 	
-	public DerivationProblem(TaskInfo info) {
+	public DerivationProblem(TaskInput info) {
 		super(info);
 	}
 	

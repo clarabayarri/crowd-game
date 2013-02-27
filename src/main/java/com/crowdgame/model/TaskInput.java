@@ -8,13 +8,13 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 
-public class TaskInfo {
+public class TaskInput {
 
 	private Integer id;
 	
 	private String contents;
 	
-	private TaskInfoDecoded decoded;
+	private TaskInputDecoded decoded;
 
 	public Integer getId() {
 		return id;
@@ -36,7 +36,7 @@ public class TaskInfo {
 	public void decodeContents() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			decoded = mapper.readValue(contents, TaskInfoDecoded.class);
+			decoded = mapper.readValue(contents, TaskInputDecoded.class);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -66,7 +66,7 @@ public class TaskInfo {
 		return decoded.getAnswers();
 	}
 	
-	public static class TaskInfoDecoded {
+	public static class TaskInputDecoded {
 		
 		private String type;
 		
