@@ -10,18 +10,18 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class TaskInput {
 
-	private Integer taskId;
+	private Integer id;
 	
 	private String contents;
 	
 	private TaskInputDecoded decoded;
 
-	public Integer getTaskId() {
-		return taskId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setTaskId(Integer id) {
-		this.taskId = id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getContents() {
@@ -54,7 +54,7 @@ public class TaskInput {
 		return decoded.getWord();
 	}
 
-	public Integer getId() {
+	public Integer getProblemId() {
 		return decoded.getId();
 	}
 	

@@ -23,11 +23,12 @@ public class Problem {
 	}
 	
 	public Problem(TaskInput task) {
-		this.id = task.getTaskId();
+		this.id = task.getId();
 		this.type = task.getType();
 		this.word = task.getWord();
 		this.display = task.getDisplayText();
 		this.answers = task.getAnswers();
+		generateProblem();
 	}
 	
 	public Integer getId() {

@@ -51,7 +51,7 @@ public class TaskInputTest {
 	
 	@Test
 	public void testDecodeId() {
-		int result = task.getId();
+		int result = task.getProblemId();
 		assertEquals(problemId, result);
 	}
 	
