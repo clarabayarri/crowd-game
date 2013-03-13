@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ProblemOutput {
 
-private Integer id;
+	private Integer id;
 	
 	private String type;
 	
@@ -23,7 +23,7 @@ private Integer id;
 		this.type = problem.getType();
 		this.word = problem.getWord();
 		this.displayText = problem.getDisplayText();
-		this.displayAnswers = problem.getDisplayAnswers();
+		this.displayAnswers = problem.getAnswers();
 	}
 	
 	public Integer getId() {

@@ -29,7 +29,7 @@ public class ProblemServiceImplTest {
 	public void setUp() {
 	    MockitoAnnotations.initMocks(this);
 	    TaskInput info = new TaskInput();
-		info.setContents("{\"type\":\"insertion\",\"word\":\"palabra\", \"startIndex\":3, \"endIndex\":3, \"answers\":[\"a\", \"b\"]}");
+		info.setContents("{\"answers\":[\"t\",\"e\",\"y\",\"h\"],\"id\":7,\"word\":\"trust\",\"level\":1,\"type\":\"insertion1\",\"language\":\"EN\",\"display\":\"trus_\"}");
 		Mockito.when(template.getForObject(Mockito.anyString(), Mockito.eq(TaskInput.class))).thenReturn(info);
 	}
 	
@@ -44,7 +44,7 @@ public class ProblemServiceImplTest {
 	public void testReturnedProblemContainsInfo() {
 		Problem problem = service.getProblem();
 		
-		assertEquals(problem.getType(), "insertion");
-		assertEquals(problem.getWord(), "palabra");
+		assertEquals(problem.getType(), "insertion1");
+		assertEquals(problem.getWord(), "trust");
 	}
 }

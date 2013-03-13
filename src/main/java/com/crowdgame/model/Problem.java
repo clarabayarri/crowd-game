@@ -2,34 +2,31 @@ package com.crowdgame.model;
 
 import java.util.List;
 
-public abstract class Problem {
+import com.google.common.collect.Lists;
+
+public class Problem {
 
 	private Integer id;
 	
 	private String type;
 	
-	protected String word;
+	private String word;
 	
-	protected Integer startIndex;
+	private String display;
 	
-	protected Integer endIndex;
+	private List<String> answers;
 	
-	protected List<String> answers;
-	
-	protected List<String> displayText;
-	
-	protected List<String> displayAnswers;
+	private List<String> displayText;
 	
 	public Problem() {
 		
 	}
 	
 	public Problem(TaskInput task) {
-		this.id = task.getId();
+		this.id = task.getTaskId();
 		this.type = task.getType();
 		this.word = task.getWord();
-		this.startIndex = task.getStartIndex();
-		this.endIndex = task.getEndIndex();
+		this.display = task.getDisplayText();
 		this.answers = task.getAnswers();
 	}
 	
@@ -57,22 +54,6 @@ public abstract class Problem {
 		this.word = word;
 	}
 
-	public Integer getStartIndex() {
-		return startIndex;
-	}
-
-	public void setStartIndex(Integer startIndex) {
-		this.startIndex = startIndex;
-	}
-
-	public Integer getEndIndex() {
-		return endIndex;
-	}
-
-	public void setEndIndex(Integer endIndex) {
-		this.endIndex = endIndex;
-	}
-
 	public List<String> getAnswers() {
 		return answers;
 	}
@@ -88,14 +69,36 @@ public abstract class Problem {
 	public void setDisplayText(List<String> displayText) {
 		this.displayText = displayText;
 	}
-
-	public List<String> getDisplayAnswers() {
-		return displayAnswers;
-	}
-
-	public void setDisplayAnswers(List<String> displayAnswers) {
-		this.displayAnswers = displayAnswers;
-	}
 	
-	public abstract void generateProblem();
+	public String getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(String display) {
+		this.display = display;
+		generateProblem();
+	}
+
+	public void generateProblem() {
+		this.displayText = Lists.newArrayList();
+		if (this.display.charAt(0) == '[') {
+			String cutString = this.display.substring(1, this.display.length() - 1);
+			String[] parts = cutString.split("\\|");
+			for (String part : parts) {
+				displayText.add(part);
+			}
+		} else {
+			String[] parts = this.display.split("\\|");
+			for (int i = 0; i < parts.length; ++i) {
+				if (i % 2 == 0) {
+					char[] letters = parts[i].toCharArray();
+					for (char letter : letters) {
+						displayText.add(String.valueOf(letter));
+					}
+				} else {
+					displayText.add(parts[i]);
+				}
+			}
+		}
+	}
 }

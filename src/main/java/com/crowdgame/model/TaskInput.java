@@ -10,18 +10,18 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class TaskInput {
 
-	private Integer id;
+	private Integer taskId;
 	
 	private String contents;
 	
 	private TaskInputDecoded decoded;
 
-	public Integer getId() {
-		return id;
+	public Integer getTaskId() {
+		return taskId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setTaskId(Integer id) {
+		this.taskId = id;
 	}
 
 	public String getContents() {
@@ -54,12 +54,20 @@ public class TaskInput {
 		return decoded.getWord();
 	}
 
-	public Integer getStartIndex() {
-		return decoded.getStartIndex();
+	public Integer getId() {
+		return decoded.getId();
 	}
-
-	public Integer getEndIndex() {
-		return decoded.getEndIndex();
+	
+	public Integer getLevel() {
+		return decoded.getLevel();
+	}
+	
+	public String getLanguage() {
+		return decoded.getLanguage();
+	}
+	
+	public String getDisplayText() {
+		return decoded.getDisplay();
 	}
 
 	public List<String> getAnswers() {
@@ -72,9 +80,13 @@ public class TaskInput {
 		
 		private String word;
 		
-		private Integer startIndex;
+		private Integer id;
 		
-		private Integer endIndex;
+		private Integer level;
+		
+		private String language;
+		
+		private String display;
 		
 		private List<String> answers;
 
@@ -94,20 +106,12 @@ public class TaskInput {
 			this.word = word;
 		}
 
-		public Integer getStartIndex() {
-			return startIndex;
+		public Integer getId() {
+			return id;
 		}
 
-		public void setStartIndex(Integer startIndex) {
-			this.startIndex = startIndex;
-		}
-
-		public Integer getEndIndex() {
-			return endIndex;
-		}
-
-		public void setEndIndex(Integer endIndex) {
-			this.endIndex = endIndex;
+		public void setId(Integer id) {
+			this.id = id;
 		}
 
 		public List<String> getAnswers() {
@@ -116,6 +120,30 @@ public class TaskInput {
 
 		public void setAnswers(List<String> answers) {
 			this.answers = answers;
+		}
+
+		public Integer getLevel() {
+			return level;
+		}
+
+		public void setLevel(Integer level) {
+			this.level = level;
+		}
+
+		public String getLanguage() {
+			return language;
+		}
+
+		public void setLanguage(String language) {
+			this.language = language;
+		}
+
+		public String getDisplay() {
+			return display;
+		}
+
+		public void setDisplay(String displayText) {
+			this.display = displayText;
 		}
 		
 		
