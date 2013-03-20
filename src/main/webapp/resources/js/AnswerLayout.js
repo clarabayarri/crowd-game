@@ -13,13 +13,13 @@ function AnswerLayout()
     
     this.loadChildren = function() {
     	this.children.splice(0,this.children.length);
-    	var childSize = Math.min(this.bounds.width * 0.95 / this.letters.length, this.bounds.height * 0.9);
-    	var padding = childSize * 0.05;
-    	var childrenY = (this.bounds.height * 0.9 - childSize);
-    	var childrenX = (this.bounds.width - childSize*this.letters.length - padding * (this.letters.length)) / 2;
+    	this.childSize = Math.min(this.bounds.width * 0.95 / this.letters.length, this.bounds.height * 0.9);
+    	var padding = this.childSize * 0.05;
+    	this.childrenY = (this.bounds.height * 0.9 - this.childSize);
+    	this.childrenX = (this.bounds.width - this.childSize*this.letters.length - padding * (this.letters.length)) / 2;
     	for(var i = 0; i < this.letters.length; ++i) {
-    		var childOrigin = new Point().init(this.bounds.origin.x + childrenX + ((childSize + padding)*i) + padding, this.bounds.origin.y + childrenY + padding);
-    		var childBounds = new Bounds().init(childOrigin, childSize - padding, childSize - padding);
+    		var childOrigin = new Point().init(this.bounds.origin.x + this.childrenX + ((this.childSize + padding)*i) + padding, this.bounds.origin.y + this.childrenY + padding);
+    		var childBounds = new Bounds().init(childOrigin, this.childSize - padding, this.childSize - padding);
     		var child = new WordCube().startupWordCube(i, this.letters[i], childBounds);
     		this.children.push(child);
     	}
