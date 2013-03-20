@@ -122,6 +122,46 @@ function WordLayout()
     	this.loadChildren();
     }
     
+    this.addLetterAtIndex = function(/**String*/ letter, /**Number*/ index) {
+    	this.displayedWord.splice(index, 0, letter);
+    	this.loadChildren();
+    }
+    
+    
+    this.animateSuccess = function(/**Function*/ callback) {
+    	for (var i = 0; i < this.children.length; ++i) {
+    		var child = this.children[i];
+    		var points = new Array();
+    		points[0] = new Point().init(child.bounds.origin.x, child.bounds.origin.y - 70);
+    		points[1] = new Point().init(child.bounds.origin.x, child.bounds.origin.y + 40);
+    		points[2] = new Point().init(child.bounds.origin.x, child.bounds.origin.y - 25);
+    		points[3] = new Point().init(child.bounds.origin.x, child.bounds.origin.y);
+       		if (i == this.children.length - 1) {
+    			child.animateMoveToPoints(points, i*15, callback);
+    		} else {
+    			child.animateMoveToPoints(points, i*15, null);
+    		}
+    		
+    	}
+    }
+    
+    this.animateFail = function(/**Function*/ callback) {
+    	for (var i = 0; i < this.children.length; ++i) {
+    		var child = this.children[i];
+    		var points = new Array();
+    		points[0] = new Point().init(child.bounds.origin.x + 20, child.bounds.origin.y);
+    		points[1] = new Point().init(child.bounds.origin.x - 20, child.bounds.origin.y);
+    		points[2] = new Point().init(child.bounds.origin.x + 10, child.bounds.origin.y);
+    		points[3] = new Point().init(child.bounds.origin.x, child.bounds.origin.y);
+    			if (i == this.children.length - 1) {
+    			child.animateMoveToPoints(points, 0, callback);
+    		} else {
+    			child.animateMoveToPoints(points, 0, null);
+    		}
+    		
+    	}
+    }
+    
 }
 
 WordLayout.prototype = new TileLayout;

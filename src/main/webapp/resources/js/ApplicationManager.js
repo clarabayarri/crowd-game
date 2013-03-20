@@ -15,7 +15,9 @@ function ApplicationManager()
 	
     this.findProblemTemp = function() {
         var req = new Object();
-        req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
+        //req.responseText = '{"id":299,"type":"transposition","word":"palabra","displayText":["p","a","r","l","a","b","a"],"displayAnswers":[]}';
+        req.responseText = '{"id":299,"type":"insertion1","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
+        //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l","b","r","a"],"displayAnswers":["a","i","o","u"]}';
         //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
         //req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
         //req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
@@ -36,7 +38,7 @@ function ApplicationManager()
 	};
 	
 	this.loadGameController = function() {
-		if (this.problem.type == 'insertion') {
+		if (this.problem.type == 'insertion1') {
 			this.gameController = new InsertionGameController().startupInsertionGameController(this, this.problem);
 		} else if (this.problem.type == 'omission') {
 			this.gameController = new OmissionGameController().startupOmissionGameController(this, this.problem);
@@ -46,10 +48,15 @@ function ApplicationManager()
 			this.gameController = new DerivationGameController().startupDerivationGameController(this, this.problem);
 		} else if (this.problem.type == 'separation') {
 			this.gameController = new SeparationGameController().startupSeparationGameController(this, this.problem);
+		} else if (this.problem.type == 'insertion') {
+			this.gameController = new HardInsertionGameController().startupHardInsertionGameController(this, this.problem);
+		} else if (this.problem.type == 'transposition') {
+			this.gameController = new TranspositionGameController().startupTranspositionGameController(this, this.problem);
 		}
 		
 		this.continue = false;
 		this.startTime = new Date().getTime();
+		this.animLoop();
 	}
 	
 	
@@ -65,7 +72,7 @@ function ApplicationManager()
     	canvas.addEventListener('mousedown', function(e) {_this.onMouseDown(e);}, false);
     	canvas.addEventListener('mousemove', function(e) {_this.onMouseMove(e);}, false);
     	canvas.addEventListener('mouseup', function(e) {_this.onMouseUp(e);}, false);
-        this.findProblemTemp();
+        this.findProblem();
         return this;
     }
     
@@ -155,5 +162,24 @@ function ApplicationManager()
     	    }
     	});
     }
+    
+    // shim layer with setTimeout fallback
+    window.requestAnimFrame = (function(){
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              function( callback ){
+                window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+    
+    
+    this.animLoop = function(){
+    var _this = this;
+      requestAnimFrame(function(){
+      	_this.animLoop();
+      });
+      this.gameController.draw();
+    };
     
 }

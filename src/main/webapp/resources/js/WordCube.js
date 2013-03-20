@@ -27,6 +27,7 @@ function WordCube()
     */
     this.draw = function (/**CanvasRenderingContext2D*/ context)
     {
+    	this.updatePosition();
     	if (this.visible && this.letter != " ") {
     		// draw tile
     		context.fillStyle = "rgba(248, 238, 207, 1.0)";

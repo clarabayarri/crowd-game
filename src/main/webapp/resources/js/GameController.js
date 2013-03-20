@@ -169,7 +169,7 @@ function GameController()
     	if (this.answerLayout) {
     		this.answerLayout.showAllChildren();
     	}
-    	this.draw();
+    	//this.draw();
     }
     
     this.reloadInternal = function() {}
@@ -178,20 +178,34 @@ function GameController()
     	this.touchEnabled = false;
     	this.applicationManager.onSuccess(this.attempts,this.wrongAnswers);
     	
+    	var _this = this;
+    	this.wordLayout.animateSuccess(function() {
+    		_this.showSuccessDialog();
+    	});
+    };
+    
+    this.showSuccessDialog = function() {
     	var continueOrigin = new Point().init(this.canvas.width * 0.1, this.canvas.height * 0.2);
     	var continueBounds = new Bounds().init(continueOrigin, this.canvas.width * 0.8, this.canvas.height * 0.6);
     	
     	this.continueDialog = new ContinueDialog().init(this.problem.word, continueBounds);
     	this.gameObjects.push(this.continueDialog);
-    	this.draw();
-    };
+    }
     
     this.fail = function() {
     	var _this = this;
     	this.wrongAnswers.push(this.wordLayout.getDisplayedWord());
     	this.touchEnabled = false;
-    	setTimeout(function() {_this.reload();}, 1000);
     	this.attempts += 1;
     	
+    	var _this = this;
+    	this.wordLayout.animateFail(function() {
+    		_this.failAnimationEnded();
+    		_this.reload();
+    	});
     };
+    
+    this.failAnimationEnded = function() {
+    	this.touchEnabled = true;
+    }
 }

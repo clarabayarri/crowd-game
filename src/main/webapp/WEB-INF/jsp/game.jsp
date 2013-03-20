@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Crowd platform</title>
+    <title>Crowd game</title>
 
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,9 +36,6 @@
 <div class="container">
     <div class="row">
         <div class="span8 offset2">
-            <div class="page-header">
-                <h1>Sample project</h1>
-            </div>
 
             <div id="game-container">
                 <canvas id="game-canvas" width="800" height="500" style="background-color: #fff888;">You need HTML5 to see this :D</canvas>

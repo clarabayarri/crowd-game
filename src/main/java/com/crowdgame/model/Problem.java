@@ -82,6 +82,7 @@ public class Problem {
 
 	public void generateProblem() {
 		this.displayText = Lists.newArrayList();
+		this.display = this.display.replace("_", " ");
 		if (this.display.charAt(0) == '[') {
 			String cutString = this.display.substring(1, this.display.length() - 1);
 			String[] parts = cutString.split("\\|");
