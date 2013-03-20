@@ -73,13 +73,13 @@ function WordLayout()
     
     this.loadChildren = function() {
     	this.children.splice(0, this.children.length);
-    	var childSize = Math.min(this.bounds.width / this.displayedWord.length, this.bounds.height);
-    	var childrenY = (this.bounds.height - childSize) / 2;
-    	var childrenX = (this.bounds.width - childSize*this.displayedWord.length) / 2;
-    	var padding = childSize * 0.05;
+    	this.childSize = Math.min(this.bounds.width / this.displayedWord.length, this.bounds.height);
+    	this.childrenY = (this.bounds.height - this.childSize) / 2;
+    	this.childrenX = (this.bounds.width - this.childSize*this.displayedWord.length) / 2;
+    	var padding = this.childSize * 0.05;
     	for(var i = 0; i < this.displayedWord.length; ++i) {
-    		var childOrigin = new Point().init(this.bounds.origin.x + childrenX + (childSize*i) + padding, this.bounds.origin.y + childrenY + padding);
-    		var childBounds = new Bounds().init(childOrigin, childSize - 2*padding, childSize - 2*padding);
+    		var childOrigin = new Point().init(this.bounds.origin.x + this.childrenX + (this.childSize*i) + padding, this.bounds.origin.y + this.childrenY + padding);
+    		var childBounds = new Bounds().init(childOrigin, this.childSize - 2*padding, this.childSize - 2*padding);
     		var child = new WordCube().startupWordCube(i, this.displayedWord[i], childBounds);
     		this.children.push(child);
     	}
@@ -96,12 +96,36 @@ function WordLayout()
     };
     
     this.removeChildWithId = function(/**Number*/ id) {
+    	var child = this.indexOfChildWithId(id);
+    	this.displayedWord.splice(child,1);
+    	this.loadChildren();
+    }
+    
+    this.indexOfChildWithId = function(/**Number*/ id) {
     	for (var child in this.children) {
     		if (this.children[child].id == id) {
-    			this.displayedWord.splice(child,1);
-    			this.loadChildren();
-    			return;
+    			return child;
     		}
+    	}
+    }
+    
+    this.exchangeChildrenWithIds = function(/**Number*/ id1, /**Number*/ id2) {
+    	var childIndex1 = this.indexOfChildWithId(id1);
+    	var childIndex2 = this.indexOfChildWithId(id2);
+    	var child1 = this.children[childIndex1];
+    	var child2 = this.children[childIndex2];
+    	if (child1 != child2) {
+    		var padding = this.childSize * 0.05;
+    		var childOrigin1 = new Point().init(this.bounds.origin.x + this.childrenX + (this.childSize*id1) + padding, this.bounds.origin.y + this.childrenY + padding);
+    		var childOrigin2 = new Point().init(this.bounds.origin.x + this.childrenX + (this.childSize*id2) + padding, this.bounds.origin.y + this.childrenY + padding);
+    		child1.moveTo(childOrigin2);
+    		child2.animateMoveTo(childOrigin1, 0, null);
+    		child1.id = id2;
+    		child2.id = id1;
+    		this.children[childIndex1] = child2;
+    		this.children[childIndex2] = child1;
+    		this.displayedWord[childIndex1] = child2.letter;
+    		this.displayedWord[childIndex2] = child1.letter;
     	}
     }
     
@@ -131,11 +155,13 @@ function WordLayout()
     this.animateSuccess = function(/**Function*/ callback) {
     	for (var i = 0; i < this.children.length; ++i) {
     		var child = this.children[i];
+    		var padding = this.childSize * 0.05;
+    		var childOrigin = new Point().init(this.bounds.origin.x + this.childrenX + (this.childSize*i) + padding, this.bounds.origin.y + this.childrenY + padding);
     		var points = new Array();
-    		points[0] = new Point().init(child.bounds.origin.x, child.bounds.origin.y - 70);
-    		points[1] = new Point().init(child.bounds.origin.x, child.bounds.origin.y + 40);
-    		points[2] = new Point().init(child.bounds.origin.x, child.bounds.origin.y - 25);
-    		points[3] = new Point().init(child.bounds.origin.x, child.bounds.origin.y);
+    		points[0] = new Point().init(childOrigin.x, childOrigin.y - 70);
+    		points[1] = new Point().init(childOrigin.x, childOrigin.y + 40);
+    		points[2] = new Point().init(childOrigin.x, childOrigin.y - 25);
+    		points[3] = new Point().init(childOrigin.x, childOrigin.y);
        		if (i == this.children.length - 1) {
     			child.animateMoveToPoints(points, i*15, callback);
     		} else {
@@ -148,11 +174,13 @@ function WordLayout()
     this.animateFail = function(/**Function*/ callback) {
     	for (var i = 0; i < this.children.length; ++i) {
     		var child = this.children[i];
+    		var padding = this.childSize * 0.05;
+    		var childOrigin = new Point().init(this.bounds.origin.x + this.childrenX + (this.childSize*i) + padding, this.bounds.origin.y + this.childrenY + padding);
     		var points = new Array();
-    		points[0] = new Point().init(child.bounds.origin.x + 20, child.bounds.origin.y);
-    		points[1] = new Point().init(child.bounds.origin.x - 20, child.bounds.origin.y);
-    		points[2] = new Point().init(child.bounds.origin.x + 10, child.bounds.origin.y);
-    		points[3] = new Point().init(child.bounds.origin.x, child.bounds.origin.y);
+    		points[0] = new Point().init(childOrigin.x + 20, childOrigin.y);
+    		points[1] = new Point().init(childOrigin.x - 20, childOrigin.y);
+    		points[2] = new Point().init(childOrigin.x + 10, childOrigin.y);
+    		points[3] = new Point().init(childOrigin.x, childOrigin.y);
     			if (i == this.children.length - 1) {
     			child.animateMoveToPoints(points, 0, callback);
     		} else {

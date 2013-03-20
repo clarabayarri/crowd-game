@@ -23,6 +23,7 @@ function GameObject()
     this.startupGameObject = function(/**Bounds*/ bounds)
     {
         this.bounds = bounds;
+        this.origin = new Point().init(this.bounds.origin.x, this.bounds.origin.y);
         return this;
     }
     
@@ -39,9 +40,13 @@ function GameObject()
     }
     
     this.animateMoveTo = function(/**Point*/ point, /**Number*/ delay, /**Function*/ callback) {
+    	if (this.animated) {
+    		this.bounds.origin.x = this.target.x;
+    		this.bounds.origin.y = this.target.y;
+    	}
     	this.animated = true;
     	this.origin = new Point().init(this.bounds.origin.x, this.bounds.origin.y);
-    	this.target = point;
+    	this.target = new Point().init(point.x, point.y);
     	this.delay = delay;
     	this.animationCallback = callback;
     }

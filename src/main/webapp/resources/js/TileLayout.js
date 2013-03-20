@@ -13,6 +13,11 @@ function TileLayout()
     */
     this.letters = null;
     
+    /** Offsets for children */
+    this.childrenX = 0;
+    this.childrenY = 0;
+    this.childSize = 0;
+    
     this.startupTileLayout = function(/**Array*/ letters, /**Bounds*/ bounds) {
     	this.startupGameObject(bounds);
     	this.letters = letters;
@@ -21,10 +26,13 @@ function TileLayout()
     }
     
     this.getClickedTile = function(/**Point*/ point) {
-    	for (var child in this.children) {
-    		if (this.children[child].bounds && this.children[child].bounds.containsPoint(point)) {
-    			return this.children[child].copy();
-    		}
+    	if (this.bounds.containsPoint(point) && 
+    		point.x > (this.bounds.origin.x + this.childrenX) && 
+    		point.x < (this.bounds.origin.x + this.bounds.width - this.childrenX) && 
+    		point.y > (this.bounds.origin.y + this.childrenY) && 
+    		point.y < (this.bounds.origin.y + this.bounds.height - this.childrenY)) {
+    		var id = Math.floor((point.x - this.childrenX - this.bounds.origin.x) / this.childSize);
+    		return this.children[id].copy();
     	}
     	return null;
     }

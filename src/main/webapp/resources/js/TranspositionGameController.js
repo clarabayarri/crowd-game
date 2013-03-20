@@ -57,6 +57,11 @@ function TranspositionGameController()
     			}
     		} else {
     			this.movingTile.moveTo(new Point().init(clickPoint.x - this.initialClickPointDifference.x, clickPoint.y - this.initialClickPointDifference.y));
+    			var touchedTile = this.wordLayout.getClickedTile(clickPoint);
+    			if (touchedTile.id != this.movingTile.id) {
+    				this.wordLayout.exchangeChildrenWithIds(this.movingTile.id, touchedTile.id);
+    				this.movingTile.id = touchedTile.id;
+    			}
     		}
     		this.draw();
     	}
@@ -68,6 +73,7 @@ function TranspositionGameController()
     		
     		this.moving = false;
     		this.movingTile = null;
+    		this.wordLayout.showAllChildren();
     		this.draw();
     		
     		this.checkForSuccess();
