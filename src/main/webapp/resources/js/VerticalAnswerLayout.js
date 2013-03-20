@@ -14,16 +14,28 @@ function VerticalAnswerLayout()
     this.loadChildren = function() {
     	this.children.splice(0, this.children.length);
     	var childWidth = this.bounds.width;
-    	var childHeight = this.bounds.height / this.letters.length;
-    	var childrenX = (this.bounds.width - childWidth) / 2;
-    	var childrenY = (this.bounds.height - childHeight*this.letters.length) / 2;
-    	var padding = childHeight * 0.05;
+    	this.childSize = this.bounds.height / this.letters.length;
+    	this.childrenX = (this.bounds.width - childWidth) / 2;
+    	this.childrenY = (this.bounds.height - this.childSize*this.letters.length) / 2;
+    	var padding = this.childSize * 0.05;
     	for(var i = 0; i < this.letters.length; ++i) {
-    		var childOrigin = new Point().init(this.bounds.origin.x + childrenX + padding, this.bounds.origin.y + childrenY + (childHeight*i) + padding);
-    		var childBounds = new Bounds().init(childOrigin, childWidth - 2*padding, childHeight - 2*padding);
+    		var childOrigin = new Point().init(this.bounds.origin.x + this.childrenX + padding, this.bounds.origin.y + this.childrenY + (this.childSize*i) + padding);
+    		var childBounds = new Bounds().init(childOrigin, childWidth - 2*padding, this.childSize - 2*padding);
     		var child = new WordCube().startupWordCube(i, this.letters[i], childBounds);
     		this.children.push(child);
     	}
+    }
+    
+    this.getClickedTile = function(/**Point*/ point) {
+    	if (this.bounds.containsPoint(point) && 
+    		point.x > (this.bounds.origin.x + this.childrenX) && 
+    		point.x < (this.bounds.origin.x + this.bounds.width - this.childrenX) && 
+    		point.y > (this.bounds.origin.y + this.childrenY) && 
+    		point.y < (this.bounds.origin.y + this.bounds.height - this.childrenY)) {
+    		var id = Math.floor((point.y - this.childrenY - this.bounds.origin.y) / this.childSize);
+    		return this.children[id].copy();
+    	}
+    	return null;
     }
     
     /**
