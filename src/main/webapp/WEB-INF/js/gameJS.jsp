@@ -15,6 +15,8 @@
 	<%@ include file="/resources/js/SubstitutionGameController.js" %>
 	<%@ include file="/resources/js/DerivationGameController.js" %>
 	<%@ include file="/resources/js/SeparationGameController.js" %>
+	<%@ include file="/resources/js/HardInsertionGameController.js" %>
+	<%@ include file="/resources/js/TranspositionGameController.js" %>
 	<%@ include file="/resources/js/ApplicationManager.js" %>
 	<%@ include file="/resources/js/main.js" %>
 </script>
