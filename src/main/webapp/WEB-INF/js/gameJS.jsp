@@ -1,4 +1,5 @@
 <script type="text/javascript">
+	<%@ include file="/resources/js/RenderUtils.js" %>
 	<%@ include file="/resources/js/Point.js" %>
 	<%@ include file="/resources/js/Bounds.js" %>
 	<%@ include file="/resources/js/GameObject.js" %>

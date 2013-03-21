@@ -19,8 +19,8 @@ function VerticalAnswerLayout()
     	this.childrenY = (this.bounds.height - this.childSize*this.letters.length) / 2;
     	var padding = this.childSize * 0.05;
     	for(var i = 0; i < this.letters.length; ++i) {
-    		var childOrigin = new Point().init(this.bounds.origin.x + this.childrenX + padding, this.bounds.origin.y + this.childrenY + (this.childSize*i) + padding);
-    		var childBounds = new Bounds().init(childOrigin, childWidth - 2*padding, this.childSize - 2*padding);
+    		var childOrigin = new Point().init(this.bounds.origin.x + this.childrenX + 2*padding, this.bounds.origin.y + this.childrenY + (this.childSize*i) + padding);
+    		var childBounds = new Bounds().init(childOrigin, childWidth - 4*padding, this.childSize - 2*padding);
     		var child = new WordCube().startupWordCube(i, this.letters[i], childBounds);
     		this.children.push(child);
     	}
@@ -45,8 +45,15 @@ function VerticalAnswerLayout()
     {
     	if (this.visible) {
     		// draw own background
-    		context.fillStyle = "rgba(218, 119, 117, 1.0)";
+    		context.shadowColor = '#000000';
+    		context.shadowBlur = 5;
+    		context.shadowOffsetX = 2;
+    		context.shadowOffsetY = 2; 
+    		context.fillStyle = "rgba(13, 114, 98, 1.0)";
     		context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
+    		context.shadowBlur = 0;
+    		context.shadowOffsetX = 0;
+    		context.shadowOffsetY = 0;
     		
     		// then draw the children
     		for (x in this.children)

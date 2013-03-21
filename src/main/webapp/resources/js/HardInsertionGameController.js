@@ -19,13 +19,13 @@ function HardInsertionGameController()
     }
     
     this.loadChildren = function() {
-    	var wordLayoutOrigin = new Point().init(this.canvas.width * 0.05, this.canvas.height * 0.20);
+    	var wordLayoutOrigin = new Point().init(this.canvas.width * 0.05, this.canvas.height * 0.25);
     	var wordLayoutBounds = new Bounds().init(wordLayoutOrigin, this.canvas.width * 0.9, this.canvas.height * 0.25);
     	var wordLayout = new WordLayout().init(this.problem.displayText, wordLayoutBounds);
     	this.gameObjects.push(wordLayout);
     	this.wordLayout = wordLayout;
     	
-    	var answerLayoutOrigin = new Point().init(this.canvas.width* 0.15, this.canvas.height * 0.6);
+    	var answerLayoutOrigin = new Point().init(this.canvas.width* 0.15, this.canvas.height * 0.65);
     	var answerLayoutBounds = new Bounds().init(answerLayoutOrigin, this.canvas.width * 0.7, this.canvas.height * 0.2);
     	var answerLayout = new AnswerLayout().init(this.problem.displayAnswers, answerLayoutBounds);
     	this.gameObjects.push(answerLayout);

@@ -22,8 +22,8 @@ function WordLayout()
     this.draw = function (/**CanvasRenderingContext2D*/ context)
     {
         // draw own background
-        context.fillStyle = "rgba(218, 119, 117, 1.0)";
-        context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
+        //context.fillStyle = "rgba(218, 119, 117, 1.0)";
+        //context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
         
         // then draw the children
         for (x in this.children)
