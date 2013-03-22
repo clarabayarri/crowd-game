@@ -10,7 +10,7 @@ public class GameControllerTest {
 	
 	@Test
 	public void testHandleRequestView() {
-		String result = controller.showGame();
+		String result = controller.loadGame();
 		assertEquals("game", result);
 	}
 }

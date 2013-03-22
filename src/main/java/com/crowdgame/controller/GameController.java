@@ -14,7 +14,6 @@ import com.crowdgame.service.ExecutionService;
 import com.crowdgame.service.ProblemService;
 
 @Controller
-@RequestMapping("/game")
 public class GameController {
 
 	@Autowired
@@ -23,17 +22,17 @@ public class GameController {
 	@Autowired
 	private ExecutionService executionService;
 	
-	@RequestMapping("/")
-	public String showGame() {
+	@RequestMapping("/game")
+	public String loadGame() {
 		return "game";
 	}
 	
-	@RequestMapping("/problem")
+	@RequestMapping("/game/problem")
 	public @ResponseBody ProblemOutput getTask() {
 		return new ProblemOutput(problemService.getProblem());
 	}
 	
-	@RequestMapping(value = "/results")
+	@RequestMapping(value = "/game/results")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void saveExecution(@RequestBody ExecutionResults execution) {
 		executionService.saveExecutionResults(execution);

@@ -37,7 +37,7 @@
     <div class="row">
         <div class="span8 offset2">
 
-            
+            <a href="/game" class="btn btn-large btn-success">Play!</a>
             
         </div>
     </div>
