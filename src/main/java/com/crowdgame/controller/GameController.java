@@ -1,7 +1,5 @@
 package com.crowdgame.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,7 @@ public class GameController {
 	private ExecutionService executionService;
 	
 	@RequestMapping("/")
-	public String showGame(Map<String, Object> map) {
+	public String showGame() {
 		return "game";
 	}
 	
