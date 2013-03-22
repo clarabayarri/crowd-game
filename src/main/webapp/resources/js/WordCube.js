@@ -30,21 +30,11 @@ function WordCube()
     	this.updatePosition();
     	if (this.visible && this.letter != " ") {
     		// draw tile
-    		context.fillStyle = "rgba(248, 238, 207, 1.0)";
-    		shadow(context, 5);
-    		roundRect(context, this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height, this.bounds.height*0.1, true, false);
-    		eraseShadow(context);
-    		//context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
+    		drawTile(context, this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
     		
     		// draw text
-    		context.lineWidth=1;
-    		context.fillStyle="#191919";
-    		context.lineStyle="#000000";
-    		context.font="bold 42px sans-serif";
-    		context.textAlign = "center";
-    		context.textBaseline = "middle";
     		var center = this.bounds.center();
-    		context.fillText(this.letter, center.x, center.y);
+    		drawText(context, this.letter, center.x, center.y, FONT_BOLD_46, COLOR_DARK_GREY);
     	}
         
     };

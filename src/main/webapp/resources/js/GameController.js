@@ -86,62 +86,18 @@ function GameController()
         this.backBufferContext2D.clearRect(0, 0, this.backBuffer.width, this.backBuffer.height);
         this.context2D.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
-        this.drawBackground(this.context2D);
+        drawScrabbleBackground(this.backBufferContext2D, 0, 0, this.canvas.width, this.canvas.height); 
               
         // then draw the game objects
-        for (x in this.gameObjects)
-        {
-            if (this.gameObjects[x].draw)
-            {
-                this.gameObjects[x].draw(this.backBufferContext2D);
+        for (x in this.gameObjects) {
+            if (this.gameObjects[x].draw) {
+           		this.gameObjects[x].draw(this.backBufferContext2D);
             }
         }
         
         // copy the back buffer to the displayed canvas
         this.context2D.drawImage(this.backBuffer, 0, 0);
     };
-    
-    this.drawBackground = function(/**CanvasRenderingContext2D*/ context) {
-    	// draw background
-    	this.backBufferContext2D.fillStyle = COLOR_GREEN1;
-    	this.backBufferContext2D.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    	
-    	// draw lines
-    	var numSquaresX = 10;
-    	var lineWidth = this.canvas.width/numSquaresX;
-    	var offsetX = lineWidth / 2;
-    	var numSquaresY = Math.floor(this.canvas.height / lineWidth);
-    	var offsetY = (this.canvas.height - (numSquaresY * lineWidth)) / 2;
-    	
-    	// Draw colored tiles
-    	this.backBufferContext2D.fillStyle = COLOR_BLUE1;
-    	for (var i = -1; i < numSquaresX; ++i) {
-    		for (var j = -1; j <= numSquaresY; ++j) {
-    			if ((i == j+1) || ((i + j) == numSquaresX - 3)) {
-    				this.backBufferContext2D.fillRect(offsetX + i*lineWidth, offsetY + j*lineWidth, lineWidth, lineWidth);
-    			}
-    		}
-    	}
-    	
-    	// Draw vertical lines
-    	this.backBufferContext2D.strokeStyle = COLOR_DARK_GREEN1;
-    	this.backBufferContext2D.lineWidth = 3;
-    	for (var i = 0; i < numSquaresX; ++i) {
-    		this.backBufferContext2D.beginPath();
-    		this.backBufferContext2D.moveTo(offsetX + i*lineWidth, 0);
-    		this.backBufferContext2D.lineTo(offsetX + i*lineWidth, this.canvas.height);
-    		this.backBufferContext2D.stroke();
-    	}
-    	
-    	// Draw horizontal lines
-    	for (var i = 0; i <= numSquaresY; ++i) {
-    		this.backBufferContext2D.beginPath();
-    		this.backBufferContext2D.moveTo(0, offsetY + i*lineWidth);
-    		this.backBufferContext2D.lineTo(this.canvas.width, offsetY + i*lineWidth);
-    		this.backBufferContext2D.stroke();
-    	}
-    	
-    }
     
     this.checkForSuccess = function() {
     	if (this.wordLayout.getDisplayedWord() == this.problem.word) {

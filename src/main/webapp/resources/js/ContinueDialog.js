@@ -34,24 +34,14 @@ function ContinueDialog()
     
     this.draw = function (/**CanvasRenderingContext2D*/ context) {
     	//darken background
-    	context.fillStyle = "rgba(42, 42, 42, 0.5)";
-    	shadow(context, 5);
-    	context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
-    	eraseShadow(context);
+    	drawBackgroundShadow(context, this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height)
     	
     	// draw tile
-    	context.fillStyle = "rgba(248, 238, 207, 1.0)";
-    	roundRect(context, this.tileBounds.origin.x, this.tileBounds.origin.y, this.tileBounds.width, this.tileBounds.height, this.tileBounds.height*0.1, true, false);
-    	
+    	drawTile(context, this.tileBounds.origin.x, this.tileBounds.origin.y, this.tileBounds.width, this.tileBounds.height);
+    	    	
     	// draw text
-    	context.lineWidth=1;
-    	context.fillStyle="#000000";
-    	context.lineStyle="#000000";
-    	context.font="bold 46px sans-serif";
-    	context.textAlign = "center";
-    	context.textBaseline = "middle";
     	var center = this.tileBounds.center();
-    	context.fillText(this.word, center.x, this.tileBounds.origin.y + this.tileBounds.height*0.3);
+    	drawText(context, this.word, center.x, this.tileBounds.origin.y + this.tileBounds.height*0.3, FONT_BOLD_46, COLOR_DARK_GREY);
     	
     	if (this.button) {
     		this.button.draw(context);

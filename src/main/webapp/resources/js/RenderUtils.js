@@ -8,8 +8,64 @@ var COLOR_RIBBON_LINES = "rgba(108, 135, 80, 0.7)";
 var COLOR_RIBBON_GLOW = "rgba(149, 183, 128, 1.0)";
 var COLOR_RIBBON_OUTLINE = "rgba(108, 135, 80, 1.0)";
 var COLOR_SHADOW_COLOR = "#000000";
+var COLOR_TILE = "rgba(248, 238, 207, 1.0)";
+var COLOR_DARK_GREY = "#191919";
+var COLOR_WHITE = "#ffffff";
+var COLOR_BACKGROUND_SHADOW = "rgba(42, 42, 42, 0.5)";
 
-function roundRect(context, x, y, width, height, radius, fill, stroke) {
+var FONT_BOLD_46 = "bold 46px sans-serif";
+var FONT_BOLD_24 = "bold 24px sans-serif";
+
+function drawScrabbleBackground(context, x, y, width, height) {
+	// draw background
+	context.fillStyle = COLOR_GREEN1;
+	context.fillRect(0, 0, width, height);
+	
+	// draw lines
+	var numSquaresX = 10;
+	var lineWidth = width/numSquaresX;
+	var offsetX = lineWidth / 2;
+	var numSquaresY = Math.floor(height / lineWidth);
+	var offsetY = (height - (numSquaresY * lineWidth)) / 2;
+	
+	// Draw colored tiles
+	context.fillStyle = COLOR_BLUE1;
+	for (var i = -1; i < numSquaresX; ++i) {
+		for (var j = -1; j <= numSquaresY; ++j) {
+			if ((i == j+1) || ((i + j) == numSquaresX - 3)) {
+				context.fillRect(offsetX + i*lineWidth, offsetY + j*lineWidth, lineWidth, lineWidth);
+			}
+		}
+	}
+	
+	// Draw vertical lines
+	context.strokeStyle = COLOR_DARK_GREEN1;
+	context.lineWidth = 3;
+	for (var i = 0; i < numSquaresX; ++i) {
+		context.beginPath();
+		context.moveTo(offsetX + i*lineWidth, 0);
+		context.lineTo(offsetX + i*lineWidth, height);
+		context.stroke();
+	}
+	
+	// Draw horizontal lines
+	for (var i = 0; i <= numSquaresY; ++i) {
+		context.beginPath();
+		context.moveTo(0, offsetY + i*lineWidth);
+		context.lineTo(width, offsetY + i*lineWidth);
+		context.stroke();
+	}
+	
+}
+
+function drawTile(context, x, y, width, height) {
+	var radius = height * 0.1;
+	shadow(context, 5);
+	drawRoundRect(context, x, y, width, height, radius, true, false, COLOR_TILE);
+	eraseShadow(context);
+}
+
+function drawRoundRect(context, x, y, width, height, radius, fill, stroke, color) {
 	context.beginPath();
 	context.moveTo(x + radius, y);
 	context.lineTo(x + width - radius, y);
@@ -22,11 +78,29 @@ function roundRect(context, x, y, width, height, radius, fill, stroke) {
 	context.quadraticCurveTo(x, y, x + radius, y);
 	context.closePath();
 	if (stroke) {
+		context.strokeStyle = color;
 		context.stroke();
 	}
 	if (fill) {
+		context.fillStyle = color;
 		context.fill();
 	}  
+}
+
+function drawText(context, text, x, y, font, color) {
+	context.lineWidth = 1;
+	context.fillStyle = color;
+	context.font = font;
+	context.textAlign = "center";
+	context.textBaseline = "middle";
+	context.fillText(text, x, y);
+}
+
+function drawBackgroundShadow(context, x, y, width, height) {
+	context.fillStyle = COLOR_BACKGROUND_SHADOW;
+	shadow(context, 5);
+	context.fillRect(x, y, width, height);
+	eraseShadow(context);
 }
 
 function shadow(context, blur) {
@@ -85,7 +159,8 @@ function ribbonLines(context, x, y, width, height, indent) {
 	context.lineWidth = 2;
 	context.beginPath();
 	var centerY = y + height/2;
-	for (var i = 0; i < width; i+=6) {
+	var offset = (width/2) % 6;
+	for (var i = offset; i < width + offset; i+=6) {
 		if (i < indent) {
 			context.moveTo(x + i, y);
 			context.lineTo(x + i, y + (i * (height/2)/indent));

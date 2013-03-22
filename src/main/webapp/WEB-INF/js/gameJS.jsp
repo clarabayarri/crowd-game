@@ -3,6 +3,7 @@
 	<%@ include file="/resources/js/Point.js" %>
 	<%@ include file="/resources/js/Bounds.js" %>
 	<%@ include file="/resources/js/GameObject.js" %>
+	<%@ include file="/resources/js/LoadingSignal.js" %>
 	<%@ include file="/resources/js/WordCube.js" %>
 	<%@ include file="/resources/js/TileLayout.js" %>
 	<%@ include file="/resources/js/WordLayout.js" %>
@@ -11,6 +12,7 @@
 	<%@ include file="/resources/js/ContinueButton.js" %>
 	<%@ include file="/resources/js/ContinueDialog.js" %>
 	<%@ include file="/resources/js/GameController.js" %>
+	<%@ include file="/resources/js/EmptyGameController.js" %>
 	<%@ include file="/resources/js/InsertionGameController.js" %>
 	<%@ include file="/resources/js/OmissionGameController.js" %>
 	<%@ include file="/resources/js/SubstitutionGameController.js" %>

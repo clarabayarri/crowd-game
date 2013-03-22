@@ -16,11 +16,11 @@ function ApplicationManager()
     this.findProblemTemp = function() {
         var req = new Object();
         //req.responseText = '{"id":299,"type":"transposition","word":"palabra","displayText":["p","a","r","l","a","b","a"],"displayAnswers":[]}';
-        req.responseText = '{"id":299,"type":"insertion1","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
+        //req.responseText = '{"id":299,"type":"insertion1","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
         //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l","b","r","a"],"displayAnswers":["a","i","o","u"]}';
         //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
         //req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
-        //req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
+        req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
         //req.responseText = '{"id":299,"type":"separation","word":"no ves","displayText":["n","o","v","e","s"],"displayAnswers":[]}';
         this.loadProblem(req);
     };
@@ -56,7 +56,6 @@ function ApplicationManager()
 		
 		this.continue = false;
 		this.startTime = new Date().getTime();
-		this.animLoop();
 	}
 	
 	
@@ -72,6 +71,8 @@ function ApplicationManager()
     	canvas.addEventListener('mousedown', function(e) {_this.onMouseDown(e);}, false);
     	canvas.addEventListener('mousemove', function(e) {_this.onMouseMove(e);}, false);
     	canvas.addEventListener('mouseup', function(e) {_this.onMouseUp(e);}, false);
+    	this.gameController = new EmptyGameController().startupEmptyGameController(this);
+    	this.animLoop();
         this.findProblem();
         return this;
     }
@@ -175,11 +176,11 @@ function ApplicationManager()
     
     
     this.animLoop = function(){
-    var _this = this;
-      requestAnimFrame(function(){
-      	_this.animLoop();
-      });
-      this.gameController.draw();
+    	var _this = this;
+      	requestAnimFrame(function(){
+      		_this.animLoop();
+      	});
+      	this.gameController.draw();
     };
     
 }

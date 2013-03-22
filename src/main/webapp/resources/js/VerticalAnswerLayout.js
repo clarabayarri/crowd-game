@@ -45,15 +45,10 @@ function VerticalAnswerLayout()
     {
     	if (this.visible) {
     		// draw own background
-    		context.shadowColor = '#000000';
-    		context.shadowBlur = 5;
-    		context.shadowOffsetX = 2;
-    		context.shadowOffsetY = 2; 
-    		context.fillStyle = "rgba(13, 114, 98, 1.0)";
+    		shadow(context, 5);
+    		context.fillStyle = COLOR_GREEN2;
     		context.fillRect(this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
-    		context.shadowBlur = 0;
-    		context.shadowOffsetX = 0;
-    		context.shadowOffsetY = 0;
+    		eraseShadow(context);
     		
     		// then draw the children
     		for (x in this.children)
