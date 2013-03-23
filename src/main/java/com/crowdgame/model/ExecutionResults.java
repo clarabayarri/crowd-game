@@ -2,6 +2,8 @@ package com.crowdgame.model;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 public class ExecutionResults {
 
 	private Integer id;
@@ -11,6 +13,10 @@ public class ExecutionResults {
 	private Integer failedAttempts;
 	
 	private List<String> wrongAnswers;
+	
+	public ExecutionResults() {
+		this.wrongAnswers = Lists.newArrayList();
+	}
 
 	public Integer getId() {
 		return id;
