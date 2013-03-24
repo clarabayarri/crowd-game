@@ -1,33 +1,27 @@
 package com.crowdgame.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
-public class GameUser {
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
-	@Id
-	@Column(name="username")
-	private String username;
+
+public class Registration {
+
+private String username;
 	
-	@Column(name="password")
+	@Size(min = 4, max = 20)
 	private String password;
 	
+	private String confirmPassword;
+	
+	@NotEmpty
+	@Email
 	private String email;
 	
+	@NotNull
 	private boolean dyslexic;
-	
-	public GameUser() {
-		
-	}
-
-	public GameUser(Registration registration) {
-		this.username = registration.getUsername();
-		this.password = registration.getPassword();
-		this.email = registration.getEmail();
-		this.dyslexic = registration.isDyslexic();
-	}
 
 	public String getUsername() {
 		return username;
@@ -45,6 +39,14 @@ public class GameUser {
 		this.password = password;
 	}
 
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -60,7 +62,5 @@ public class GameUser {
 	public void setDyslexic(boolean dyslexic) {
 		this.dyslexic = dyslexic;
 	}
-	
-	
 
 }

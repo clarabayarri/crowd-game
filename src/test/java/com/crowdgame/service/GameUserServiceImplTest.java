@@ -1,5 +1,7 @@
 package com.crowdgame.service;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.persistence.EntityManager;
 
 import org.junit.Before;
@@ -47,6 +49,33 @@ public class GameUserServiceImplTest {
 		service.addGameUser(user);
 		
 		Mockito.verify(remoteService).postGameUser(user);
+	}
+	
+	@Test
+	public void testGetUserCallsRetrievesUser() {
+		service.getUser("username");
+		
+		Mockito.verify(em).find(GameUser.class, "username");
+	}
+	
+	@Test
+	public void testUsernameExistsForTrue() {
+		String username = "username";
+		Mockito.when(em.find(GameUser.class, username)).thenReturn(new GameUser());
+		
+		boolean result = service.usernameExists(username);
+		
+		assertEquals(true, result);
+	}
+	
+	@Test
+	public void testUsernameExistsForFalse() {
+		String username = "username";
+		Mockito.when(em.find(GameUser.class, username)).thenReturn(null);
+		
+		boolean result = service.usernameExists(username);
+		
+		assertEquals(false, result);
 	}
 	
 }
