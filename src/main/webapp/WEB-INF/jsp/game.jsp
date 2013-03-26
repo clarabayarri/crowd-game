@@ -32,20 +32,7 @@
             </div>
         </div>
     </div>
-    <footer>
-        <p>&#169 Clara Bayarri, 2013</p>
-        <ul>
-            <li>
-                <a href="http://www.facebook.com/clarabayarri" target="_blank"><img src="/resources/img/facebook.png" alt="Facebook" /></a>
-            </li>
-            <li>
-                <a href="http://www.twitter.com/clarabayarri" target="_blank"><img src="/resources/img/twitter.png" alt="Twitter" /></a>
-            </li>
-            <li>
-                <a href="mailto:clarabayarri@gmail.com" target="_blank"><img src="/resources/img/mail.png" alt="Email" /></a>
-            </li>
-        </ul>
-    </footer>
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
             
     <%@ include file="/WEB-INF/js/gameJS.jsp" %>
 

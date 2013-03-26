@@ -34,6 +34,15 @@ body {
 	color: #26221a;
 }
 
+h2 {
+	font: bold 1.5em "Adobe Gothic Std";
+	margin-left: 2em;
+}
+
+p {
+	margin-left: 1em;
+}
+
 .title-container {
 	
 }
@@ -96,6 +105,20 @@ body {
 	background: url(/resources/img/vertical-overlay.png) repeat #f8eecf;
 }
 
+.register-form th {
+	width: 200px;
+	height: 48px;
+	margin: 10px;
+	margin-left: 10%;
+	padding-right: 30px;
+	background: url(/resources/img/button.png) no-repeat;
+	color: #ffffff;
+	text-align: center;
+	font: bold 1.2em "Adobe Gothic Std";
+	padding-bottom: 0.3em;
+	padding-top: 0.2em;
+}
+
 .register-form .radio {
 	margin: 1em;
 	margin-top: 2em;
@@ -111,8 +134,13 @@ body {
 	background: url(/resources/img/button.png) no-repeat;
 	color: #ffffff;
 	text-align: center;
-	font: bold 1.5em "Adobe Gothic Std";
+	font: bold 1.2em "Adobe Gothic Std";
 	padding-bottom: 0.5em;
+}
+
+.green-ribbon a {
+	text-decoration: none;
+	color: #26221a;
 }
 
 .field-holder {
@@ -136,7 +164,7 @@ body {
 	height: 49px;
 	background: url(/resources/img/beige-button.png) no-repeat;
 	border: none;
-	font: bold 1.5em "Adobe Gothic Std";
+	font: bold 1.2em "Adobe Gothic Std";
 	color: #ffffff;
 	margin: 10px;
 }

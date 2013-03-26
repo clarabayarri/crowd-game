@@ -3,87 +3,77 @@
 
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Crowd game</title>
-
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Mapuche</title>
+    <link rel="stylesheet" href="/resources/css/reset.css" />
+    <link rel="stylesheet" href="/resources/css/960.css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-    
-    <!--
-      IMPORTANT:
-      This is Heroku specific styling. Remove to customize.
-    -->
-    <link href="http://heroku.github.com/template-app-bootstrap/heroku.css" rel="stylesheet">
-    <!-- /// -->
 
 </head>
 
-<body>
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a href="/" class="brand">Crowd game</a>
-            <a href="/" class="brand" id="heroku">by <strong>Clara</strong></a>
-        </div>
+<body class="container_12">
+
+<div class="title-container grid_4 prefix_4 suffix_4">
+        <a href="/home">
+            <img src="/resources/img/mapuche.png" alt="Mapuche" />
+        </a>
     </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="span8 offset2">
-
-            <div class="page-header">
-                <h1>Crowd game</h1>
-            </div>
-
-            <h2>Sign in</h2>
-
-            <form method="post" action="/static/j_spring_security_check">
-                <fieldset>
-                    <table>
-                        <tr>
-                            <th><label for="username_or_email">Username or email:</label></th>
-                            <td>
-                                <input id="username_or_email" name="j_username" type="text" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label for="password">Password:</label></th>
-                            <td>
-                                <input name="j_password" type="password" id="password" />
-                                <small><a href="/account/resend_password">Forgot?</a></small>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><label for="remember_me">Remember me</label></th>
-                            <td>
-                                <input name="_spring_security_remember_me" type="checkbox" id="remember_me" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <td><input name="commit" type="submit" class="btn btn-primary" value="Sign In"/></td>
-                    </div>
-                        </tr>
-                    </table>
-                </fieldset>
+    <div class="central">
+        <div class="central-container">
+            <div class="central-container2">
+                <section class="contents-area">
                     
-            </form>
+                    <div id="register-title">
+                        <span class="left" id="register-title-text">Sign in</span>
+                        <div class="green-ribbon-bent"></div>
+                    </div>
 
-            <p>Don't have an account yet? <a href="/register">Sign up now!</a></p>
+                    <div class="clear"></div>
 
-            <script type="text/javascript">
-                document.getElementById('username_or_email').focus();
-            </script>
-            
+                    <form method="post" class="register-form" action="/static/j_spring_security_check">
+                        <fieldset>
+                            <table>
+                                <tr>
+                                    <th><label for="username_or_email">Username:</label></th>
+                                    <td>
+                                        <input id="username_or_email" name="j_username" type="text" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="password">Password:</label></th>
+                                    <td>
+                                        <input name="j_password" type="password" id="password" />
+                                        <small><a href="/account/resend_password">Forgot?</a></small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="remember_me">Remember me</label></th>
+                                    <td>
+                                        <input name="_spring_security_remember_me" type="checkbox" id="remember_me" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                        <div >
+                            <input name="commit" type="submit" class="beige-ribbon right" value="Sign in"/>
+                        </div>
+
+                        <div class="clear"></div>
+
+                        <p>Don't have an account yet? <a href="/register">Sign up now!</a></p>
+                    </form>
+                </section>
+            </div>
         </div>
     </div>
-</div>
+
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
+            
+    <script type="text/javascript">
+        document.getElementById('username_or_email').focus();
+    </script>
 
 </body>
 </html>

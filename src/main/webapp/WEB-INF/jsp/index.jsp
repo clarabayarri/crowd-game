@@ -1,47 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Crowd game</title>
-
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Mapuche</title>
+    <link rel="stylesheet" href="/resources/css/reset.css" />
+    <link rel="stylesheet" href="/resources/css/960.css" />
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-    
-    <!--
-      IMPORTANT:
-      This is Heroku specific styling. Remove to customize.
-    -->
-    <link href="http://heroku.github.com/template-app-bootstrap/heroku.css" rel="stylesheet">
-    <!-- /// -->
 
 </head>
 
-<body>
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a href="/" class="brand">Crowd game</a>
-            <a href="/" class="brand" id="heroku">by <strong>Clara</strong></a>
+<body class="container_12">
+    <div class="title-container grid_4 prefix_4 suffix_4">
+        <a href="/home">
+            <img src="/resources/img/mapuche.png" alt="Mapuche" />
+        </a>
+    </div>
+    <div class="central">
+        <div class="central-container">
+            <div class="central-container2">
+                <section class="contents-area">
+                    
+                    <h2>Welcome!</h2>
+
+                    <p>This is an online linguistic game that indirectly helps improve research on technological capabilities for people with dyslexia. Feel free to join in!</p>
+
+                    <div class="green-ribbon">
+                        <a href="/game">Enter</a>
+                    </div>
+                    
+                </section>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="span8 offset2">
-
-            <a href="/game" class="btn btn-large btn-success">Enter</a>
-            
-        </div>
-    </div>
-</div>
+    <%@ include file="/WEB-INF/jsp/footer.jsp" %>
 
 </body>
 </html>
