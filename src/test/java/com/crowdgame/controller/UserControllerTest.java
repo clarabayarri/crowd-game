@@ -4,13 +4,16 @@ import static org.junit.Assert.assertEquals;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -26,13 +29,18 @@ public class UserControllerTest {
 	private UserController controller = new UserController();
 	
 	@Mock
-	private AuthenticationManager manager;
-	
-	@Mock
 	private RegistrationValidator validator;
 	
 	@Mock
+	private AuthenticationManager manager;
+	
+	@Mock
 	private GameUserService service;
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+	}
 	
 	@Test
 	public void testLoadLoginHandleRequestView() {
@@ -60,6 +68,39 @@ public class UserControllerTest {
 	}
 	
 	@Test
+	public void testProcessRegistrationHandleRequestViewBindingErrors() {
+		Registration registration = new Registration();
+		BindingResult bindingResult = Mockito.mock(BindingResult.class);
+		Mockito.when(bindingResult.hasErrors()).thenReturn(true);
+		
+		String result = controller.processRegistration(registration, bindingResult, null);
+		
+		assertEquals("register", result);
+	}
+	
+	@Test
+	public void testProcessRegistrationHandleRequestViewCreationErrors() {
+		Registration registration = new Registration();
+		BindingResult bindingResult = Mockito.mock(BindingResult.class);
+		
+		String result = controller.processRegistration(registration, bindingResult, null);
+		
+		assertEquals("register", result);
+	}
+	
+	@Test
+	public void testProcessRegistrationHandleRequestViewSuccess() {
+		Registration registration = new Registration();
+		BindingResult bindingResult = Mockito.mock(BindingResult.class);
+		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+		Mockito.when(service.getUser(Mockito.anyString())).thenReturn(new GameUser());
+		
+		String result = controller.processRegistration(registration, bindingResult, request);
+		
+		assertEquals("redirect:/game", result);
+	}
+	
+	@Test
 	public void testProcessRegistrationValidatesInput() {
 		Registration registration = new Registration();
 		BindingResult bindingResult = Mockito.mock(BindingResult.class);
@@ -74,12 +115,23 @@ public class UserControllerTest {
 	public void testProcessRegistrationCallsUserService() {
 		Registration registration = new Registration();
 		BindingResult bindingResult = Mockito.mock(BindingResult.class);
-		Mockito.when(bindingResult.hasErrors()).thenReturn(false);
 		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 		
 		controller.processRegistration(registration, bindingResult, request);
 		
 		Mockito.verify(service).addGameUser(Mockito.any(GameUser.class));
+	}
+	
+	@Test
+	public void testProcessRegistrationHandlesLogin() {
+		Registration registration = new Registration();
+		BindingResult bindingResult = Mockito.mock(BindingResult.class);
+		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
+		Mockito.when(service.getUser(Mockito.anyString())).thenReturn(new GameUser());
+		
+		controller.processRegistration(registration, bindingResult, request);
+		
+		Mockito.verify(manager).authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
 	}
 
 }

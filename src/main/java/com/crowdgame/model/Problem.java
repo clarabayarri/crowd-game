@@ -2,10 +2,19 @@ package com.crowdgame.model;
 
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.IndexColumn;
+
 import com.google.common.collect.Lists;
 
+@Entity
 public class Problem {
 
+	@Id
 	private Integer id;
 	
 	private String type;
@@ -14,8 +23,12 @@ public class Problem {
 	
 	private String display;
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+    @IndexColumn(name = "POSITION", base = 1)
 	private List<String> answers;
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+    @IndexColumn(name = "POSITION", base = 1)
 	private List<String> displayText;
 	
 	public Problem() {

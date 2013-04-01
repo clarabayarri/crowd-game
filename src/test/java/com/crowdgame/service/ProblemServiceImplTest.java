@@ -13,8 +13,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
 import com.crowdgame.model.Problem;
+import com.crowdgame.model.ProblemCollection;
 import com.crowdgame.model.TaskInput;
-import com.crowdgame.service.ProblemServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProblemServiceImplTest {
@@ -25,19 +25,35 @@ public class ProblemServiceImplTest {
 	@Mock
 	private RestTemplate template;
 	
+	@Mock
+	private ProblemCollectionService collectionService;
+	
 	@Before
 	public void setUp() {
 	    MockitoAnnotations.initMocks(this);
 	    TaskInput info = new TaskInput();
 		info.setContents("{\"answers\":[\"t\",\"e\",\"y\",\"h\"],\"id\":7,\"word\":\"trust\",\"level\":1,\"type\":\"insertion1\",\"language\":\"EN\",\"display\":\"trus_\"}");
-		Mockito.when(template.getForObject(Mockito.anyString(), Mockito.eq(TaskInput.class))).thenReturn(info);
+		TaskInput[] data = {info};
+		Mockito.when(template.getForObject(Mockito.anyString(), Mockito.eq(TaskInput[].class))).thenReturn(data);
+		Mockito.when(collectionService.getCollection()).thenReturn(new ProblemCollection());
 	}
 	
 	@Test
 	public void testGetProblemCallsAPI() {
 		service.getProblem();
 	
-		Mockito.verify(template).getForObject(Mockito.anyString(), Mockito.eq(TaskInput.class));
+		Mockito.verify(template).getForObject(Mockito.anyString(), Mockito.eq(TaskInput[].class));
+	}
+	
+	@Test
+	public void testGetProblemDoesntCallAPIIfProblemsRemaining() {
+		ProblemCollection collection = new ProblemCollection();
+		collection.addProblem(new Problem());
+		Mockito.when(collectionService.getCollection()).thenReturn(collection);
+		
+		service.getProblem();
+		
+		Mockito.verifyZeroInteractions(template);
 	}
 	
 	@Test

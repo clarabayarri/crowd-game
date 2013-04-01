@@ -13,12 +13,8 @@ import com.crowdgame.util.RemoteCommunicationService;
 @Service
 public class GameUserServiceImpl implements GameUserService {
 
-	private EntityManager em;
-	 
 	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager) {
-	        this.em = entityManager;
-	}
+	private EntityManager em;
 	
 	@Autowired
 	RemoteCommunicationService remoteService;

@@ -27,11 +27,6 @@ public class UserController {
 	@Autowired
 	private RegistrationValidator registrationValidator;
 	
-	public void setRegistrationValidator(
-    		RegistrationValidator registrationValidator) {
-            this.registrationValidator = registrationValidator;
-    }
-	
 	@Autowired @Qualifier("org.springframework.security.authenticationManager")
     private AuthenticationManager authenticationManager;
 	

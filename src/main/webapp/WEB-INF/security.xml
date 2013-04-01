@@ -11,7 +11,11 @@
 			always-use-default-target="false" />
 		<logout logout-url="/static/j_spring_security_logout"
 			logout-success-url="/home" />
-		<intercept-url pattern="/ga*" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/home" access="permitAll" />
+		<intercept-url pattern="/login" access="isAnonymous()" />
+		<intercept-url pattern="/register" access="isAnonymous()" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 	</http>
 
 	<beans:bean class="java.net.URI" id="dbUrl">
