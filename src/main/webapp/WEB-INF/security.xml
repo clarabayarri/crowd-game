@@ -34,8 +34,8 @@
 		<authentication-provider>
 			<jdbc-user-service id="userService"
 				data-source-ref="dataSource"
-				users-by-username-query="select username, password, true from PlatformUser where username=?"
-				authorities-by-username-query="select username,'ROLE_USER' from PlatformUser where username=?" />
+				users-by-username-query="select username, password, true from GameUser where username=?"
+				authorities-by-username-query="select username,'ROLE_USER' from GameUser where username=?" />
 		</authentication-provider>
 	</authentication-manager>
 
