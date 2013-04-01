@@ -18,6 +18,8 @@ public class GameUser {
 	
 	private boolean dyslexic;
 	
+	private Integer platformId;
+	
 	public GameUser() {
 		
 	}
@@ -59,6 +61,14 @@ public class GameUser {
 
 	public void setDyslexic(boolean dyslexic) {
 		this.dyslexic = dyslexic;
+	}
+
+	public Integer getPlatformId() {
+		return platformId;
+	}
+
+	public void setPlatformId(Integer platformId) {
+		this.platformId = platformId;
 	}
 	
 	

@@ -1,5 +1,9 @@
 package com.crowdgame.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +53,41 @@ public class RemoteCommunicationServiceImplTest {
 		
 		service.postGameUser(user);
 		
-		Mockito.verify(template).postForLocation(Mockito.anyString(), Mockito.any(GameUserInfo.class));
+		Mockito.verify(template).postForObject(Mockito.anyString(), Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class));
+	}
+	
+	@Test
+	public void testPostGameUserAssignsPlatformIdIfReceived() {
+		GameUser user = new GameUser();
+		user.setUsername("username");
+		user.setDyslexic(true);
+		Mockito.when(template.postForObject(Mockito.anyString(), Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class))).thenReturn(1);
+		
+		service.postGameUser(user);
+		
+		int result = user.getPlatformId();
+		assertEquals(1, result);
+	}
+	
+	@Test
+	public void testPostGameUserDoesntAssignPlatformIdIfZeroReceived() {
+		GameUser user = new GameUser();
+		user.setUsername("username");
+		user.setDyslexic(true);
+		Mockito.when(template.postForObject(Mockito.anyString(), Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class))).thenReturn(0);
+		
+		service.postGameUser(user);
+		
+		assertNull(user.getPlatformId());
+	}
+	
+	@Test
+	public void testGetRestTemplateNeverReturnsNull() {
+		service.setTemplate(null);
+		
+		RestTemplate result = service.getTemplate();
+		
+		assertNotNull(result);
 	}
 
 }

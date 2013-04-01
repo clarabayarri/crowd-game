@@ -17,8 +17,10 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 		this.template = template;
 	}
 
-	private RestTemplate getTemplate() {
-		if (this.template == null) this.template = new RestTemplate();
+	public RestTemplate getTemplate() {
+		if (this.template == null) {
+			this.template = new RestTemplate();
+		}
 		return template;
 	}
 
@@ -31,7 +33,10 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 	@Override
 	public void postGameUser(GameUser user) {
 		GameUserInfo gameUserInfo = new GameUserInfo(user);
-		getTemplate().postForLocation(USER_POST_URL, gameUserInfo);
+		Integer id = getTemplate().postForObject(USER_POST_URL, gameUserInfo, Integer.class);
+		if (id != null && id > 0) {
+			user.setPlatformId(id);
+		}
 		// TODO: check for errors in creation
 	}
 
