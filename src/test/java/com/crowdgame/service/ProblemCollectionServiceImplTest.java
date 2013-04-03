@@ -1,5 +1,6 @@
 package com.crowdgame.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
@@ -15,8 +16,10 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProblemCollectionServiceImplTest {
@@ -63,5 +66,20 @@ public class ProblemCollectionServiceImplTest {
 		service.saveCollection(collection);
 		
 		Mockito.verify(em).merge(collection);
+	}
+	
+	@Test
+	public void testRemoveProblemFromCollection() {
+		ProblemCollection collection = new ProblemCollection();
+		Problem problem = new Problem();
+		problem.setId(1);
+		collection.setProblems(Sets.newHashSet(new Problem(), new Problem(), problem));
+		Mockito.when(em.find(Problem.class, 1)).thenReturn(problem);
+	
+		service.removeProblemFromCollection(collection, problem);
+		
+		assertEquals(2, collection.getProblems().size());
+		Mockito.verify(em).merge(collection);
+		Mockito.verify(em).remove(problem);
 	}
 }

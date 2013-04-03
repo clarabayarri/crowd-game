@@ -14,12 +14,7 @@ public class RegistrationValidator {
 	@Autowired
 	private GameUserService service;
 	
-	public boolean supports(Class<?> klass) {
-		return Registration.class.isAssignableFrom(klass);
-	}
-	
-	public void validate(Object target, Errors errors) {
-		Registration registration = (Registration) target;
+	public void validate(Registration registration, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", 
 				"registration.username.notEmpty");
 		String username = registration.getUsername();

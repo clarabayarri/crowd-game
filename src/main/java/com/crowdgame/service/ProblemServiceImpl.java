@@ -15,16 +15,11 @@ import com.google.common.collect.Lists;
 @Service
 public class ProblemServiceImpl implements ProblemService {
 
-	private RestTemplate template;
-	private static final Integer projectId = 1;
+	private RestTemplate template = new RestTemplate();
+	private static final String PROBLEM_URL = "http://gentle-gorge-9660.herokuapp.com/API/project/1/task?count=10";
 	
 	@Autowired
 	private ProblemCollectionService collectionService;
-	
-	private RestTemplate getTemplate() {
-		if (this.template == null) this.template = new RestTemplate();
-		return template;
-	}
 	
 	public Problem getProblem() {
 		ProblemCollection collection = collectionService.getCollection();
@@ -41,7 +36,7 @@ public class ProblemServiceImpl implements ProblemService {
 	}
 	
 	private void retrieveMoreProblems(ProblemCollection collection) {
-		TaskInput[] tasks = getTemplate().getForObject("http://gentle-gorge-9660.herokuapp.com/API/project/" + projectId + "/task?count=10", TaskInput[].class);
+		TaskInput[] tasks = template.getForObject(PROBLEM_URL, TaskInput[].class);
 		for (TaskInput task : tasks) {
 			Problem problem = new Problem(task);
 			collection.addProblem(problem);

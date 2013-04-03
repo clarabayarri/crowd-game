@@ -1,6 +1,7 @@
 package com.crowdgame.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import javax.persistence.EntityManager;
 
@@ -12,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.crowdgame.model.GameUser;
 import com.crowdgame.util.RemoteCommunicationService;
@@ -27,6 +30,8 @@ public class GameUserServiceImplTest {
 	
 	@Mock
 	private RemoteCommunicationService remoteService;
+	
+	private static final String username = "username";
 	
 	@Before
 	public void setUp() {
@@ -52,15 +57,32 @@ public class GameUserServiceImplTest {
 	}
 	
 	@Test
-	public void testGetUserCallsRetrievesUser() {
-		service.getUser("username");
+	public void testGetUserRetrievesUser() {
+		service.getUser(username);
 		
-		Mockito.verify(em).find(GameUser.class, "username");
+		Mockito.verify(em).find(GameUser.class, username);
+	}
+	
+	@Test
+	public void testGetCurrentUserRetrievesUserWithSecurityUsername() {
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(username, "12345"));
+		
+		service.getCurrentUser();
+		
+		Mockito.verify(em).find(GameUser.class, username);
+	}
+	
+	@Test
+	public void testGetCurrentUserReturnsNullIfNoAuthentication() {
+		SecurityContextHolder.getContext().setAuthentication(null);
+		
+		GameUser result = service.getCurrentUser();
+		
+		assertNull(result);
 	}
 	
 	@Test
 	public void testUsernameExistsForTrue() {
-		String username = "username";
 		Mockito.when(em.find(GameUser.class, username)).thenReturn(new GameUser());
 		
 		boolean result = service.usernameExists(username);
@@ -70,7 +92,6 @@ public class GameUserServiceImplTest {
 	
 	@Test
 	public void testUsernameExistsForFalse() {
-		String username = "username";
 		Mockito.when(em.find(GameUser.class, username)).thenReturn(null);
 		
 		boolean result = service.usernameExists(username);

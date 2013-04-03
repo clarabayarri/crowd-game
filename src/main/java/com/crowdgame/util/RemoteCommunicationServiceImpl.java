@@ -43,7 +43,6 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 	public void postGameUser(GameUser user) {
 		GameUserInfo gameUserInfo = new GameUserInfo(user);
 		Integer id = getTemplate().postForObject(USER_POST_URL, gameUserInfo, Integer.class);
-		System.out.println(id);
 		if (id != null && id > 0) {
 			user.setPlatformId(id);
 		}
