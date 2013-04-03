@@ -35,7 +35,6 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 		GameUser user = userService.getCurrentUser();
 		if (user != null) {
 			executionInfo.setUserId(user.getPlatformId());
-			System.out.println(executionInfo.getUserId() + " " + user.getUsername());
 		}
 		getTemplate().postForLocation(EXECUTION_POST_URL, executionInfo);
 	}
