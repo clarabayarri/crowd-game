@@ -12,23 +12,14 @@ function ApplicationManager()
 	this.startTime = null;
 	
 	this.continue = true;
-	
-    this.findProblemTemp = function() {
-        var req = new Object();
-        //req.responseText = '{"id":299,"type":"transposition","word":"palabra","displayText":["p","a","r","l","a","b","a"],"displayAnswers":[]}';
-        //req.responseText = '{"id":299,"type":"insertion1","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
-        //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l","b","r","a"],"displayAnswers":["a","i","o","u"]}';
-        //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
-        //req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
-        req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
-        //req.responseText = '{"id":299,"type":"separation","word":"no ves","displayText":["n","o","v","e","s"],"displayAnswers":[]}';
-        this.loadProblem(req);
-    };
-    
+
+    this.problemURL = "/game/problem";
+
+    this.executionURL = "/game/results";
     
 	this.findProblem = function() {
 		var _this = this;
-        this.getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function(req) {_this.loadProblem(req);});
+        this.getRequest(this.problemURL, function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {
@@ -125,7 +116,7 @@ function ApplicationManager()
     	result.wrongAnswers = answers;
     	var coded = JSON.stringify(result);
     	
-    	postRequest(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
+    	postRequest(coded, this.executionURL, null);
     	console.log(this.problem.id);
     	console.log(coded);
     }

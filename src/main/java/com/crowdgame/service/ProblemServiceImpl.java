@@ -35,8 +35,9 @@ public class ProblemServiceImpl implements ProblemService {
 		Random random = new Random();
 		List<Problem> problems = Lists.newArrayList(collection.getProblems());
 		int index = random.nextInt(problems.size());
-		collection.removeProblem(problems.get(index));
-		return problems.get(index);
+		Problem problem = problems.get(index);
+		collectionService.removeProblemFromCollection(collection, problem);
+		return problem;
 	}
 	
 	private void retrieveMoreProblems(ProblemCollection collection) {

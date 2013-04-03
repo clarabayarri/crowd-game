@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
 
 @Service
@@ -36,6 +37,14 @@ public class ProblemCollectionServiceImpl implements ProblemCollectionService {
 	@Transactional
 	public void saveCollection(ProblemCollection collection) {
 		em.merge(collection);
+	}
+	
+	@Transactional
+	public void removeProblemFromCollection(ProblemCollection collection, Problem problem) {
+		collection.removeProblem(problem);
+		em.merge(collection);
+		Problem retrievedProblem = em.find(Problem.class, problem.getId());
+		em.remove(retrievedProblem);
 	}
 
 }

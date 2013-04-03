@@ -21,6 +21,7 @@ import com.crowdgame.model.ExecutionResults;
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemOutput;
 import com.crowdgame.service.ExecutionService;
+import com.crowdgame.service.GameUserService;
 import com.crowdgame.service.ProblemService;
 
 @Controller
@@ -31,6 +32,9 @@ public class GameController {
 	
 	@Autowired
 	private ExecutionService executionService;
+	
+	@Autowired
+	private GameUserService userService;
 	
 	@RequestMapping("/game")
 	public String loadGame() {

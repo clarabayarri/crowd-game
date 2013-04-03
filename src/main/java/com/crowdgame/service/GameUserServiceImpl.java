@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,16 @@ public class GameUserServiceImpl implements GameUserService {
 	public GameUser getUser(String username) {
 		GameUser user = em.find(GameUser.class, username);
 		return user;
+	}
+	
+	@Transactional
+	public GameUser getCurrentUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null) {
+	    	String username = auth.getName();
+		    return getUser(username);
+	    }
+	    return null;
 	}
 	
 	@Transactional

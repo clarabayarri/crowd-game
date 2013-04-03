@@ -18,6 +18,7 @@ import com.crowdgame.model.ExecutionInfo;
 import com.crowdgame.model.ExecutionResults;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.GameUserInfo;
+import com.crowdgame.service.GameUserService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RemoteCommunicationServiceImplTest {
@@ -27,6 +28,9 @@ public class RemoteCommunicationServiceImplTest {
 	
 	@Mock
 	private RestTemplate template;
+	
+	@Mock
+	private GameUserService userService;
 	
 	@Before
 	public void setUp() {
@@ -43,6 +47,20 @@ public class RemoteCommunicationServiceImplTest {
 		service.postExecutionResults(results);
 		
 		Mockito.verify(template).postForLocation(Mockito.anyString(), Mockito.any(ExecutionInfo.class));
+	}
+	
+	@Test
+	public void testPostExecutionResultsAssignsUserId() {
+		ExecutionResults results = new ExecutionResults();
+		results.setId(1);
+		results.setFailedAttempts(0);
+		results.setTimeSpent(100);
+		GameUser user = Mockito.mock(GameUser.class);
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		
+		service.postExecutionResults(results);
+		
+		Mockito.verify(user).getPlatformId();
 	}
 	
 	@Test

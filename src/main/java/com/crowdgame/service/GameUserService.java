@@ -9,6 +9,8 @@ public interface GameUserService {
 	
 	public GameUser getUser(String username);
 	
+	public GameUser getCurrentUser();
+	
 	public boolean usernameExists(String username);
 
 }
