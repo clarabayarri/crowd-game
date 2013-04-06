@@ -10,11 +10,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.web.client.RestTemplate;
 
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
 import com.crowdgame.model.TaskInput;
+import com.crowdgame.util.RemoteCommunicationService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProblemServiceImplTest {
@@ -23,10 +23,10 @@ public class ProblemServiceImplTest {
 	private ProblemServiceImpl service = new ProblemServiceImpl();
 	
 	@Mock
-	private RestTemplate template;
+	private ProblemCollectionService collectionService;
 	
 	@Mock
-	private ProblemCollectionService collectionService;
+	private RemoteCommunicationService remoteService;
 	
 	@Before
 	public void setUp() {
@@ -34,15 +34,15 @@ public class ProblemServiceImplTest {
 	    TaskInput info = new TaskInput();
 		info.setContents("{\"answers\":[\"t\",\"e\",\"y\",\"h\"],\"id\":7,\"word\":\"trust\",\"level\":1,\"type\":\"insertion1\",\"language\":\"EN\",\"display\":\"trus_\"}");
 		TaskInput[] data = {info};
-		Mockito.when(template.getForObject(Mockito.anyString(), Mockito.eq(TaskInput[].class))).thenReturn(data);
+		Mockito.when(remoteService.getTasks()).thenReturn(data);
 		Mockito.when(collectionService.getCollection()).thenReturn(new ProblemCollection());
 	}
 	
 	@Test
-	public void testGetProblemCallsAPI() {
+	public void testGetProblemCallsRemoteService() {
 		service.getProblem();
 	
-		Mockito.verify(template).getForObject(Mockito.anyString(), Mockito.eq(TaskInput[].class));
+		Mockito.verify(remoteService).getTasks();
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class ProblemServiceImplTest {
 		
 		service.getProblem();
 		
-		Mockito.verifyZeroInteractions(template);
+		Mockito.verifyZeroInteractions(remoteService);
 	}
 	
 	@Test

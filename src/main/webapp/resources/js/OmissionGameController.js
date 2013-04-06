@@ -12,10 +12,30 @@ function OmissionGameController()
     {
         this.startupGameController(applicationManager, problem);
         
+        this.maxMovesAllowed = this.numOmissionsInProblem();
         this.loadChildren();
         this.draw();
         
         return this;        
+    }
+
+    this.numOmissionsInProblem = function() {
+        var count = 0;
+        var wordIndex = 0;
+        var cubeIndex = 0;
+        var cubes = this.problem.displayText;
+        var word = this.problem.word;
+        while (wordIndex < word.length) {
+            var tileContents = cubes[cubeIndex];
+            var wordContents = word.substr(wordIndex, Math.min(word.length-wordIndex, tileContents.length));
+            if (tileContents !== wordContents) {
+                ++count;
+            } else {
+                wordIndex += tileContents.length;
+            }
+            ++cubeIndex;
+        }
+        return count;
     }
     
     this.loadChildren = function() {

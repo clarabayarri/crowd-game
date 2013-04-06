@@ -19,7 +19,7 @@ public class GameUserServiceImpl implements GameUserService {
 	private EntityManager em;
 	
 	@Autowired
-	RemoteCommunicationService remoteService;
+	private RemoteCommunicationService remoteService;
 	
 	@Transactional
 	public void addGameUser(GameUser user) {

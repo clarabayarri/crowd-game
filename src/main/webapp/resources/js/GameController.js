@@ -39,6 +39,9 @@ function GameController()
     this.problem = null;
     
     this.attempts = 0;
+
+    this.numMoves = 0;
+    this.maxMovesAllowed = 1;
     
     this.wrongAnswers = new Array();
     
@@ -100,10 +103,12 @@ function GameController()
     };
     
     this.checkForSuccess = function() {
+        ++this.numMoves;
     	if (this.wordLayout.getDisplayedWord() == this.problem.word) {
     		this.success();
-    	} else {
+    	} else if (this.numMoves >= this.maxMovesAllowed) {
     		this.fail();
+            this.numMoves = 0;
     	}
     }
     

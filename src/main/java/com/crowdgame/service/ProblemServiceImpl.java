@@ -5,21 +5,21 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
 import com.crowdgame.model.TaskInput;
+import com.crowdgame.util.RemoteCommunicationService;
 import com.google.common.collect.Lists;
 
 @Service
 public class ProblemServiceImpl implements ProblemService {
 
-	private RestTemplate template = new RestTemplate();
-	private static final String PROBLEM_URL = "http://gentle-gorge-9660.herokuapp.com/API/project/1/task?count=10";
-	
 	@Autowired
 	private ProblemCollectionService collectionService;
+
+	@Autowired
+	private RemoteCommunicationService remoteService;
 	
 	public Problem getProblem() {
 		ProblemCollection collection = collectionService.getCollection();
@@ -36,7 +36,7 @@ public class ProblemServiceImpl implements ProblemService {
 	}
 	
 	private void retrieveMoreProblems(ProblemCollection collection) {
-		TaskInput[] tasks = template.getForObject(PROBLEM_URL, TaskInput[].class);
+		TaskInput[] tasks = remoteService.getTasks();
 		for (TaskInput task : tasks) {
 			Problem problem = new Problem(task);
 			collection.addProblem(problem);

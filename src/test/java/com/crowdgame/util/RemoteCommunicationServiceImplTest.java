@@ -1,7 +1,6 @@
 package com.crowdgame.util;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
@@ -18,6 +17,7 @@ import com.crowdgame.model.ExecutionInfo;
 import com.crowdgame.model.ExecutionResults;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.GameUserInfo;
+import com.crowdgame.model.TaskInput;
 import com.crowdgame.service.GameUserService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,6 +38,13 @@ public class RemoteCommunicationServiceImplTest {
 	}
 	
 	@Test
+	public void testGetTasksExecutesGet() {
+		service.getTasks();
+		
+		Mockito.verify(template).getForObject(RemoteCommunicationService.TASK_GET_URL, TaskInput[].class);
+	}
+	
+	@Test
 	public void testPostExecutionResultsExecutesPost() {
 		ExecutionResults results = new ExecutionResults();
 		results.setId(1);
@@ -46,7 +53,8 @@ public class RemoteCommunicationServiceImplTest {
 		
 		service.postExecutionResults(results);
 		
-		Mockito.verify(template).postForLocation(Mockito.anyString(), Mockito.any(ExecutionInfo.class));
+		Mockito.verify(template).postForLocation(Mockito.eq(RemoteCommunicationService.EXECUTION_POST_URL), 
+				Mockito.any(ExecutionInfo.class));
 	}
 	
 	@Test
@@ -71,7 +79,8 @@ public class RemoteCommunicationServiceImplTest {
 		
 		service.postGameUser(user);
 		
-		Mockito.verify(template).postForObject(Mockito.anyString(), Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class));
+		Mockito.verify(template).postForObject(Mockito.eq(RemoteCommunicationService.CREATE_USER_POST_URL), 
+				Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class));
 	}
 	
 	@Test
@@ -97,15 +106,6 @@ public class RemoteCommunicationServiceImplTest {
 		service.postGameUser(user);
 		
 		assertNull(user.getPlatformId());
-	}
-	
-	@Test
-	public void testGetRestTemplateNeverReturnsNull() {
-		service.setTemplate(null);
-		
-		RestTemplate result = service.getTemplate();
-		
-		assertNotNull(result);
 	}
 
 }
