@@ -12,6 +12,7 @@ function TranspositionGameController()
     {
         this.startupGameController(applicationManager, problem);
         
+        this.maxMovesAllowed = 3;
         this.loadChildren();
         this.draw();
         
@@ -27,14 +28,7 @@ function TranspositionGameController()
     }
     
     this.onClickInternal = function(/**Point*/ clickPoint) {
-    	var answer = this.wordLayout.getClickedTile(clickPoint);
-    	this.moving = false;
-    	if (answer != null) {
-    		this.wordLayout.hideChildWithId(answer.id);
-    		this.draw();
-    		
-    		this.checkForSuccess();
-    	}
+    	
     }
     
     this.onMouseDownInternal = function(/**Point*/ clickPoint) {
