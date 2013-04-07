@@ -37,6 +37,22 @@ function SeparationGameController()
     	this.gameObjects.push(wordLayout);
     	this.wordLayout = wordLayout;
     }
+
+    this.checkPartialSolution = function() {
+        var index = 0;
+        var word = this.problem.word;
+        var current = this.wordLayout.getDisplayedWord();
+        for (var i = 0; i < word.length; ++i) {
+            var currentLetter = current.substr(index,1);
+            var problemLetter = word.substr(i,1);
+            if (!(currentLetter == problemLetter) && !(problemLetter == " ")) {
+                return false;
+            } else if (!(problemLetter == " ") || (problemLetter == " " && currentLetter == " ")) {
+                ++index;
+            }
+        }
+        return true;
+    }
     
     this.onClickInternal = function(/**Point*/ clickPoint) {
     	var answer = this.wordLayout.getCutIndexForPoint(clickPoint);

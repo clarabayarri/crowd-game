@@ -106,10 +106,14 @@ function GameController()
         ++this.numMoves;
     	if (this.wordLayout.getDisplayedWord() == this.problem.word) {
     		this.success();
-    	} else if (this.numMoves >= this.maxMovesAllowed) {
+    	} else if (this.numMoves >= this.maxMovesAllowed || !this.checkPartialSolution()) {
     		this.fail();
             this.numMoves = 0;
     	}
+    }
+
+    this.checkPartialSolution = function() {
+        return true;
     }
     
     this.onClick = function(e) {
