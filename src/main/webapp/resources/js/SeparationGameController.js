@@ -12,10 +12,22 @@ function SeparationGameController()
     {
         this.startupGameController(applicationManager, problem);
         
+        this.maxMovesAllowed = this.numSpacesInProblem();
         this.loadChildren();
         this.draw();
         
         return this;        
+    }
+
+    this.numSpacesInProblem = function() {
+        var count = 0;
+        var word = this.problem.word;
+        for (var i = 0; i < word.length; i++) {
+            if (word.substr(i,1) == " ") {
+                count++;
+            }
+        }
+        return count;
     }
     
     this.loadChildren = function() {
@@ -33,6 +45,7 @@ function SeparationGameController()
     		this.wordLayout.addSpaceAtIndex(answer);
     		this.draw();
     		
+            this.moving = false;
     		this.checkForSuccess();
     	}
     }
@@ -41,7 +54,7 @@ function SeparationGameController()
     	var touchedTile = this.wordLayout.getClickedTile(clickPoint);
     	if (touchedTile != null) {
     		this.initialClickPointDifference = clickPoint;
-    		this.moving = true;
+    		
     	}
     }
     
@@ -50,7 +63,7 @@ function SeparationGameController()
     }
     
     this.onMouseUpInternal = function(/**Point*/ point) {
-    	if (this.moving) {
+    	if (this.moving && this.initialClickPointDifference) {
     		this.moving = false;
     		var midPoint = new Point().init(this.initialClickPointDifference.x + (point.x - this.initialClickPointDifference.x)/2, this.initialClickPointDifference.y + (point.y - this.initialClickPointDifference.y)/2);
     		var answer = this.wordLayout.getCutIndexForPoint(midPoint);
@@ -59,8 +72,10 @@ function SeparationGameController()
     			this.draw();
     			
     			this.checkForSuccess();
+                this.initialClickPointDifference = null;
     		}
     	}
     }
+
 }
 SeparationGameController.prototype = new GameController;
