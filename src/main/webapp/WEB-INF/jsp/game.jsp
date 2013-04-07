@@ -14,7 +14,8 @@
 </head>
 
 <body class="container_12">
-    <div class="title-container grid_4 prefix_4 suffix_4">
+    <a href="/static/j_spring_security_logout" class="right-ribbon">logout</a>
+    <div class="title-container grid_4 prefix_4">
         <a href="/home">
             <img src="/resources/img/mapuche.png" alt="Mapuche" />
         </a>

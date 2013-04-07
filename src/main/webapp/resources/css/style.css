@@ -226,3 +226,16 @@ footer ul li {
 .right {
 	float:  right;
 }
+
+.right-ribbon {
+	float: right;
+	margin-top: 4em;
+	margin-right: -50px;
+	width: 175px;
+	height: 69px;
+	padding-top: 4px;
+	background: url(../img/right-ribbon.png) no-repeat;
+	font: bold 1.2em "Adobe Gothic Std";
+	text-align: center;
+	color: white;
+}
