@@ -59,7 +59,6 @@
                                     <th><label for="password">Password:</label></th>
                                     <td>
                                         <form:input path="password" type="password" id="password" />
-                                        <small><a href="/account/resend_password">Forgot?</a></small>
 
                                         <div class="control-group error">
                                             <div class="controls">
