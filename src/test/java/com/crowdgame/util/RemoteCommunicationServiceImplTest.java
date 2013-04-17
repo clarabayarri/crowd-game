@@ -17,8 +17,10 @@ import com.crowdgame.model.ExecutionInfo;
 import com.crowdgame.model.ExecutionResults;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.GameUserInfo;
+import com.crowdgame.model.PlatformData;
 import com.crowdgame.model.TaskInput;
 import com.crowdgame.service.GameUserService;
+import com.crowdgame.service.PlatformDataService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RemoteCommunicationServiceImplTest {
@@ -32,16 +34,21 @@ public class RemoteCommunicationServiceImplTest {
 	@Mock
 	private GameUserService userService;
 	
+	@Mock
+	private PlatformDataService dataService;
+	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		
+		Mockito.when(dataService.getPlatformData()).thenReturn(new PlatformData());
 	}
 	
 	@Test
 	public void testGetTasksExecutesGet() {
 		service.getTasks();
 		
-		Mockito.verify(template).getForObject(RemoteCommunicationService.TASK_GET_URL, TaskInput[].class);
+		Mockito.verify(template).getForObject(Mockito.anyString(), Mockito.eq(TaskInput[].class));
 	}
 	
 	@Test
@@ -53,7 +60,7 @@ public class RemoteCommunicationServiceImplTest {
 		
 		service.postExecutionResults(results);
 		
-		Mockito.verify(template).postForLocation(Mockito.eq(RemoteCommunicationService.EXECUTION_POST_URL), 
+		Mockito.verify(template).postForLocation(Mockito.anyString(), 
 				Mockito.any(ExecutionInfo.class));
 	}
 	
@@ -79,7 +86,7 @@ public class RemoteCommunicationServiceImplTest {
 		
 		service.postGameUser(user);
 		
-		Mockito.verify(template).postForObject(Mockito.eq(RemoteCommunicationService.CREATE_USER_POST_URL), 
+		Mockito.verify(template).postForObject(Mockito.anyString(), 
 				Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class));
 	}
 	

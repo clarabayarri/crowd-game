@@ -8,8 +8,10 @@ import com.crowdgame.model.ExecutionInfo;
 import com.crowdgame.model.ExecutionResults;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.GameUserInfo;
+import com.crowdgame.model.PlatformData;
 import com.crowdgame.model.TaskInput;
 import com.crowdgame.service.GameUserService;
+import com.crowdgame.service.PlatformDataService;
 
 @Service
 public class RemoteCommunicationServiceImpl implements RemoteCommunicationService {
@@ -18,10 +20,15 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 	
 	@Autowired
 	private GameUserService userService;
+	
+	@Autowired
+	private PlatformDataService dataService;
 
 	@Override
 	public TaskInput[] getTasks() {
-		return template.getForObject(TASK_GET_URL, TaskInput[].class);
+		PlatformData data = dataService.getPlatformData();
+		String taskGetURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/uid/" + data.getUID() + "/task?count=10";
+		return template.getForObject(taskGetURL, TaskInput[].class);
 	}
 
 	@Override
@@ -31,13 +38,17 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 		if (user != null) {
 			executionInfo.setUserId(user.getPlatformId());
 		}
-		template.postForLocation(EXECUTION_POST_URL, executionInfo);
+		PlatformData data = dataService.getPlatformData();
+		String executionPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/uid/" + data.getUID() + "/execution";
+		template.postForLocation(executionPostURL, executionInfo);
 	}
 
 	@Override
 	public void postGameUser(GameUser user) {
 		GameUserInfo gameUserInfo = new GameUserInfo(user);
-		Integer id = template.postForObject(CREATE_USER_POST_URL, gameUserInfo, Integer.class);
+		PlatformData data = dataService.getPlatformData();
+		String createUserPostUrl = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/uid/" + data.getUID() + "/user";
+		Integer id = template.postForObject(createUserPostUrl, gameUserInfo, Integer.class);
 		if (id != null && id > 0) {
 			user.setPlatformId(id);
 		}
