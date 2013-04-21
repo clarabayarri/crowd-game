@@ -11,15 +11,25 @@ function ApplicationManager()
 	
 	this.startTime = null;
 	
-	this.continue = true;
-
-    this.problemURL = "/game/problem";
-
-    this.executionURL = "/game/results";
+	this.continue = false;
+	
+    this.findProblemTemp = function() {
+        var req = new Object();
+        req.responseText = '{"id":299,"type":"transposition","word":"palabra","displayText":["p","a","r","l","a","b","a"],"displayAnswers":[]}';
+        //req.responseText = '{"id":299,"type":"insertion1","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
+        //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l","b","r","a"],"displayAnswers":["a","i","o","u"]}';
+        //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
+        //req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
+        //req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
+        //req.responseText = '{"id":299,"type":"separation","word":"no ve s","displayText":["n","o","v","e","s"],"displayAnswers":[]}';
+        //req.responseText = '{"id":299,"type":"omission","word":"alrededor","displayText":["a","l","r","r","e","d","e","r","d","o","r"],"displayAnswers":[]}';
+        this.loadProblem(req);
+    };
+    
     
 	this.findProblem = function() {
 		var _this = this;
-        this.getRequest(this.problemURL, function(req) {_this.loadProblem(req);});
+        this.getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {
@@ -48,6 +58,14 @@ function ApplicationManager()
 		this.continue = false;
 		this.startTime = new Date().getTime();
 	}
+
+    this.loadPause = function() {
+        this.gameController = new PausedGameController().startupPausedGameController(this);
+    }
+
+    this.loadEmpty = function() {
+        this.gameController = new EmptyGameController().startupEmptyGameController(this);
+    }
 	
 	
     /**
@@ -62,7 +80,7 @@ function ApplicationManager()
     	canvas.addEventListener('mousedown', function(e) {_this.onMouseDown(e);}, false);
     	canvas.addEventListener('mousemove', function(e) {_this.onMouseMove(e);}, false);
     	canvas.addEventListener('mouseup', function(e) {_this.onMouseUp(e);}, false);
-    	this.gameController = new EmptyGameController().startupEmptyGameController(this);
+        this.loadPause();
     	this.animLoop();
         this.findProblem();
         return this;
@@ -105,6 +123,8 @@ function ApplicationManager()
     	this.continue = true;
     	if (this.problem) {
     		this.loadGameController();
+    	} else {
+    		this.loadEmpty();
     	}
     }
     
@@ -116,7 +136,7 @@ function ApplicationManager()
     	result.wrongAnswers = answers;
     	var coded = JSON.stringify(result);
     	
-    	postRequest(coded, this.executionURL, null);
+    	postRequest(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
     	console.log(this.problem.id);
     	console.log(coded);
     }

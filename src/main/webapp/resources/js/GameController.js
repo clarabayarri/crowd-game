@@ -51,7 +51,7 @@ function GameController()
     this.wordLayout = null;
     this.answerLayout = null;
     this.movingTile = null;
-    this.continueDialog = null;
+    this.dialog = null;
 
     /**
         Initialises this object
@@ -106,7 +106,8 @@ function GameController()
         ++this.numMoves;
     	if (this.wordLayout.getDisplayedWord() == this.problem.word) {
     		this.success();
-    	} else if (this.numMoves >= this.maxMovesAllowed || !this.checkPartialSolution()) {
+    	} else if (this.numMoves >= this.maxMovesAllowed || 
+            !this.checkPartialSolution()) {
     		this.fail();
             this.numMoves = 0;
     	}
@@ -119,7 +120,7 @@ function GameController()
     this.onClick = function(e) {
     	var clickPoint = this.getEventPosition(e);
     	
-    	if (this.continueDialog) {
+    	if (this.dialog) {
     		this.checkForContinue(clickPoint);
     	} else if (this.touchEnabled) {
     		this.onClickInternal(clickPoint);
@@ -162,7 +163,7 @@ function GameController()
     }
     
     this.checkForContinue = function(/**Point*/ clickPoint) {
-    	if (this.continueDialog.onClick(clickPoint)) {
+    	if (this.dialog.onClick(clickPoint)) {
     		this.applicationManager.onContinue();
     	}
     }
@@ -195,8 +196,8 @@ function GameController()
     	var continueOrigin = new Point().init(0, 0);
     	var continueBounds = new Bounds().init(continueOrigin, this.canvas.width, this.canvas.height);
     	
-    	this.continueDialog = new ContinueDialog().init(this.problem.word, continueBounds);
-    	this.gameObjects.push(this.continueDialog);
+    	this.dialog = new ContinueDialog().startupContinueDialog(this.problem.word, continueBounds);
+    	this.gameObjects.push(this.dialog);
     }
     
     this.fail = function() {
