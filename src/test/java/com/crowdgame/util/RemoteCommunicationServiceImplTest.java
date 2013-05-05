@@ -72,10 +72,11 @@ public class RemoteCommunicationServiceImplTest {
 		results.setTimeSpent(100);
 		GameUser user = Mockito.mock(GameUser.class);
 		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		Mockito.when(user.getPlatformId()).thenReturn(1);
 		
 		service.postExecutionResults(results);
 		
-		Mockito.verify(user).getPlatformId();
+		Mockito.verify(user, Mockito.atLeastOnce()).getPlatformId();
 	}
 	
 	@Test

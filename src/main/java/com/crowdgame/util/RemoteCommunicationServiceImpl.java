@@ -36,6 +36,9 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 		ExecutionInfo executionInfo = new ExecutionInfo(results);
 		GameUser user = userService.getCurrentUser();
 		if (user != null) {
+			if (user.getPlatformId() == null) {
+				postGameUser(user);
+			}
 			executionInfo.setUserId(user.getPlatformId());
 		}
 		PlatformData data = dataService.getPlatformData();
