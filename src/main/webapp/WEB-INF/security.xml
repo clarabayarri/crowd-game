@@ -14,6 +14,7 @@
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/home" access="permitAll" />
 		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/login" access="isAnonymous()" />
 		<intercept-url pattern="/register" access="isAnonymous()" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
@@ -35,7 +36,7 @@
 			<jdbc-user-service id="userService"
 				data-source-ref="dataSource"
 				users-by-username-query="select username, password, true from GameUser where username=?"
-				authorities-by-username-query="select username,'ROLE_USER' from GameUser where username=?" />
+				authorities-by-username-query="select gameuser_username as username, roles from gameuser_roles where gameuser_username=?" />
 		</authentication-provider>
 	</authentication-manager>
 

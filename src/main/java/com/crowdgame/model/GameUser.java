@@ -1,8 +1,16 @@
 package com.crowdgame.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+
+import com.google.common.collect.Lists;
+
+
 
 @Entity
 public class GameUser {
@@ -20,6 +28,9 @@ public class GameUser {
 	
 	private Integer platformId;
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+	List<String> roles;
+	
 	public GameUser() {
 		
 	}
@@ -29,6 +40,7 @@ public class GameUser {
 		this.password = registration.getPassword();
 		this.email = registration.getEmail();
 		this.dyslexic = registration.isDyslexic();
+		this.roles = Lists.newArrayList("ROLE_USER");
 	}
 
 	public String getUsername() {
