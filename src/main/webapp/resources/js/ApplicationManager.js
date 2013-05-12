@@ -15,7 +15,7 @@ function ApplicationManager()
 	
     this.findProblemTemp = function() {
         var req = new Object();
-        req.responseText = '{"id":299,"type":"transposition","word":"palabra","displayText":["p","a","r","l","a","b","a"],"displayAnswers":[]}';
+        req.responseText = '{"batchId":299,"taskId":299,"type":"transposition","word":"palabra","displayText":["p","a","r","l","a","b","a"],"displayAnswers":[]}';
         //req.responseText = '{"id":299,"type":"insertion1","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
         //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l","b","r","a"],"displayAnswers":["a","i","o","u"]}';
         //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
@@ -130,7 +130,8 @@ function ApplicationManager()
     
     this.sendResults = function(/**Number*/time, /**Number*/intents, /**Array*/answers) {
     	var result = new Object();
-    	result.id = this.problem.id;
+    	result.taskId = this.problem.taskId;
+        result.batchId = this.problem.batchId;
     	result.timeSpent = time;
     	result.failedAttempts = intents;
     	result.wrongAnswers = answers;

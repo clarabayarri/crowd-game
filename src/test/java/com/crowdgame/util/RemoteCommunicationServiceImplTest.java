@@ -54,7 +54,7 @@ public class RemoteCommunicationServiceImplTest {
 	@Test
 	public void testPostExecutionResultsExecutesPost() {
 		ExecutionResults results = new ExecutionResults();
-		results.setId(1);
+		results.setTaskId(1);
 		results.setFailedAttempts(0);
 		results.setTimeSpent(100);
 		
@@ -67,7 +67,7 @@ public class RemoteCommunicationServiceImplTest {
 	@Test
 	public void testPostExecutionResultsAssignsUserId() {
 		ExecutionResults results = new ExecutionResults();
-		results.setId(1);
+		results.setTaskId(1);
 		results.setFailedAttempts(0);
 		results.setTimeSpent(100);
 		GameUser user = Mockito.mock(GameUser.class);

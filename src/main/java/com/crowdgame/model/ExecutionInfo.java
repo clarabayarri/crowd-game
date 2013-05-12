@@ -1,33 +1,42 @@
 package com.crowdgame.model;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 public class ExecutionInfo {
 
+	private Integer batchId;
+	
 	private Integer taskId;
 	
-	private String contents;
+	private Map<String, Object> contents;
 	
 	private Integer userId;
 	
 	public ExecutionInfo(ExecutionResults results) {
-		this.taskId = results.getId();
+		this.batchId = results.getBatchId();
+		this.taskId = results.getTaskId();
 		this.contents = encodeContents(results);
 	}
+
+	public Integer getBatchId() {
+		return batchId;
+	}
+
+	public void setBatchId(Integer batchId) {
+		this.batchId = batchId;
+	}
 	
-	private String encodeContents(ExecutionResults results) {
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectNode node = mapper.createObjectNode();
-		node.put("failedAttempts", results.getFailedAttempts());
-		node.put("timeSpent", results.getTimeSpent());
-		ArrayNode array = mapper.createArrayNode();
-		for (String wrongAnswer : results.getWrongAnswers()) {
-			array.add(wrongAnswer);
-		}
-		node.put("wrongAnswers", array);
-		return node.toString();
+	private Map<String, Object> encodeContents(ExecutionResults results) {
+		Map<String, Object> result = Maps.newHashMap();
+		result.put("failedAttempts", results.getFailedAttempts());
+		result.put("timeSpent", results.getTimeSpent());
+		List<String> answers = Lists.newArrayList(results.getWrongAnswers());
+		result.put("wrongAnswers", answers);
+		return result;
 	}
 
 	public Integer getTaskId() {
@@ -38,11 +47,11 @@ public class ExecutionInfo {
 		this.taskId = taskId;
 	}
 
-	public String getContents() {
+	public Map<String, Object> getContents() {
 		return contents;
 	}
 
-	public void setContents(String contents) {
+	public void setContents(Map<String, Object> contents) {
 		this.contents = contents;
 	}
 

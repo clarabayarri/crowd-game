@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.IndexColumn;
@@ -15,7 +16,12 @@ import com.google.common.collect.Lists;
 public class Problem {
 
 	@Id
+	@GeneratedValue
 	private Integer id;
+	
+	private Integer batchId;
+	
+	private Integer taskId;
 	
 	private String type;
 	
@@ -36,7 +42,8 @@ public class Problem {
 	}
 	
 	public Problem(TaskInput task) {
-		this.id = task.getId();
+		this.batchId = task.getBatchId();
+		this.taskId = task.getId();
 		this.type = task.getType();
 		this.word = task.getWord();
 		this.display = task.getDisplayText();
@@ -50,6 +57,22 @@ public class Problem {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getBatchId() {
+		return batchId;
+	}
+
+	public void setBatchId(Integer batchId) {
+		this.batchId = batchId;
+	}
+
+	public Integer getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(Integer taskId) {
+		this.taskId = taskId;
 	}
 
 	public String getType() {

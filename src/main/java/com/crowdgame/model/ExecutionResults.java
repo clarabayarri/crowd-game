@@ -5,8 +5,10 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 public class ExecutionResults {
+	
+	private Integer batchId;
 
-	private Integer id;
+	private Integer taskId;
 	
 	private Integer timeSpent;
 	
@@ -18,12 +20,20 @@ public class ExecutionResults {
 		this.wrongAnswers = Lists.newArrayList();
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getBatchId() {
+		return batchId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setBatchId(Integer batchId) {
+		this.batchId = batchId;
+	}
+
+	public Integer getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(Integer taskId) {
+		this.taskId = taskId;
 	}
 
 	public Integer getTimeSpent() {

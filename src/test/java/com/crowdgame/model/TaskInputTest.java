@@ -3,11 +3,13 @@ package com.crowdgame.model;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.crowdgame.model.TaskInput;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 
 
@@ -23,10 +25,18 @@ public class TaskInputTest {
 	private static final int problemLevel = 1;
 	private static final String problemLanguage = "EN";
 	private static final String problemDisplay = "trus_";
-	private static final String taskContents = "{\"answers\":[\"t\",\"e\",\"y\",\"h\"],\"id\":7,\"word\":\"trust\",\"level\":1,\"type\":\"insertion1\",\"language\":\"EN\",\"display\":\"trus_\"}";
+	private static Map<String, Object> taskContents;
 	
 	@Before
 	public void setUp() {
+		taskContents = Maps.newHashMap();
+		taskContents.put("id", problemId);
+		taskContents.put("answers", Lists.newArrayList(problemAnswer1, "e", "y", "h"));
+		taskContents.put("word", problemWord);
+		taskContents.put("level", problemLevel);
+		taskContents.put("type", problemType);
+		taskContents.put("language", problemLanguage);
+		taskContents.put("display", problemDisplay);
 		task.setContents(taskContents);
 	}
 	
