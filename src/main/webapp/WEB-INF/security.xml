@@ -33,6 +33,7 @@
 
 	<authentication-manager>
 		<authentication-provider>
+		    <password-encoder hash="sha" />
 			<jdbc-user-service id="userService"
 				data-source-ref="dataSource"
 				users-by-username-query="select username, password, true from GameUser where username=?"

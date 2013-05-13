@@ -7,6 +7,8 @@ public interface GameUserService {
 
 	public void addGameUser(GameUser user);
 	
+	public void saveGameUser(GameUser user);
+	
 	public GameUser getUser(String username);
 	
 	public GameUser getCurrentUser();

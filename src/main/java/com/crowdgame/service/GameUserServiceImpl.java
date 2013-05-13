@@ -23,8 +23,13 @@ public class GameUserServiceImpl implements GameUserService {
 	
 	@Transactional
 	public void addGameUser(GameUser user) {
-		remoteService.postGameUser(user);
 		em.persist(user);
+		remoteService.postGameUser(user);
+	}
+	
+	@Transactional
+	public void saveGameUser(GameUser user) {
+		em.merge(user);
 	}
 	
 	@Transactional

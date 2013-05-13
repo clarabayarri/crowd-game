@@ -14,8 +14,11 @@
 </head>
 
 <body class="container_12">
+    <div class="left-ribbon">
+        ${score} points
+    </div>
     <a href="/static/j_spring_security_logout" class="right-ribbon">logout</a>
-    <div class="title-container grid_4 prefix_4">
+    <div class="title-container grid_5 prefix_2">
         <a href="/home">
             <img src="/resources/img/mapuche.png" alt="Mapuche" />
         </a>

@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.model.GameUser;
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemOutput;
 import com.crowdgame.service.ExecutionService;
@@ -37,7 +39,9 @@ public class GameController {
 	private GameUserService userService;
 	
 	@RequestMapping("/game")
-	public String loadGame() {
+	public String loadGame(Model model) {
+		GameUser user = userService.getCurrentUser();
+		model.addAttribute("score", user.getScore());
 		return "game";
 	}
 	
@@ -51,6 +55,9 @@ public class GameController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void saveExecution(@RequestBody ExecutionResults execution) {
 		executionService.saveExecutionResults(execution);
+		GameUser user = userService.getCurrentUser();
+		user.increaseScore(1);
+		userService.saveGameUser(user);
 	}
 	
 	@ExceptionHandler

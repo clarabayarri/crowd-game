@@ -28,6 +28,8 @@ public class GameUser {
 	
 	private Integer platformId;
 	
+	private Integer score = 0;
+	
 	@ElementCollection(fetch=FetchType.EAGER)
 	List<String> roles;
 	
@@ -82,7 +84,16 @@ public class GameUser {
 	public void setPlatformId(Integer platformId) {
 		this.platformId = platformId;
 	}
-	
-	
 
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+	
+	public void increaseScore(Integer increase) {
+		this.score += increase;
+	}
 }

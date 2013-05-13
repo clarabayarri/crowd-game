@@ -34,21 +34,12 @@ body {
 	color: #26221a;
 }
 
-h2 {
-	font: bold 1.5em "Adobe Gothic Std";
-	margin-left: 2em;
-}
-
-p {
-	margin-left: 1em;
-}
-
 .title-container {
 	
 }
 
 .central {
-	background: url(/resources/img/pattern-overlay.png) repeat #59554d;
+	background: url(../img/pattern-overlay.png) repeat #59554d;
 	border: 1px solid #26221a;
 	-moz-box-shadow: -1px 1px 1px, inset 0 0 5px #7f7a6e;
 	-webkit-box-shadow: -1px 1px 1px, inset 0 0 5px #7f7a6e;
@@ -68,7 +59,7 @@ p {
 }
 
 .contents-area {
-	background: url(/resources/img/line-overlay.png) repeat #f8eecf;
+	background: url(../img/line-overlay.png) repeat #f8eecf;
 	border: 3px solid #d8cea3;
 }
 
@@ -92,7 +83,7 @@ p {
 	margin-bottom: 1em;
 	padding: 30px;
 	border: 2px solid #d8cea3;
-	background: url(/resources/img/vertical-overlay.png) repeat #f8eecf;
+	background: url(../img/vertical-overlay.png) repeat #f8eecf;
 }
 
 .register-form {
@@ -102,21 +93,7 @@ p {
 	margin-bottom: 3em;
 	padding: 30px;
 	border: 2px solid #d8cea3;
-	background: url(/resources/img/vertical-overlay.png) repeat #f8eecf;
-}
-
-.register-form th {
-	width: 200px;
-	height: 48px;
-	margin: 10px;
-	margin-left: 10%;
-	padding-right: 30px;
-	background: url(/resources/img/button.png) no-repeat;
-	color: #ffffff;
-	text-align: center;
-	font: bold 1.2em "Adobe Gothic Std";
-	padding-bottom: 0.3em;
-	padding-top: 0.2em;
+	background: url(../img/vertical-overlay.png) repeat #f8eecf;
 }
 
 .register-form .radio {
@@ -131,16 +108,11 @@ p {
 	margin: 10px;
 	margin-left: 10%;
 	margin-right: 30px;
-	background: url(/resources/img/button.png) no-repeat;
+	background: url(../img/button.png) no-repeat;
 	color: #ffffff;
 	text-align: center;
-	font: bold 1.2em "Adobe Gothic Std";
+	font: bold 1.5em "Adobe Gothic Std";
 	padding-bottom: 0.5em;
-}
-
-.green-ribbon a {
-	text-decoration: none;
-	color: #26221a;
 }
 
 .field-holder {
@@ -162,9 +134,9 @@ p {
 .beige-ribbon {
 	width: 161px;
 	height: 49px;
-	background: url(/resources/img/beige-button.png) no-repeat;
+	background: url(../img/beige-button.png) no-repeat;
 	border: none;
-	font: bold 1.2em "Adobe Gothic Std";
+	font: bold 1.5em "Adobe Gothic Std";
 	color: #ffffff;
 	margin: 10px;
 }
@@ -193,7 +165,7 @@ p {
 	width: 220px;
 	height: 57px;
 	
-	background: url(/resources/img/green-ribbon-bent.png) no-repeat;
+	background: url(../img/green-ribbon-bent.png) no-repeat;
 	
 	padding-bottom: 0.5em;
 }
@@ -235,6 +207,19 @@ footer ul li {
 	height: 69px;
 	padding-top: 4px;
 	background: url(../img/right-ribbon.png) no-repeat;
+	font: bold 1.2em "Adobe Gothic Std";
+	text-align: center;
+	color: white;
+}
+
+.left-ribbon {
+	float: left;
+	margin-top: 4em;
+	margin-left: -50px;
+	width: 175px;
+	height: 69px;
+	padding-top: 4px;
+	background: url(../img/left-ribbon.png) no-repeat;
 	font: bold 1.2em "Adobe Gothic Std";
 	text-align: center;
 	color: white;

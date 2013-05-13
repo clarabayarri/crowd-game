@@ -21,6 +21,7 @@ import com.crowdgame.model.PlatformData;
 import com.crowdgame.model.TaskInput;
 import com.crowdgame.service.GameUserService;
 import com.crowdgame.service.PlatformDataService;
+import com.crowdgame.util.RemoteCommunicationServiceImpl.GameUserPost;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RemoteCommunicationServiceImplTest {
@@ -84,8 +85,9 @@ public class RemoteCommunicationServiceImplTest {
 		GameUser user = new GameUser();
 		user.setUsername("username");
 		user.setDyslexic(true);
+		GameUserPost post = service.getGameUserPostForTesting(user);
 		
-		service.postGameUser(user);
+		post.run();
 		
 		Mockito.verify(template).postForObject(Mockito.anyString(), 
 				Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class));
@@ -96,9 +98,11 @@ public class RemoteCommunicationServiceImplTest {
 		GameUser user = new GameUser();
 		user.setUsername("username");
 		user.setDyslexic(true);
+		Mockito.when(userService.getUser("username")).thenReturn(user);
 		Mockito.when(template.postForObject(Mockito.anyString(), Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class))).thenReturn(1);
+		GameUserPost post = service.getGameUserPostForTesting(user);
 		
-		service.postGameUser(user);
+		post.run();
 		
 		int result = user.getPlatformId();
 		assertEquals(1, result);
@@ -110,8 +114,9 @@ public class RemoteCommunicationServiceImplTest {
 		user.setUsername("username");
 		user.setDyslexic(true);
 		Mockito.when(template.postForObject(Mockito.anyString(), Mockito.any(GameUserInfo.class), Mockito.eq(Integer.class))).thenReturn(0);
+		GameUserPost post = service.getGameUserPostForTesting(user);
 		
-		service.postGameUser(user);
+		post.run();
 		
 		assertNull(user.getPlatformId());
 	}
