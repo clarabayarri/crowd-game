@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -37,9 +38,14 @@ public class UserControllerTest {
 	@Mock
 	private GameUserService service;
 	
+	@Mock
+	private PasswordEncoder encoder;
+	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		
+		Mockito.when(encoder.encodePassword(Mockito.anyString(), Mockito.isNull())).thenReturn("password");
 	}
 	
 	@Test

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -33,6 +34,9 @@ public class UserController {
 	@Autowired
 	private GameUserService userService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@RequestMapping("/login")
 	public String loadLogin() {
 		return "login";
@@ -51,19 +55,21 @@ public class UserController {
 		if (bindingResult.hasErrors()) {
 			return "register";
 		}
-		userService.addGameUser(new GameUser(registration));
+		GameUser newUser = new GameUser(registration);
+		newUser.setPassword(passwordEncoder.encodePassword(registration.getPassword(), null));
+		userService.addGameUser(newUser);
 		GameUser user = userService.getUser(registration.getUsername());
 		if (user != null) {
-			authenticateUserAndSetSession(user, request);
+			authenticateUserAndSetSession(registration.getUsername(), registration.getPassword(), request);
 			return "redirect:/game";
 		}
 		bindingResult.reject("registration.error");
 		return "register";
 	}
 	
-	private void authenticateUserAndSetSession(GameUser user, HttpServletRequest request) {
+	private void authenticateUserAndSetSession(String username, String password, HttpServletRequest request) {
 		UsernamePasswordAuthenticationToken token = 
-				new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+				new UsernamePasswordAuthenticationToken(username, password);
 
 	    request.getSession();
 

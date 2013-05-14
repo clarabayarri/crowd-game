@@ -31,9 +31,12 @@
 		<beans:property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
 	</beans:bean>
 
+	<beans:bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder">
+    </beans:bean>
+    
 	<authentication-manager>
 		<authentication-provider>
-		    <password-encoder hash="sha" />
+		    <password-encoder hash="sha" ref="passwordEncoder"></password-encoder>
 			<jdbc-user-service id="userService"
 				data-source-ref="dataSource"
 				users-by-username-query="select username, password, true from GameUser where username=?"
