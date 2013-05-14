@@ -1,28 +1,38 @@
 package com.crowdgame.model;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ObjectNode;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 public class GameUserInfo {
 	
-	private String contents;
+	private Long projectUid;
+	
+	private Map<String, Object> contents;
 	
 	public GameUserInfo(GameUser user) {
 		this.contents = encodeContents(user);
 	}
 	
-	private String encodeContents(GameUser user) {
-		ObjectMapper mapper = new ObjectMapper();
-		ObjectNode node = mapper.createObjectNode();
-		node.put("dyslexic", user.isDyslexic());
-		return node.toString();
+	public Long getProjectUid() {
+		return projectUid;
 	}
 
-	public String getContents() {
+	public void setProjectUid(Long projectUid) {
+		this.projectUid = projectUid;
+	}
+
+	private Map<String, Object> encodeContents(GameUser user) {
+		Map<String, Object> result = Maps.newHashMap();
+		result.put("dyslexic", user.isDyslexic());
+		return result;
+	}
+
+	public Map<String, Object> getContents() {
 		return contents;
 	}
 
-	public void setContents(String contents) {
+	public void setContents(Map<String, Object> contents) {
 		this.contents = contents;
 	}
 

@@ -11,6 +11,7 @@ import com.crowdgame.model.GameUser;
 import com.crowdgame.model.GameUserInfo;
 import com.crowdgame.model.PlatformData;
 import com.crowdgame.model.TaskInput;
+import com.crowdgame.model.TaskRequest;
 import com.crowdgame.service.GameUserService;
 import com.crowdgame.service.PlatformDataService;
 import com.google.common.annotations.VisibleForTesting;
@@ -32,13 +33,18 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 	@Override
 	public TaskInput[] getTasks() {
 		PlatformData data = dataService.getPlatformData();
-		String taskGetURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/uid/" + data.getUID() + "/task?count=10";
-		return template.getForObject(taskGetURL, TaskInput[].class);
+		TaskRequest request = new TaskRequest();
+		request.setProjectUid(data.getUID());
+		request.setCount(10);
+		String taskPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/task";
+		return template.postForObject(taskPostURL, request, TaskInput[].class);
 	}
 
 	@Override
 	public void postExecutionResults(ExecutionResults results) {
 		ExecutionInfo executionInfo = new ExecutionInfo(results);
+		PlatformData data = dataService.getPlatformData();
+		executionInfo.setProjectUid(data.getUID());
 		GameUser user = userService.getCurrentUser();
 		if (user != null) {
 			if (user.getPlatformId() == null) {
@@ -46,8 +52,7 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 			}
 			executionInfo.setUserId(user.getPlatformId());
 		}
-		PlatformData data = dataService.getPlatformData();
-		String executionPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/uid/" + data.getUID() + "/execution";
+		String executionPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/execution";
 		template.postForLocation(executionPostURL, executionInfo);
 	}
 
@@ -73,7 +78,8 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 		public void run() {
 			GameUserInfo gameUserInfo = new GameUserInfo(user);
 			PlatformData data = dataService.getPlatformData();
-			String createUserPostUrl = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/uid/" + data.getUID() + "/user";
+			gameUserInfo.setProjectUid(data.getUID());
+			String createUserPostUrl = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/user";
 			Integer id = template.postForObject(createUserPostUrl, gameUserInfo, Integer.class);
 			if (id != null && id > 0) {
 				// Retrieve User again in case there have been updates
