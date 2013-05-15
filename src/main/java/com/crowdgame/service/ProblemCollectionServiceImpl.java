@@ -73,7 +73,6 @@ public class ProblemCollectionServiceImpl implements ProblemCollectionService {
 		result.addProblem(new Problem("separation", "cara bonita", "carabonita", emptyList));
 		result.addProblem(new Problem("separation", "de la ley", "delaley", emptyList));
 		result.addProblem(new Problem("substitution", "majestad", "majestat", Lists.newArrayList("d", "z", "s", "n")));
-		result.addProblem(new Problem("substitution", "miércoles", "miéscoles", Lists.newArrayList("r", "n", "d", "s", "l")));
 		result.addProblem(new Problem("substitution", "literales", "literates", Lists.newArrayList("g", "j", "l", "f", "r")));
 		return result;
 	}
