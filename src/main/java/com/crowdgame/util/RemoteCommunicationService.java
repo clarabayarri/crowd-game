@@ -2,11 +2,10 @@ package com.crowdgame.util;
 
 import com.crowdgame.model.ExecutionResults;
 import com.crowdgame.model.GameUser;
-import com.crowdgame.model.TaskInput;
 
 public interface RemoteCommunicationService {
 	
-	public TaskInput[] getTasks();
+	public void addTasksToProblemCollection();
 	
 	public void postExecutionResults(ExecutionResults results);
 	

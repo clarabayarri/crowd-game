@@ -41,6 +41,14 @@ public class Problem {
 		
 	}
 	
+	public Problem(String type, String word, String display, List<String> answers) {
+		this.type = type;
+		this.word = word;
+		this.display = display;
+		this.answers = answers;
+		generateProblem();
+	}
+	
 	public Problem(TaskInput task) {
 		this.batchId = task.getBatchId();
 		this.taskId = task.getId();

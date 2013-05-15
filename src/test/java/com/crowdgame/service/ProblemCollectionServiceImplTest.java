@@ -3,9 +3,9 @@ package com.crowdgame.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -39,26 +38,35 @@ public class ProblemCollectionServiceImplTest {
 	
 	@Test
 	public void testGetCollection() {
-		Query query = Mockito.mock(Query.class);
-		Mockito.when(query.getResultList()).thenReturn(Lists.newArrayList(collection));
-		Mockito.when(em.createQuery("FROM ProblemCollection")).thenReturn(query);
+		Mockito.when(em.find(ProblemCollection.class, 1)).thenReturn(collection);
 		
 		ProblemCollection result = service.getCollection();
 		
-		Mockito.verify(query, Mockito.times(2)).getResultList();
 		assertSame(collection, result);
 	}
 	
 	@Test
 	public void testGetCollectionCreatesCollectionIfNone() {
-		Query query = Mockito.mock(Query.class);
-		Mockito.when(query.getResultList()).thenReturn(Lists.newArrayList());
-		Mockito.when(em.createQuery("FROM ProblemCollection")).thenReturn(query);
-		
 		ProblemCollection result = service.getCollection();
 		
-		Mockito.verify(em).persist(Mockito.any(ProblemCollection.class));
 		assertNotNull(result);
+	}
+	
+	@Test
+	public void testGetBackupCollection() {
+		Mockito.when(em.find(ProblemCollection.class, 2)).thenReturn(collection);
+		
+		ProblemCollection result = service.getBackupCollection();
+		
+		assertSame(collection, result);
+	}
+	
+	@Test
+	public void testGetBackupCollectionCreatesCollectionIfNone() {
+		ProblemCollection result = service.getBackupCollection();
+		
+		assertNotNull(result);
+		assertTrue(!result.getProblems().isEmpty());
 	}
 	
 	@Test

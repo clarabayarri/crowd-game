@@ -9,7 +9,6 @@ public class GameUserInfoTest {
 	private GameUserInfo gameUserInfo;
 	
 	private static final boolean dyslexic = true;
-	private static final String expectedJSON = "{\"dyslexic\":true}";
 
 	@Test
 	public void testGenerateFromGameUser() {
@@ -18,6 +17,6 @@ public class GameUserInfoTest {
 		
 		gameUserInfo = new GameUserInfo(user);
 		
-		assertEquals(expectedJSON, gameUserInfo.getContents());
+		assertEquals(dyslexic, gameUserInfo.getContents().get("dyslexic"));
 	}
 }

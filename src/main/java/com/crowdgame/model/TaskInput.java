@@ -3,6 +3,8 @@ package com.crowdgame.model;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+
 
 
 
@@ -14,6 +16,10 @@ public class TaskInput {
 	
 	private Map<String, Object> contents;
 
+	public TaskInput() {
+		this.contents = Maps.newHashMap();
+	}
+	
 	public Integer getId() {
 		return batchId;
 	}

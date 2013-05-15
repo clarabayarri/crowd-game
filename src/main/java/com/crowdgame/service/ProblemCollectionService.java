@@ -7,6 +7,8 @@ public interface ProblemCollectionService {
 
 	public ProblemCollection getCollection();
 	
+	public ProblemCollection getBackupCollection();
+	
 	public void saveCollection(ProblemCollection collection);
 	
 	public void removeProblemFromCollection(ProblemCollection collection, Problem problem);

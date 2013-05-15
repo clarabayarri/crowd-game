@@ -10,10 +10,13 @@ import com.crowdgame.model.ExecutionResults;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.GameUserInfo;
 import com.crowdgame.model.PlatformData;
+import com.crowdgame.model.Problem;
+import com.crowdgame.model.ProblemCollection;
 import com.crowdgame.model.TaskInput;
 import com.crowdgame.model.TaskRequest;
 import com.crowdgame.service.GameUserService;
 import com.crowdgame.service.PlatformDataService;
+import com.crowdgame.service.ProblemCollectionService;
 import com.google.common.annotations.VisibleForTesting;
 
 @Service
@@ -28,32 +31,61 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 	private PlatformDataService dataService;
 	
 	@Autowired
+	private ProblemCollectionService collectionService;
+	
+	@Autowired
 	private ThreadPoolTaskExecutor taskExecutor;
 
 	@Override
-	public TaskInput[] getTasks() {
-		PlatformData data = dataService.getPlatformData();
-		TaskRequest request = new TaskRequest();
-		request.setProjectUid(data.getUID());
-		request.setCount(10);
-		String taskPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/task";
-		return template.postForObject(taskPostURL, request, TaskInput[].class);
+	public void addTasksToProblemCollection() {
+		taskExecutor.execute(new PostForTasks());
+	}
+	
+	@VisibleForTesting
+	public PostForTasks getPostForTasksForTesting() {
+		return new PostForTasks();
+	}
+	
+	public class PostForTasks implements Runnable {
+
+		@Override
+		public void run() {
+			PlatformData data = dataService.getPlatformData();
+			TaskRequest request = new TaskRequest();
+			request.setProjectUid(data.getUID());
+			request.setCount(10);
+			String taskPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/task";
+			TaskInput[] tasks = template.postForObject(taskPostURL, request, TaskInput[].class);
+			if (tasks.length > 0) {
+				ProblemCollection newCollection = collectionService.getCollection();
+				for (TaskInput task : tasks) {
+					Problem problem = new Problem(task);
+					newCollection.addProblem(problem);
+				}
+				
+				collectionService.saveCollection(newCollection);
+			}
+		}
+		
 	}
 
 	@Override
 	public void postExecutionResults(ExecutionResults results) {
-		ExecutionInfo executionInfo = new ExecutionInfo(results);
-		PlatformData data = dataService.getPlatformData();
-		executionInfo.setProjectUid(data.getUID());
-		GameUser user = userService.getCurrentUser();
-		if (user != null) {
-			if (user.getPlatformId() == null) {
-				postGameUser(user);
+		// Check if it is a real task, not backup
+		if (results.getBatchId() != null) {
+			ExecutionInfo executionInfo = new ExecutionInfo(results);
+			PlatformData data = dataService.getPlatformData();
+			executionInfo.setProjectUid(data.getUID());
+			GameUser user = userService.getCurrentUser();
+			if (user != null) {
+				if (user.getPlatformId() == null) {
+					postGameUser(user);
+				}
+				executionInfo.setUserId(user.getPlatformId());
 			}
-			executionInfo.setUserId(user.getPlatformId());
+			String executionPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/execution";
+			template.postForLocation(executionPostURL, executionInfo);
 		}
-		String executionPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/execution";
-		template.postForLocation(executionPostURL, executionInfo);
 	}
 
 	@Override

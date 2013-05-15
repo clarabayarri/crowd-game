@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
-import com.crowdgame.model.TaskInput;
 import com.crowdgame.util.RemoteCommunicationService;
 import com.google.common.collect.Lists;
 
@@ -23,8 +22,11 @@ public class ProblemServiceImpl implements ProblemService {
 	
 	public Problem getProblem() {
 		ProblemCollection collection = collectionService.getCollection();
+		if (collection.getProblems().size() < 3) {
+			retrieveMoreProblems();
+		}
 		if (collection.getProblems().size() == 0) {
-			retrieveMoreProblems(collection);
+			return getBackupProblem();
 		}
 		
 		Random random = new Random();
@@ -35,14 +37,17 @@ public class ProblemServiceImpl implements ProblemService {
 		return problem;
 	}
 	
-	private void retrieveMoreProblems(ProblemCollection collection) {
-		TaskInput[] tasks = remoteService.getTasks();
-		for (TaskInput task : tasks) {
-			Problem problem = new Problem(task);
-			collection.addProblem(problem);
-		}
-		
-		collectionService.saveCollection(collection);
+	private Problem getBackupProblem() {
+		ProblemCollection collection = collectionService.getBackupCollection();
+		Random random = new Random();
+		List<Problem> problems = Lists.newArrayList(collection.getProblems());
+		int index = random.nextInt(problems.size());
+		Problem problem = problems.get(index);
+		return problem;
+	}
+	
+	private void retrieveMoreProblems() {
+		remoteService.addTasksToProblemCollection();
 	}
 	
 }
