@@ -52,12 +52,12 @@ public class GameController {
 	}
 	
 	@RequestMapping(value = "/game/results")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void saveExecution(@RequestBody ExecutionResults execution) {
+	public @ResponseBody Integer saveExecution(@RequestBody ExecutionResults execution) {
 		executionService.saveExecutionResults(execution);
 		GameUser user = userService.getCurrentUser();
 		user.increaseScore(1);
 		userService.saveGameUser(user);
+		return user.getScore();
 	}
 	
 	@ExceptionHandler

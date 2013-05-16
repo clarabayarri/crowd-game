@@ -15,7 +15,7 @@
 
 <body class="container_12">
     <div class="left-ribbon">
-        ${score} points
+        <div id="score">${score} points</div>
     </div>
     <a href="/static/j_spring_security_logout" class="right-ribbon">logout</a>
     <div class="title-container grid_5 prefix_2">

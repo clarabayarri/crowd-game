@@ -12,6 +12,8 @@ function ApplicationManager()
 	this.startTime = null;
 	
 	this.continue = false;
+
+    this.newScore = 0;
 	
     this.findProblemTemp = function() {
         var req = new Object();
@@ -29,7 +31,7 @@ function ApplicationManager()
     
 	this.findProblem = function() {
 		var _this = this;
-        this.getRequest("/game/problem",function(req) {_this.loadProblem(req);});
+        this.getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {
@@ -116,12 +118,17 @@ function ApplicationManager()
     	this.problem = null;
     	
     	var _this = this;
-    	setTimeout(function() {_this.findProblem();}, 2000);
+    	setTimeout(function() {
+            _this.findProblem();
+        }, 2000);
     }
     
     this.onContinue = function() {
     	this.continue = true;
-    	if (this.problem) {
+        if (this.newScore > 0) {
+            $('#score').text("" + this.newScore + " points");
+        }
+        if (this.problem) {
     		this.loadGameController();
     	} else {
     		this.loadEmpty();
@@ -137,7 +144,10 @@ function ApplicationManager()
     	result.wrongAnswers = answers;
     	var coded = JSON.stringify(result);
     	
-    	postRequest(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", null);
+        var _this = this;
+    	postRequest(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", function(score) {
+            _this.newScore = score;
+        });
     	console.log(this.problem.id);
     	console.log(coded);
     }
