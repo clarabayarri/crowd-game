@@ -29,7 +29,7 @@ function ApplicationManager()
     
 	this.findProblem = function() {
 		var _this = this;
-        this.getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function(req) {_this.loadProblem(req);});
+        this.getRequest("/game/problem",function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {

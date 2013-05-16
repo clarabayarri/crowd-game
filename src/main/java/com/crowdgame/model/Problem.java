@@ -51,7 +51,7 @@ public class Problem {
 	
 	public Problem(TaskInput task) {
 		this.batchId = task.getBatchId();
-		this.taskId = task.getId();
+		this.taskId = task.getTaskId();
 		this.type = task.getType();
 		this.word = task.getWord();
 		this.display = task.getDisplayText();

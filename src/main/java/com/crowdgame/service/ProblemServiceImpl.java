@@ -26,6 +26,7 @@ public class ProblemServiceImpl implements ProblemService {
 			retrieveMoreProblems();
 		}
 		if (collection.getProblems().size() == 0) {
+			System.out.println("Returning backup problem");
 			return getBackupProblem();
 		}
 		

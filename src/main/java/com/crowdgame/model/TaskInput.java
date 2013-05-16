@@ -19,10 +19,6 @@ public class TaskInput {
 	public TaskInput() {
 		this.contents = Maps.newHashMap();
 	}
-	
-	public Integer getId() {
-		return batchId;
-	}
 
 	public Integer getBatchId() {
 		return batchId;
