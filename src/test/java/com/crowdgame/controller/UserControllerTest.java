@@ -139,5 +139,25 @@ public class UserControllerTest {
 		
 		Mockito.verify(manager).authenticate(Mockito.any(UsernamePasswordAuthenticationToken.class));
 	}
+	
+	@Test
+	public void testShowUserDataHandleRequestView() {
+		Model model = Mockito.mock(Model.class);
+		
+		String result = controller.showUserData(model);
+		
+		assertEquals("user", result);
+	}
+	
+	@Test
+	public void testShowUserDataAddsCurrentUserToModel() {
+		Model model = Mockito.mock(Model.class);
+		GameUser user = new GameUser();
+		Mockito.when(service.getCurrentUser()).thenReturn(user);
+		
+		controller.showUserData(model);
+		
+		Mockito.verify(model).addAttribute("user", user);
+	}
 
 }

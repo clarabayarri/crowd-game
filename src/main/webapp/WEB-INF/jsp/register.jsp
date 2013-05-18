@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="/resources/css/960.css" />
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-
 </head>
 
 <body class="container_12">
@@ -32,7 +30,7 @@
 
                     <div class="clear"></div>
 
-                    <form:form method="post" action="/register" modelAttribute="registration" class="register-form">
+                    <form:form method="post" action="/register" modelAttribute="registration" class="center-box">
                         <c:set var="errors"><form:errors path="*"/></c:set>
                         <c:if test="${not empty errors}">
                             <div class="alert alert-error">
@@ -99,6 +97,30 @@
                                         <div class="control-group error">
                                             <div class="controls">
                                                 <form:errors path="dyslexic" cssClass="error help-inline" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="age">Age:</label></th>
+                                    <td>
+                                        <form:input path="age" id="age" />
+
+                                        <div class="control-group error">
+                                            <div class="controls">
+                                                <form:errors path="age" cssClass="error help-inline" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="spanishSpeaker">Spanish speaker:</label></th>
+                                    <td>
+                                        <form:checkbox path="spanishSpeaker" id="spanishSpeaker" />
+
+                                        <div class="control-group error">
+                                            <div class="controls">
+                                                <form:errors path="spanishSpeaker" cssClass="error help-inline" />
                                             </div>
                                         </div>
                                     </td>

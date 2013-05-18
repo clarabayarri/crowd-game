@@ -24,6 +24,10 @@ a, font, img, ul, li {
 	text-decoration: none;
 }
 
+a:visited {
+	color:inherit;
+}
+
 input, select, textarea, button{
 	font-family:inherit;
 }
@@ -72,7 +76,7 @@ body {
 	width: 80%;
 	height: 500px;
 	margin-left: 9.75%;
-	margin-bottom: 2em;
+	margin-bottom: 1em;
 	border: 3px solid #d8cea3;
 }
 
@@ -86,7 +90,7 @@ body {
 	background: url(../img/vertical-overlay.png) repeat #f8eecf;
 }
 
-.register-form {
+.center-box {
 	width: 60%;
 	margin: auto;
 	margin-top: 1em;
@@ -199,28 +203,41 @@ footer ul li {
 	float:  right;
 }
 
-.right-ribbon {
-	float: right;
+.side-ribbon {
 	margin-top: 4em;
-	margin-right: -50px;
 	width: 175px;
 	height: 69px;
 	padding-top: 4px;
-	background: url(../img/right-ribbon.png) no-repeat;
 	font: bold 1.2em "Adobe Gothic Std";
 	text-align: center;
 	color: white;
 }
 
+.right-ribbon {
+	float: right;
+	margin-right: -50px;
+	background: url(../img/right-ribbon.png) no-repeat;
+}
+
+.right-red-ribbon {
+	float: right;
+	margin-right: -50px;
+	background: url(../img/right-red-ribbon.png) no-repeat;
+}
+
 .left-ribbon {
 	float: left;
-	margin-top: 4em;
 	margin-left: -50px;
-	width: 175px;
-	height: 69px;
-	padding-top: 4px;
 	background: url(../img/left-ribbon.png) no-repeat;
-	font: bold 1.2em "Adobe Gothic Std";
-	text-align: center;
-	color: white;
+}
+
+.left-red-ribbon {
+	float: left;
+	margin-left: -50px;
+	background: url(../img/left-red-ribbon.png) no-repeat;
+}
+
+.push-out-ribbon {
+	margin-top: 0em !important;
+	margin-right: -65px !important;
 }

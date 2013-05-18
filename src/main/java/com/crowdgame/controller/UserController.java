@@ -67,6 +67,12 @@ public class UserController {
 		return "register";
 	}
 	
+	@RequestMapping(value={"/user"})
+	public String showUserData(Model model) {
+		model.addAttribute("user", userService.getCurrentUser());
+		return "user";
+	}
+	
 	private void authenticateUserAndSetSession(String username, String password, HttpServletRequest request) {
 		UsernamePasswordAuthenticationToken token = 
 				new UsernamePasswordAuthenticationToken(username, password);

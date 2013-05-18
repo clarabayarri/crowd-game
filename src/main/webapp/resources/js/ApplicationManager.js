@@ -126,7 +126,7 @@ function ApplicationManager()
     this.onContinue = function() {
     	this.continue = true;
         if (this.newScore > 0) {
-            $('#score').text("" + this.newScore + " points");
+            $('#score').text("" + this.newScore + " puntos");
         }
         if (this.problem) {
     		this.loadGameController();

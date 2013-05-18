@@ -14,10 +14,12 @@
 </head>
 
 <body class="container_12">
-    <div class="left-ribbon">
-        <div id="score">${score} points</div>
+    <div class="side-ribbon left-ribbon">
+        <a href="/user">${user.username}</a>
     </div>
-    <a href="/static/j_spring_security_logout" class="right-ribbon">logout</a>
+    <div class="side-ribbon right-ribbon">
+        <div id="score">${user.score} puntos</div>
+    </div>
     <div class="title-container grid_5 prefix_2">
         <a href="/home">
             <img src="/resources/img/mapuche.png" alt="Mapuche" />
@@ -31,11 +33,18 @@
                     <div id="game-container">
                         <canvas id="game-canvas" width="800" height="500" style="background-color: #fff888;">You need HTML5 to see this :D</canvas>
                     </div>
+
+                    <div class="side-ribbon right-red-ribbon push-out-ribbon">
+                        <a href="/static/j_spring_security_logout">salir</a>
+                    </div>
+
+                    <div class="clear"></div>
                 </section>
                 
             </div>
         </div>
     </div>
+
     <%@ include file="/WEB-INF/jsp/footer.jsp" %>
             
     <%@ include file="/WEB-INF/js/gameJS.jsp" %>

@@ -26,6 +26,10 @@ public class GameUser {
 	
 	private boolean dyslexic;
 	
+	private Integer age;
+	
+	private boolean isSpanishSpeaker;
+	
 	private Integer platformId;
 	
 	private Integer score = 0;
@@ -42,6 +46,8 @@ public class GameUser {
 		this.password = registration.getPassword();
 		this.email = registration.getEmail();
 		this.dyslexic = registration.isDyslexic();
+		this.age = registration.getAge();
+		this.isSpanishSpeaker = registration.isSpanishSpeaker();
 		this.roles = Lists.newArrayList("ROLE_USER");
 	}
 
@@ -75,6 +81,22 @@ public class GameUser {
 
 	public void setDyslexic(boolean dyslexic) {
 		this.dyslexic = dyslexic;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public boolean isSpanishSpeaker() {
+		return isSpanishSpeaker;
+	}
+
+	public void setSpanishSpeaker(boolean isSpanishSpeaker) {
+		this.isSpanishSpeaker = isSpanishSpeaker;
 	}
 
 	public Integer getPlatformId() {

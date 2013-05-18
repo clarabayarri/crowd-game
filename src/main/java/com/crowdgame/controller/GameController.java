@@ -41,7 +41,7 @@ public class GameController {
 	@RequestMapping("/game")
 	public String loadGame(Model model) {
 		GameUser user = userService.getCurrentUser();
-		model.addAttribute("score", user.getScore());
+		model.addAttribute("user", user);
 		return "game";
 	}
 	

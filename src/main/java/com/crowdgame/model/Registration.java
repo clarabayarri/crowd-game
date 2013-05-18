@@ -1,5 +1,7 @@
 package com.crowdgame.model;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -9,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Registration {
 
-private String username;
+	private String username;
 	
 	@Size(min = 4, max = 20)
 	private String password;
@@ -22,6 +24,14 @@ private String username;
 	
 	@NotNull
 	private boolean dyslexic;
+	
+	@NotNull
+	@Min(4)
+	@Max(120)
+	private Integer age;
+	
+	@NotNull
+	private boolean spanishSpeaker;
 
 	public String getUsername() {
 		return username;
@@ -61,6 +71,22 @@ private String username;
 
 	public void setDyslexic(boolean dyslexic) {
 		this.dyslexic = dyslexic;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public boolean isSpanishSpeaker() {
+		return spanishSpeaker;
+	}
+
+	public void setSpanishSpeaker(boolean isSpanishSpeaker) {
+		this.spanishSpeaker = isSpanishSpeaker;
 	}
 
 }

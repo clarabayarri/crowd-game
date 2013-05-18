@@ -25,6 +25,8 @@ public class GameUserInfo {
 	private Map<String, Object> encodeContents(GameUser user) {
 		Map<String, Object> result = Maps.newHashMap();
 		result.put("dyslexic", user.isDyslexic());
+		result.put("age", user.getAge());
+		result.put("spanishSpeaker", user.isSpanishSpeaker());
 		return result;
 	}
 

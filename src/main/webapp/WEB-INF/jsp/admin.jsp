@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="/resources/css/960.css" />
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-
 </head>
 
 <body class="container_12">
-
+    <div class="side-ribbon left-ribbon">
+        <a href="/game">jugar</a>
+    </div>
     <div class="title-container grid_4 prefix_4 suffix_4">
         <a href="/home">
             <img src="/resources/img/mapuche.png" alt="Mapuche" />
