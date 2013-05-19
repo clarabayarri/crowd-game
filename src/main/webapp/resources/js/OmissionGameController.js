@@ -4,6 +4,9 @@
 */
 function OmissionGameController()
 {
+
+    this.instructions = "¡Sobran letras!";
+
     /**
         Initialises this object
         @return A reference to the initialised object

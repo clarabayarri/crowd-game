@@ -53,6 +53,8 @@ function GameController()
     this.movingTile = null;
     this.dialog = null;
 
+    this.instructions = null;
+
     /**
         Initialises this object
         @return A reference to the initialised object
@@ -75,8 +77,20 @@ function GameController()
         this.gameObjects = new Array();
         this.attempts = 0;
         this.wrongAnswers = new Array();
+
+        if (this.problem != null && this.instructions != null) {
+            this.loadInstructions();
+        }
         
         return this;        
+    }
+
+    this.loadInstructions = function() {
+        var instrOrigin = new Point().init(30, 30);
+        var instrBounds = new Bounds().init(instrOrigin, 400, 50);
+        var instr = new VisualButton().startupVisualButton(instrBounds);
+        instr.text = this.instructions;
+        this.gameObjects.push(instr);
     }
     
     

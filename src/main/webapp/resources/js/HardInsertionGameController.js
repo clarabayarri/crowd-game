@@ -4,6 +4,9 @@
 */
 function HardInsertionGameController()
 {
+
+    this.instructions = "¡Pon la letra que falta!";
+
     /**
         Initialises this object
         @return A reference to the initialised object

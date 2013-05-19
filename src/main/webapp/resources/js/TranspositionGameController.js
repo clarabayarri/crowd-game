@@ -4,6 +4,9 @@
 */
 function TranspositionGameController()
 {
+
+    this.instructions = "¡Reordena las letras!";
+
     /**
         Initialises this object
         @return A reference to the initialised object

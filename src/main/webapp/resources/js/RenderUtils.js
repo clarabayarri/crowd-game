@@ -3,10 +3,10 @@ var COLOR_GREEN2 = "rgba(13, 114, 98, 1.0)";
 var COLOR_GREEN3 = "rgba(3, 85, 71, 1.0)";
 var COLOR_BLUE1 = "#c0fcff";
 var COLOR_DARK_GREEN1 = "#102f22";
-var COLOR_RIBBON_BACKGROUND = "rgba(122, 146, 98, 1.0)";
-var COLOR_RIBBON_LINES = "rgba(108, 135, 80, 0.7)";
-var COLOR_RIBBON_GLOW = "rgba(149, 183, 128, 1.0)";
-var COLOR_RIBBON_OUTLINE = "rgba(108, 135, 80, 1.0)";
+var COLOR_RIBBON_BACKGROUND = "#749a66";
+var COLOR_RIBBON_LINES = "#698d5d";
+var COLOR_RIBBON_GLOW = "#86b172";
+var COLOR_RIBBON_OUTLINE = "#699156";
 var COLOR_SHADOW_COLOR = "#000000";
 var COLOR_TILE = "rgba(248, 238, 207, 1.0)";
 var COLOR_DARK_GREY = "#191919";
@@ -117,7 +117,7 @@ function eraseShadow(context) {
 }
 
 function drawRibbon(context, x, y, width, height) {
-	var indent = width * 0.1;
+	var indent = height*2/5;
 	
 	// background
 	context.fillStyle = COLOR_RIBBON_BACKGROUND;

@@ -4,6 +4,9 @@
 */
 function SubstitutionGameController()
 {
+
+    this.instructions = "¡Cambia una letra!";
+
     /**
         Initialises this object
         @return A reference to the initialised object

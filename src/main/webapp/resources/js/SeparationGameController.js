@@ -4,6 +4,9 @@
 */
 function SeparationGameController()
 {
+
+    this.instructions = "¡Corta en palabras!";
+
     /**
         Initialises this object
         @return A reference to the initialised object
