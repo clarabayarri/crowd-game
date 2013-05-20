@@ -53,7 +53,7 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 			PlatformData data = dataService.getPlatformData();
 			TaskRequest request = new TaskRequest();
 			request.setProjectUid(data.getUID());
-			request.setCount(10);
+			request.setCount(30);
 			String taskPostURL = "http://gentle-gorge-9660.herokuapp.com/API/project/" + data.getProjectId() + "/task";
 			TaskInput[] tasks = template.postForObject(taskPostURL, request, TaskInput[].class);
 			if (tasks.length > 0) {
