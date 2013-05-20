@@ -5,11 +5,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Mapuche</title>
+    
     <link rel="stylesheet" href="/resources/css/reset.css" />
     <link rel="stylesheet" href="/resources/css/960.css" />
-    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
-
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
+    
     <script src="http://code.jquery.com/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
 
