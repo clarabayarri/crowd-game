@@ -19,6 +19,7 @@ public class PlatformDataServiceImpl implements PlatformDataService {
 		PlatformData result = em.find(PlatformData.class, 1);
 		if (result == null) {
 			result = new PlatformData();
+			result.setId(1);
 		}
 		return result;
 	}

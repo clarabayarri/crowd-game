@@ -64,6 +64,7 @@ public class RemoteCommunicationServiceImpl implements RemoteCommunicationServic
 				}
 				
 				collectionService.saveCollection(newCollection);
+				System.out.println("Received " + tasks.length + " tasks.");
 			}
 		}
 		
