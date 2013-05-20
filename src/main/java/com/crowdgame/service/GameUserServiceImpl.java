@@ -2,6 +2,7 @@ package com.crowdgame.service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -46,6 +47,24 @@ public class GameUserServiceImpl implements GameUserService {
 		    return getUser(username);
 	    }
 	    return null;
+	}
+	
+	@Transactional
+	public GameUser getUserByUsernameOrEmail(String username) {
+		GameUser user = getUser(username);
+		if (user == null) {
+			user = getUserByEmail(username);
+		}
+		return user;
+	}
+	
+	@Transactional
+	private GameUser getUserByEmail(String email) {
+		Query query = em.createQuery("FROM GameUser WHERE email='" + email + "'");
+		if (!query.getResultList().isEmpty()) {
+			return (GameUser) query.getResultList().get(0);
+		}
+		return null;
 	}
 	
 	@Transactional

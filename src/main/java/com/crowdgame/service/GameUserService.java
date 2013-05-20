@@ -13,6 +13,8 @@ public interface GameUserService {
 	
 	public GameUser getCurrentUser();
 	
+	public GameUser getUserByUsernameOrEmail(String username);
+	
 	public boolean usernameExists(String username);
 	
 	public void removeUser(String username);

@@ -34,7 +34,7 @@
                         <c:set var="errors"><form:errors path="*"/></c:set>
                         <c:if test="${not empty errors}">
                             <div class="alert alert-error">
-                                <h4><fmt:message key="alerta"/>!</h4>
+                                <h4><fmt:message key="warning"/></h4>
                                 <p><spring:message code="registration.error" /></p>
                             </div>
                         </c:if>

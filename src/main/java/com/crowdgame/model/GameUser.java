@@ -7,10 +7,12 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.google.common.collect.Lists;
-
-
 
 @Entity
 public class GameUser {
@@ -36,6 +38,11 @@ public class GameUser {
 	
 	@ElementCollection(fetch=FetchType.EAGER)
 	List<String> roles;
+	
+	@SuppressWarnings("deprecation")
+	@OneToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.DELETE_ORPHAN, CascadeType.ALL})
+	private PasswordResetRequest passwordResetRequest;
 	
 	public GameUser() {
 		
@@ -117,5 +124,21 @@ public class GameUser {
 	
 	public void increaseScore(Integer increase) {
 		this.score += increase;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	public PasswordResetRequest getPasswordResetRequest() {
+		return passwordResetRequest;
+	}
+
+	public void setPasswordResetRequest(PasswordResetRequest passwordResetRequest) {
+		this.passwordResetRequest = passwordResetRequest;
 	}
 }

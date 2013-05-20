@@ -17,6 +17,9 @@
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/login" access="isAnonymous()" />
+		<intercept-url pattern="/forgot" access="isAnonymous()" />
+		<intercept-url pattern="/reset" access="isAnonymous()" />
+		<intercept-url pattern="/forgot/**" access="isAnonymous()" />
 		<intercept-url pattern="/register" access="isAnonymous()" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 	</http>

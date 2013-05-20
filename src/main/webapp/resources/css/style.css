@@ -169,7 +169,7 @@ body {
 }
 
 .beige-ribbon {
-	width: 161px;
+	width: 161px !important;
 	height: 49px;
 	background: url(../img/beige-button.png) no-repeat;
 	border: none;
