@@ -56,7 +56,7 @@ a, font, img, ul, li {
 	font-size: 1.2em;
 }
 
-.green-ribbon a:visited, .beige-ribbon a:visited, .green-ribbon-bent a:visited, .side-ribbon a:visited {
+.green-ribbon, .green-ribbon a:visited, .beige-ribbon, .beige-ribbon a:visited, .green-ribbon-bent a:visited, .side-ribbon, .side-ribbon a:visited {
 	color:inherit;
 }
 

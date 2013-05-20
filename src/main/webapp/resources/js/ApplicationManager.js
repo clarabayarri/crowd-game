@@ -33,7 +33,7 @@ function ApplicationManager()
     
 	this.findProblem = function() {
 		var _this = this;
-        this.getRequest("http://desolate-inlet-9447.herokuapp.com/game/problem",function(req) {_this.loadProblem(req);});
+        this.getRequest("http://mapuche.clarabayarri.com/game/problem",function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {
@@ -152,7 +152,7 @@ function ApplicationManager()
     	var coded = JSON.stringify(result);
     	
         var _this = this;
-    	postRequest(coded, "http://desolate-inlet-9447.herokuapp.com/game/results", function(score) {
+    	postRequest(coded, "http://mapuche.clarabayarri.com/game/results", function(score) {
             _this.newScore = score;
         });
     	console.log(this.problem.id);
