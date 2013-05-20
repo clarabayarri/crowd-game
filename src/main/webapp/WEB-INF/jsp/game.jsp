@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

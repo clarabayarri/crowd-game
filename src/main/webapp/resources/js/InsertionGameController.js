@@ -5,7 +5,7 @@
 function InsertionGameController()
 {
 
-    this.instructions = "¡Falta una letra!";
+    this.instructions = "Falta una letra";
 
     /**
         Initialises this object

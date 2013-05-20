@@ -4,6 +4,9 @@
 */
 function DerivationGameController()
 {
+
+    this.instructions="Escoge la terminación";
+
     /**
         Initialises this object
         @return A reference to the initialised object

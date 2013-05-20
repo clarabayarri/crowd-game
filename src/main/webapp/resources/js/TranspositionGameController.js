@@ -5,7 +5,7 @@
 function TranspositionGameController()
 {
 
-    this.instructions = "¡Reordena las letras!";
+    this.instructions = "Reordena las letras";
 
     /**
         Initialises this object

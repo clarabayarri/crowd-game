@@ -5,7 +5,7 @@
 function SeparationGameController()
 {
 
-    this.instructions = "¡Corta en palabras!";
+    this.instructions = "Corta en palabras";
 
     /**
         Initialises this object

@@ -5,7 +5,7 @@
 function SubstitutionGameController()
 {
 
-    this.instructions = "¡Cambia una letra!";
+    this.instructions = "Cambia una letra";
 
     /**
         Initialises this object

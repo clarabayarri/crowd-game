@@ -5,7 +5,7 @@
 function HardInsertionGameController()
 {
 
-    this.instructions = "¡Pon la letra que falta!";
+    this.instructions = "Pon la letra que falta";
 
     /**
         Initialises this object

@@ -5,7 +5,7 @@
 function OmissionGameController()
 {
 
-    this.instructions = "¡Sobran letras!";
+    this.instructions = "Sobran letras";
 
     /**
         Initialises this object
