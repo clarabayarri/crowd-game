@@ -4,6 +4,9 @@
 function ContinueDialog()
 {
     this.word = null;
+
+    this.dialogCenter = null;
+    this.dialogTextOriginY = null;
      
     this.startupContinueDialog = function(/**String*/ word, /**Bounds*/ bounds) {
     	this.startupDialog(bounds);
@@ -21,9 +24,12 @@ function ContinueDialog()
     }
     
     this.drawInternal = function (/**CanvasRenderingContext2D*/ context) {
-    	// draw text
-    	var center = this.tileBounds.center();
-    	drawText(context, this.word, center.x, this.tileBounds.origin.y + this.tileBounds.height*0.3, FONT_BOLD_46, COLOR_DARK_GREY);
+    	if (this.dialogCenter == null) {
+            this.dialogCenter = this.tileBounds.center();
+            this.dialogTextOriginY = this.tileBounds.origin.y + this.tileBounds.height*0.3;
+        }
+        // draw text
+    	drawText(context, this.word, this.dialogCenter.x, this.dialogTextOriginY, FONT_BOLD_46, COLOR_DARK_GREY);
     }
 }
 

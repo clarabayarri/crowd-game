@@ -73,6 +73,19 @@ public class UserController {
 		return "user";
 	}
 	
+	@RequestMapping(value={"/deleteUser"})
+	public String deleteCurrentUser() {
+		GameUser user = userService.getCurrentUser();
+		userService.removeUser(user.getUsername());
+		SecurityContextHolder.getContext().setAuthentication(null);
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(value={"/policy"})
+	public String showPolicy() {
+		return "policy";
+	}
+	
 	private void authenticateUserAndSetSession(String username, String password, HttpServletRequest request) {
 		UsernamePasswordAuthenticationToken token = 
 				new UsernamePasswordAuthenticationToken(username, password);

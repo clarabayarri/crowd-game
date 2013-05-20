@@ -13,7 +13,6 @@ function DerivationGameController()
         this.startupGameController(applicationManager, problem);
         
         this.loadChildren();
-        this.draw();
         
         return this;        
     }

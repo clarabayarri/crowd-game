@@ -53,5 +53,13 @@ public class GameUserServiceImpl implements GameUserService {
 		GameUser user = em.find(GameUser.class, username);
 		return user != null;
 	}
+	
+	@Transactional
+	public void removeUser(String username) {
+		GameUser user = em.find(GameUser.class, username);
+		if (user != null) {
+			em.remove(user);
+		}
+	}
 
 }

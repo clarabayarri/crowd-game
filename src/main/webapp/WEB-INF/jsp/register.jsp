@@ -24,7 +24,7 @@
                 <section class="contents-area">
                     
                     <div id="register-title">
-                        <span class="left" id="register-title-text">Register</span>
+                        <span class="left" id="register-title-text"><fmt:message key="register.title"/></span>
                         <div class="green-ribbon-bent"></div>
                     </div>
 
@@ -34,7 +34,7 @@
                         <c:set var="errors"><form:errors path="*"/></c:set>
                         <c:if test="${not empty errors}">
                             <div class="alert alert-error">
-                                <h4>Warning!</h4>
+                                <h4><fmt:message key="alerta"/>!</h4>
                                 <p><spring:message code="registration.error" /></p>
                             </div>
                         </c:if>
@@ -42,7 +42,7 @@
                         <fieldset>
                             <table>
                                 <tr>
-                                    <th><label for="username">Username:</label></th>
+                                    <th><label for="username"><fmt:message key="user.username"/>: </label></th>
                                     <td>
                                         <form:input id="username" path="username" />
 
@@ -54,7 +54,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="password">Password:</label></th>
+                                    <th><label for="password"><fmt:message key="user.password"/>: </label></th>
                                     <td>
                                         <form:input path="password" type="password" id="password" />
 
@@ -66,7 +66,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="confirm-password">Confirm password:</label></th>
+                                    <th><label for="confirm-password"><fmt:message key="user.confirmpassword"/>: </label></th>
                                     <td>
                                         <form:input path="confirmPassword" type="password" id="confirm-password" />
 
@@ -78,7 +78,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="email">Email:</label></th>
+                                    <th><label for="email"><fmt:message key="user.email"/>: </label></th>
                                     <td>
                                         <form:input path="email" type="text" id="email" />
 
@@ -90,7 +90,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="dyslexic">Dyslexic:</label></th>
+                                    <th><label for="dyslexic"><fmt:message key="user.dyslexic"/>: </label></th>
                                     <td>
                                         <form:checkbox path="dyslexic" id="dyslexic" />
 
@@ -102,7 +102,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="age">Age:</label></th>
+                                    <th><label for="age"><fmt:message key="user.age"/>: </label></th>
                                     <td>
                                         <form:input path="age" id="age" />
 
@@ -114,7 +114,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="spanishSpeaker">Spanish speaker:</label></th>
+                                    <th><label for="spanishSpeaker"><fmt:message key="user.spanishspeaker"/>: </label></th>
                                     <td>
                                         <form:checkbox path="spanishSpeaker" id="spanishSpeaker" />
 
@@ -127,8 +127,11 @@
                                 </tr>
                             </table>
                         </fieldset>
+
+                        <p><fmt:message key="policy.accept"/> <a href="/policy" target="_blank"><fmt:message key="policy0"/></a>.</p>
+
                         <div >
-                            <input name="commit" type="submit" class="beige-ribbon right" value="Register"/>
+                            <input name="commit" type="submit" class="beige-ribbon right" value="<fmt:message key="register.action"/>"/>
                         </div>
 
                         <div class="clear"></div>

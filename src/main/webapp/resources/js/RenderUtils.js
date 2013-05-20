@@ -1,4 +1,4 @@
-var COLOR_GREEN1 = "#33ac7b";
+var COLOR_GREEN1 = "#2b7658";
 var COLOR_GREEN2 = "rgba(13, 114, 98, 1.0)";
 var COLOR_GREEN3 = "rgba(3, 85, 71, 1.0)";
 var COLOR_BLUE1 = "#c0fcff";

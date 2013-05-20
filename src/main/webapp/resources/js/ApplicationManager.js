@@ -14,6 +14,8 @@ function ApplicationManager()
 	this.continue = false;
 
     this.newScore = 0;
+
+    this.loopStarted = false;
 	
     this.findProblemTemp = function() {
         var req = new Object();
@@ -57,12 +59,18 @@ function ApplicationManager()
 			this.gameController = new TranspositionGameController().startupTranspositionGameController(this, this.problem);
 		}
 		
+    if (!this.loopStarted) {
+        this.loopStarted = true;
+        this.animLoop();        
+    }
+
 		this.continue = false;
 		this.startTime = new Date().getTime();
 	}
 
     this.loadPause = function() {
         this.gameController = new PausedGameController().startupPausedGameController(this);
+        this.gameController.draw();
     }
 
     this.loadEmpty = function() {
@@ -83,7 +91,6 @@ function ApplicationManager()
     	canvas.addEventListener('mousemove', function(e) {_this.onMouseMove(e);}, false);
     	canvas.addEventListener('mouseup', function(e) {_this.onMouseUp(e);}, false);
         this.loadPause();
-    	this.animLoop();
         this.findProblem();
         return this;
     }
@@ -188,21 +195,21 @@ function ApplicationManager()
     
     // shim layer with setTimeout fallback
     window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              function( callback ){
-                window.setTimeout(callback, 1000 / 60);
-              };
+        return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            function( callback ){
+                window.setTimeout(callback, 1000 / 30);
+            };
     })();
     
     
     this.animLoop = function(){
-    	var _this = this;
+    	this.gameController.draw();
+        var _this = this;
       	requestAnimFrame(function(){
       		_this.animLoop();
       	});
-      	this.gameController.draw();
     };
     
 }

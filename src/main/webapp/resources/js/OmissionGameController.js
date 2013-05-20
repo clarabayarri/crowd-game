@@ -17,7 +17,6 @@ function OmissionGameController()
         
         this.maxMovesAllowed = this.numOmissionsInProblem();
         this.loadChildren();
-        this.draw();
         
         return this;        
     }

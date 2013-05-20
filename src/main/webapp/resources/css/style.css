@@ -24,7 +24,39 @@ a, font, img, ul, li {
 	text-decoration: none;
 }
 
-a:visited {
+.contents-area h1 {
+	margin-left: 2em;
+	font-size: 2.3em;
+}
+
+.contents-area h2 {
+	font-size: 1.8em;
+	margin-top: 0.5em;
+	margin-bottom: 0.3em;
+}
+
+.contents-area p {
+	margin: 0.1em;
+}
+
+.contents-area label {
+	margin-right: 0.5em;
+	margin-bottom: 0.3em;
+	font: bold 1em "Helvetica Neue";
+}
+
+.contents-area table {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.contents-area th, .contents-area td {
+	padding: 0.2em;
+	vertical-align: middle;
+	font-size: 1.2em;
+}
+
+.green-ribbon a:visited, .beige-ribbon a:visited, .green-ribbon-bent a:visited, .side-ribbon a:visited {
 	color:inherit;
 }
 
@@ -34,7 +66,7 @@ input, select, textarea, button{
 
 body {
 	background: url(../img/background.jpg) repeat;
-	font-family: 'Adobe Gothic Std';
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #26221a;
 }
 
@@ -96,6 +128,7 @@ body {
 	margin-top: 1em;
 	margin-bottom: 3em;
 	padding: 30px;
+	padding-top: 5px;
 	border: 2px solid #d8cea3;
 	background: url(../img/vertical-overlay.png) repeat #f8eecf;
 }
@@ -140,7 +173,7 @@ body {
 	height: 49px;
 	background: url(../img/beige-button.png) no-repeat;
 	border: none;
-	font: bold 1.5em "Adobe Gothic Std";
+	font: bold 1.5em "Adobe Gothic Std" !important;
 	color: #ffffff;
 	margin: 10px;
 }
@@ -151,11 +184,11 @@ body {
 }
 
 #register-title-text {
-	margin-top: -57px;
+	margin-top: -55px;
 	width: 220px;
 	color: #ffffff;
 	text-align: center;
-	font: bold 1.2em "Adobe Gothic Std";
+	font: bold 1.3em "Adobe Gothic Std";
 }
 
 #home-register-button-text {
@@ -178,6 +211,7 @@ body {
 footer {
 	margin: auto;
 	float: right;
+	font-family: "Adobe Gothic Std";
 }
 
 footer p {

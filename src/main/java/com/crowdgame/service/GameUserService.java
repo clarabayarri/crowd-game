@@ -14,5 +14,7 @@ public interface GameUserService {
 	public GameUser getCurrentUser();
 	
 	public boolean usernameExists(String username);
+	
+	public void removeUser(String username);
 
 }

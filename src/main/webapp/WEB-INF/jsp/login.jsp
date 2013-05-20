@@ -24,7 +24,7 @@
                 <section class="contents-area">
                     
                     <div id="register-title">
-                        <span class="left" id="register-title-text">Sign in</span>
+                        <span class="left" id="register-title-text"><fmt:message key="login"/></span>
                         <div class="green-ribbon-bent"></div>
                     </div>
 
@@ -34,20 +34,20 @@
                         <fieldset>
                             <table>
                                 <tr>
-                                    <th><label for="username_or_email">Username:</label></th>
+                                    <th><label for="username_or_email"><fmt:message key="user.username"/> </label></th>
                                     <td>
                                         <input id="username_or_email" name="j_username" type="text" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="password">Password:</label></th>
+                                    <th><label for="password"><fmt:message key="user.password"/> </label></th>
                                     <td>
                                         <input name="j_password" type="password" id="password" />
-                                        <small><a href="/account/resend_password">Forgot?</a></small>
+                                        <small><a href="/account/resend_password"><fmt:message key="user.password.forgot"/></a></small>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="remember_me">Remember me</label></th>
+                                    <th><label for="remember_me"><fmt:message key="user.rememberme"/></label></th>
                                     <td>
                                         <input name="_spring_security_remember_me" type="checkbox" id="remember_me" />
                                     </td>
@@ -55,12 +55,12 @@
                             </table>
                         </fieldset>
                         <div >
-                            <input name="commit" type="submit" class="beige-ribbon right" value="Sign in"/>
+                            <input name="commit" type="submit" class="beige-ribbon right" value="<fmt:message key="login"/>"/>
                         </div>
 
                         <div class="clear"></div>
 
-                        <p>Don't have an account yet? <a href="/register">Sign up now!</a></p>
+                        <p><fmt:message key="register.text"/> <a href="/register"><fmt:message key="register.link"/></a></p>
                     </form>
                 </section>
             </div>

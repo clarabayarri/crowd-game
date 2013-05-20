@@ -13,7 +13,7 @@
 
 <body class="container_12">
     <div class="side-ribbon left-ribbon">
-        <a href="/game">jugar</a>
+        <a href="/game"><fmt:message key="play"/></a>
     </div>
     <div class="title-container grid_4 prefix_4 suffix_4">
         <a href="/home">
