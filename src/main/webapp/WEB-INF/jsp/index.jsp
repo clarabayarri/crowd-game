@@ -22,14 +22,22 @@
         <div class="central-container">
             <div class="central-container2">
                 <section class="contents-area">
-                    
-                    <h2>Welcome!</h2>
+                    <div class="center-area">
+                        <h1><fmt:message key="home.welcome"/></h1>
 
-                    <p>This is an online linguistic game that indirectly helps improve research on technological capabilities for people with dyslexia. Feel free to join in!</p>
+                        <br />
 
-                    <div class="green-ribbon">
-                        <a href="/game"><fmt:message key="enter"/></a>
+                        <p><fmt:message key="home.text1"/></p>
+
+                        <img src="/resources/img/screenshot.png" alt="Game screenshot"/>
+
+                        <p><fmt:message key="home.text2"/></p>
+                        
+                        <div class="green-ribbon">
+                            <a href="/game"><fmt:message key="enter"/></a>
+                        </div>
                     </div>
+                    
                     
                 </section>
             </div>

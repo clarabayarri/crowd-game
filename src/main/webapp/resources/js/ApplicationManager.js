@@ -155,8 +155,6 @@ function ApplicationManager()
     	postRequest(coded, "http://mapuche.clarabayarri.com/game/results", function(score) {
             _this.newScore = score;
         });
-    	console.log(this.problem.taskId);
-    	console.log(coded);
     }
 
     this.getRequest = function(reqUri, callback) {

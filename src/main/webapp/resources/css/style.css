@@ -41,6 +41,13 @@ body {
 
 .contents-area p {
 	margin: 0.1em;
+	font-size: 1.2em;
+	margin-bottom: 0.5em;
+}
+
+.contents-area img {
+	margin-left: 22%;
+	border: 3px solid #d8cea3;
 }
 
 .contents-area label {
@@ -78,7 +85,7 @@ body {
 }
 
 .title-container {
-	
+	margin-left: 4.5%;
 }
 
 .central {
@@ -140,6 +147,13 @@ body {
 	background: url(../img/vertical-overlay.png) repeat #f8eecf;
 }
 
+.center-area {
+	width: 80%;
+	margin: auto;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
 .register-form .radio {
 	margin: 1em;
 	margin-top: 2em;
@@ -150,7 +164,7 @@ body {
 	width: 200px;
 	height: 48px;
 	margin: 10px;
-	margin-left: 10%;
+	margin-left: 36%;
 	margin-right: 30px;
 	background: url(../img/button.png) no-repeat;
 	color: #ffffff;
