@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/resources/css/reset.css" />
     <link rel="stylesheet" href="/resources/css/960.css" />
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
 
     <script src="http://code.jquery.com/jquery-1.7.1.js"></script>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -60,6 +61,10 @@
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <strong><fmt:message key="login.forgot.success"/></strong> <fmt:message key="login.forgot.successmessage"/>
                     </div>
+
+                    <c:if test="${error}">
+                        <p><strong><fmt:message key="login.error"/></strong> <fmt:message key="login.error.message"/></p>
+                    </c:if>
             
                     <form method="post" class="center-box" action="/static/j_spring_security_check">
                         <fieldset>
@@ -88,7 +93,7 @@
                         <div >
                             <input name="commit" type="submit" class="beige-ribbon right" value="<fmt:message key="login"/>"/>
                         </div>
-
+                        
                         <div class="clear"></div>
 
                         <p><fmt:message key="register.text"/> <a href="/register"><fmt:message key="register.link"/></a></p>

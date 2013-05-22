@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/resources/css/reset.css" />
     <link rel="stylesheet" href="/resources/css/960.css" />
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -15,24 +16,23 @@
     <div class="side-ribbon left-ribbon">
         <a href="/game"><fmt:message key="play"/></a>
     </div>
-    <div class="title-container grid_4 prefix_4 suffix_4">
+    <div class="side-ribbon right-ribbon">
+        <a href="/user">user</a>
+    </div>
+    <div class="title-container grid_5 prefix_2">
         <a href="/home">
             <img src="/resources/img/mapuche.png" alt="Mapuche" />
         </a>
     </div>
+    
     <div class="central">
         <div class="central-container">
             <div class="central-container2">
                 <section class="contents-area">
-                    
-                    <div id="register-title">
-                        <span class="left" id="register-title-text">Platform data</span>
-                        <div class="green-ribbon-bent"></div>
-                    </div>
 
                     <div class="clear"></div>
 
-                    <form:form method="post" action="/admin/save" modelAttribute="platformData" class="register-form">
+                    <form:form method="post" action="/admin/save" modelAttribute="platformData" class="center-box">
                         <fieldset>
                             <table>
                                 <tr>

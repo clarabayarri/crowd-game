@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/resources/css/reset.css" />
     <link rel="stylesheet" href="/resources/css/960.css" />
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
 
 </head>
 

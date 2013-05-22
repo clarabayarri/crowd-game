@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/resources/css/960.css" />
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
     
     <script src="http://code.jquery.com/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
@@ -17,6 +18,11 @@
 </head>
 
 <body class="container_12">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <div class="side-ribbon right-ribbon">
+            <a href="/admin">admin</a>
+        </div>
+    </sec:authorize>
     <div class="side-ribbon left-ribbon">
         <a href="/game"><fmt:message key="play"/></a>
     </div>

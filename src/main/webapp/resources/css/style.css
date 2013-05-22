@@ -18,10 +18,14 @@ a, font, img, ul, li {
 	border: 0;
 	outline: 0;
 	font-size: 100%;
-	
+	font-family: 'Didact Gothic', sans-serif;
 	vertical-align: baseline;
 	background: transparent;
 	text-decoration: none;
+}
+
+body {
+	font-size: 14px;
 }
 
 .contents-area h1 {
@@ -42,7 +46,11 @@ a, font, img, ul, li {
 .contents-area label {
 	margin-right: 0.5em;
 	margin-bottom: 0.3em;
-	font: bold 1em "Helvetica Neue";
+	font: bold 1.2em 'Didact Gothic';
+}
+
+.contents-area input {
+	width: 206px;
 }
 
 .contents-area table {
@@ -66,7 +74,6 @@ input, select, textarea, button{
 
 body {
 	background: url(../img/background.jpg) repeat;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #26221a;
 }
 
@@ -148,7 +155,7 @@ body {
 	background: url(../img/button.png) no-repeat;
 	color: #ffffff;
 	text-align: center;
-	font: bold 1.5em "Adobe Gothic Std";
+	font: bold 1.8em/1.7em 'Didact Gothic';
 	padding-bottom: 0.5em;
 }
 
@@ -173,7 +180,8 @@ body {
 	height: 49px;
 	background: url(../img/beige-button.png) no-repeat;
 	border: none;
-	font: bold 1.5em "Adobe Gothic Std" !important;
+	font: bold 1.8em 'Didact Gothic' !important;
+	text-align: center;
 	color: #ffffff;
 	margin: 10px;
 }
@@ -188,14 +196,14 @@ body {
 	width: 220px;
 	color: #ffffff;
 	text-align: center;
-	font: bold 1.3em "Adobe Gothic Std";
+	font: bold 1.8em 'Didact Gothic';
 }
 
 #home-register-button-text {
 	width: 220px;
 	color: #ffffff;
 	text-align: center;
-	font: bold 1.2em "Adobe Gothic Std";
+	font: bold 1.2em 'Didact Gothic';
 }
 
 .green-ribbon-bent {
@@ -211,14 +219,16 @@ body {
 footer {
 	margin: auto;
 	float: right;
-	font-family: "Adobe Gothic Std";
 }
 
 footer p {
+	margin-top: -40px;
 	display: inline-block;
 	margin-right: 10px;
 	text-align: center;
+	vertical-align: middle;
 	color: #191610;
+	font-size: 1.5em;
 }
 
 footer ul {
@@ -238,11 +248,11 @@ footer ul li {
 }
 
 .side-ribbon {
-	margin-top: 4em;
+	margin-top: 3.5em;
 	width: 175px;
 	height: 69px;
 	padding-top: 4px;
-	font: bold 1.2em "Adobe Gothic Std";
+	font: bold 1.6em 'Didact Gothic';
 	text-align: center;
 	color: white;
 }

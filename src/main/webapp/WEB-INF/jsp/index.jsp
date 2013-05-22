@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/resources/css/reset.css" />
     <link rel="stylesheet" href="/resources/css/960.css" />
     <link rel="stylesheet" href="/resources/css/style.css" type="text/css" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Didact+Gothic' rel='stylesheet' type='text/css'>
 
 </head>
 
@@ -27,7 +28,7 @@
                     <p>This is an online linguistic game that indirectly helps improve research on technological capabilities for people with dyslexia. Feel free to join in!</p>
 
                     <div class="green-ribbon">
-                        <a href="/game">Enter</a>
+                        <a href="/game"><fmt:message key="enter"/></a>
                     </div>
                     
                 </section>
