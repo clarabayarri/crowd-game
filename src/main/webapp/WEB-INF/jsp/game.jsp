@@ -31,7 +31,7 @@
                 <section class="contents-area">
                     
                     <div id="game-container">
-                        <canvas id="game-canvas" width="800" height="500" style="background-color: #fff888;"><fmt:message key="canvas.html5"/></canvas>
+                        <canvas id="game-canvas" width="800" height="500"><fmt:message key="canvas.html5"/></canvas>
                     </div>
 
                     <div class="side-ribbon right-red-ribbon push-out-ribbon">

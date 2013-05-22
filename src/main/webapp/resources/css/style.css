@@ -72,7 +72,7 @@ body {
 }
 
 .green-ribbon, .green-ribbon a:visited, .beige-ribbon, .beige-ribbon a:visited, .green-ribbon-bent a:visited, .side-ribbon, .side-ribbon a:visited {
-	color:inherit;
+	color:#ffffff;
 }
 
 input, select, textarea, button{
@@ -114,7 +114,6 @@ body {
 }
 
 .game-container {
-	
 	padding: 30px;
 }
 
@@ -124,6 +123,7 @@ body {
 	margin-left: 9.75%;
 	margin-bottom: 1em;
 	border: 3px solid #d8cea3;
+	background-color: #f8eecf;
 }
 
 .login-form {
