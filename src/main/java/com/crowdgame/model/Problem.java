@@ -43,7 +43,7 @@ public class Problem {
 	
 	public Problem(String type, String word, String display, List<String> answers) {
 		this.type = type;
-		this.word = word;
+		this.word = word.trim();
 		this.display = display;
 		this.answers = answers;
 		generateProblem();
@@ -53,7 +53,7 @@ public class Problem {
 		this.batchId = task.getBatchId();
 		this.taskId = task.getTaskId();
 		this.type = task.getType();
-		this.word = task.getWord();
+		this.word = task.getWord().trim();
 		this.display = task.getDisplayText();
 		this.answers = task.getAnswers();
 		generateProblem();
