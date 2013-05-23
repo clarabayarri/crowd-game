@@ -5,9 +5,9 @@ function VisualButton()
 {
     this.text = null;
     
-    this.startupVisualButton = function(/**Bounds*/ bounds) {
+    this.startupVisualButton = function(/**Bounds*/ bounds, /**String*/ text) {
     	this.startupGameObject(bounds);
-    	
+    	this.text = text;
     	return this;
     }
     

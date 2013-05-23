@@ -52,9 +52,12 @@ public class Problem {
 	public Problem(TaskInput task) {
 		this.batchId = task.getBatchId();
 		this.taskId = task.getTaskId();
-		this.type = task.getType().trim();
-		this.word = task.getWord().trim();
-		this.display = task.getDisplayText().trim();
+		if (task.getType() != null)
+			this.type = task.getType().trim();
+		if (task.getWord() != null)
+			this.word = task.getWord().trim();
+		if (task.getDisplayText() != null)
+			this.display = task.getDisplayText().trim();
 		this.answers = task.getAnswers();
 		generateProblem();
 	}

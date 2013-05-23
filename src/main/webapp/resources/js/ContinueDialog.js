@@ -17,18 +17,15 @@ function ContinueDialog()
     }
     
     this.loadInternalViews = function() {
-    	var center = this.tileBounds.center();
-    	var buttonOrigin = new Point().init(center.x - 100, this.tileBounds.origin.y + this.tileBounds.height * 0.7);
+    	this.dialogCenter = this.tileBounds.center();
+        this.dialogTextOriginY = this.tileBounds.origin.y + this.tileBounds.height*0.3;
+    	var buttonOrigin = new Point().init(this.dialogCenter.x - 100, this.tileBounds.origin.y + this.tileBounds.height * 0.7);
     	var buttonBounds = new Bounds().init(buttonOrigin, 200, 50);
-    	this.button = new ContinueButton().startupContinueButton(buttonBounds);
+    	this.button = new VisualButton().startupVisualButton(buttonBounds, "continuar");
     }
     
     this.drawInternal = function (/**CanvasRenderingContext2D*/ context) {
-    	if (this.dialogCenter == null) {
-            this.dialogCenter = this.tileBounds.center();
-            this.dialogTextOriginY = this.tileBounds.origin.y + this.tileBounds.height*0.3;
-        }
-        // draw text
+    	// draw text
     	drawText(context, this.word, this.dialogCenter.x, this.dialogTextOriginY, FONT_BOLD_46, COLOR_DARK_GREY);
     }
 }

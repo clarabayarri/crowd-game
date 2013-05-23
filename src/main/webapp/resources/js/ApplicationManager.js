@@ -16,25 +16,12 @@ function ApplicationManager()
     this.newScore = 0;
 
     this.loopStarted = false;
-	
-    this.findProblemTemp = function() {
-        var req = new Object();
-        req.responseText = '{"batchId":299,"taskId":299,"type":"transposition","word":"palabra","displayText":["p","a","r","l","a","b","a"],"displayAnswers":[]}';
-        //req.responseText = '{"id":299,"type":"insertion1","word":"palabra","displayText":["p","a","l"," ","b","r","a"],"displayAnswers":["a","i","o","u"]}';
-        //req.responseText = '{"id":299,"type":"insertion","word":"palabra","displayText":["p","a","l","b","r","a"],"displayAnswers":["a","i","o","u"]}';
-        //req.responseText = '{"id":299,"type":"omission","word":"palabra","displayText":["p","a","l","a","r","b","r","a"],"displayAnswers":[]}';
-        //req.responseText = '{"id":299,"type":"substitution","word":"palabra","displayText":["p","a","l","e","b","r","a"],"displayAnswers":["a","o","u","i"]}';
-        //req.responseText = '{"id":299,"type":"derivation","word":"palabra","displayText":["p","a","l","a"],"displayAnswers":["bra","bre","es","ria"]}';
-        //req.responseText = '{"id":299,"type":"separation","word":"no ve s","displayText":["n","o","v","e","s"],"displayAnswers":[]}';
-        //req.responseText = '{"id":299,"type":"omission","word":"alrededor","displayText":["a","l","r","r","e","d","e","r","d","o","r"],"displayAnswers":[]}';
-        this.loadProblem(req);
-    };
     
     
 	this.findProblem = function() {
 		var _this = this;
-        //this.getRequest("http://mapuche.clarabayarri.com/game/problem",function(req) {_this.loadProblem(req);});
-        this.getRequest("http://localhost:8080/game/problem",function(req) {_this.loadProblem(req);});
+        this.getRequest("http://mapuche.clarabayarri.com/game/problem",function(req) {_this.loadProblem(req);});
+        //this.getRequest("http://localhost:8080/game/problem",function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {

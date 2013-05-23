@@ -92,6 +92,7 @@ public class RemoteCommunicationServiceImplTest {
 	private TaskInput getTestTaskInput() {
 		TaskInput result = new TaskInput();
 		Map<String, Object> contents = Maps.newHashMap();
+		contents.put("type", "insertion1");
 		contents.put("word", "hola");
 		contents.put("display", "h_la");
 		result.setContents(contents);

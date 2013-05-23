@@ -10,8 +10,6 @@
 	<%@ include file="/resources/js/AnswerLayout.js" %>
 	<%@ include file="/resources/js/VerticalAnswerLayout.js" %>
 	<%@ include file="/resources/js/VisualButton.js" %>
-	<%@ include file="/resources/js/ContinueButton.js" %>
-	<%@ include file="/resources/js/StartButton.js" %>
 	<%@ include file="/resources/js/Dialog.js" %>
 	<%@ include file="/resources/js/ContinueDialog.js" %>
 	<%@ include file="/resources/js/StartDialog.js" %>
