@@ -33,7 +33,8 @@ function ApplicationManager()
     
 	this.findProblem = function() {
 		var _this = this;
-        this.getRequest("http://mapuche.clarabayarri.com/game/problem",function(req) {_this.loadProblem(req);});
+        //this.getRequest("http://mapuche.clarabayarri.com/game/problem",function(req) {_this.loadProblem(req);});
+        this.getRequest("http://localhost:8080/game/problem",function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {

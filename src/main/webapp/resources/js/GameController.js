@@ -171,8 +171,10 @@ function GameController()
     this.onMouseUpInternal = function(/**Point*/ clickPoint) {}
     
     this.getEventPosition = function(e) {
-    	var x = e.pageX - this.canvasOffsetX;
-    	var y = e.pageY - this.canvasOffsetY;
+    	//var x = e.pageX - this.canvasOffsetX;
+        var x = e.x - this.canvas.offsetLeft - window.pageXOffset;
+    	//var y = e.pageY - this.canvasOffsetY;
+        var y = e.y - this.canvas.offsetTop + window.pageYOffset;
     	return new Point().init(x, y);
     }
     

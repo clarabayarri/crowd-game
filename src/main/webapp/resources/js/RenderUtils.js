@@ -13,6 +13,7 @@ var COLOR_DARK_GREY = "#191919";
 var COLOR_WHITE = "#ffffff";
 var COLOR_BACKGROUND_SHADOW = "rgba(42, 42, 42, 0.5)";
 
+var FONT_RIBBON_24 = "bold 24px 'Didact Gothic'";
 var FONT_BOLD_46 = "bold 46px sans-serif";
 var FONT_BOLD_24 = "bold 24px sans-serif";
 

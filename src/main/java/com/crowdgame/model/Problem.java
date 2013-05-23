@@ -42,9 +42,9 @@ public class Problem {
 	}
 	
 	public Problem(String type, String word, String display, List<String> answers) {
-		this.type = type;
+		this.type = type.trim();
 		this.word = word.trim();
-		this.display = display;
+		this.display = display.trim();
 		this.answers = answers;
 		generateProblem();
 	}
@@ -52,9 +52,9 @@ public class Problem {
 	public Problem(TaskInput task) {
 		this.batchId = task.getBatchId();
 		this.taskId = task.getTaskId();
-		this.type = task.getType();
+		this.type = task.getType().trim();
 		this.word = task.getWord().trim();
-		this.display = task.getDisplayText();
+		this.display = task.getDisplayText().trim();
 		this.answers = task.getAnswers();
 		generateProblem();
 	}
