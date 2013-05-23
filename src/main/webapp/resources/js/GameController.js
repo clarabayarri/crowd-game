@@ -188,11 +188,12 @@ function GameController()
     this.onMouseUpInternal = function(/**Point*/ clickPoint) {}
     
     this.getEventPosition = function(e) {
-    	var x = e.pageX - this.canvasOffsetX;
+        var ratio = this.canvas.offsetWidth/this.canvas.width;
+    	var x = (e.pageX - this.applicationManager.canvasOrigin.x - 5) / ratio;
         //var x = e.x - this.canvas.offsetLeft - window.pageXOffset;
-    	var y = e.pageY - this.canvasOffsetY;
+        var y = e.pageY - this.applicationManager.canvasOrigin.y - 5;
         //var y = e.y - this.canvas.offsetTop + window.pageYOffset;
-    	return new Point().init(x, y);
+        return new Point().init(x, y);
     }
     
     this.checkForContinue = function(/**Point*/ clickPoint) {

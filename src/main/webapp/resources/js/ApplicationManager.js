@@ -16,6 +16,8 @@ function ApplicationManager()
     this.newScore = 0;
 
     this.loopStarted = false;
+
+    this.canvasOrigin = null;
     
     
 	this.findProblem = function() {
@@ -80,7 +82,20 @@ function ApplicationManager()
     	canvas.addEventListener('mouseup', function(e) {_this.onMouseUp(e);}, false);
         this.loadPause();
         this.findProblem();
+        this.canvasOrigin = findPos(canvas);
         return this;
+    }
+
+    function findPos(obj) {
+        var curleft = 0, curtop = 0;
+        if (obj.offsetParent) {
+            do {
+                curleft += obj.offsetLeft;
+                curtop += obj.offsetTop;
+            } while (obj = obj.offsetParent);
+            return new Point().init(curleft, curtop);
+        }
+        return undefined;
     }
     
     this.onClick = function(e) {
