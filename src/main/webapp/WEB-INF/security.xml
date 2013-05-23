@@ -15,6 +15,7 @@
 		<intercept-url pattern="/home" access="permitAll" />
 		<intercept-url pattern="/policy" access="permitAll" />
 		<intercept-url pattern="/resources/**" access="permitAll" />
+		<intercept-url pattern="/favicon.ico" access="permitAll" />
 		<intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/login" access="isAnonymous()" />
 		<intercept-url pattern="/forgot" access="isAnonymous()" />
