@@ -3,16 +3,24 @@ var COLOR_GREEN2 = "rgba(13, 114, 98, 1.0)";
 var COLOR_GREEN3 = "rgba(3, 85, 71, 1.0)";
 var COLOR_BLUE1 = "#c0fcff";
 var COLOR_DARK_GREEN1 = "#102f22";
+
 var COLOR_RIBBON_BACKGROUND = "#749a66";
 var COLOR_RIBBON_LINES = "#698d5d";
 var COLOR_RIBBON_GLOW = "#86b172";
 var COLOR_RIBBON_OUTLINE = "#699156";
+
+var COLOR_ARROW_BACKGROUND = "#fa585c";
+var COLOR_ARROW_LINES = "#e45155";
+var COLOR_ARROW_GLOW = "#f77072";
+var COLOR_ARROW_OUTLINE = "#c05e5f";
+
 var COLOR_SHADOW_COLOR = "#000000";
 var COLOR_TILE = "rgba(248, 238, 207, 1.0)";
 var COLOR_DARK_GREY = "#191919";
 var COLOR_WHITE = "#ffffff";
 var COLOR_BACKGROUND_SHADOW = "rgba(42, 42, 42, 0.5)";
 
+var FONT_RIBBON_20 = "bold 20px 'Didact Gothic'";
 var FONT_RIBBON_24 = "bold 24px 'Didact Gothic'";
 var FONT_BOLD_46 = "bold 46px sans-serif";
 var FONT_BOLD_24 = "bold 24px sans-serif";
@@ -136,12 +144,50 @@ function drawRibbon(context, x, y, width, height) {
 	ribbonShape(context, x, y, width, height, indent, false, true);
 }
 
+function drawArrow(context, x, y, width, height) {
+	var indent = height*2/5;
+	
+	// background
+	context.fillStyle = COLOR_ARROW_BACKGROUND;
+	arrowShape(context, x, y, width, height, indent, true, false);
+	
+	arrowLines(context, x+4, y+2, width-4, height-4, indent-2);
+	
+	context.strokeStyle = COLOR_ARROW_GLOW;
+	context.lineWidth = 3;
+	arrowShape(context, x+4, y+2, width-4, height-4, indent-2, false, true);
+	
+	//outline
+	context.strokeStyle = COLOR_ARROW_OUTLINE;
+	context.lineWidth = 2;
+	arrowShape(context, x, y, width, height, indent, false, true);
+}
+
 function ribbonShape(context, x, y, width, height, indent, fill, stroke) {
 	var center = new Point().init(x + width/2, y + height/2);
 	context.beginPath();
 	context.moveTo(x, 					y);
 	context.lineTo(x + width, 			y);
 	context.lineTo(x + width - indent, 	center.y);
+	context.lineTo(x + width, 			y + height);
+	context.lineTo(x, 					y + height);
+	context.lineTo(x + indent, 			center.y);
+	context.lineTo(x, 					y);
+	context.closePath();
+	if (stroke) {
+	  context.stroke();
+	}
+	if (fill) {
+	  context.fill();
+	}
+}
+
+function arrowShape(context, x, y, width, height, indent, fill, stroke) {
+	var center = new Point().init(x + width/2, y + height/2);
+	context.beginPath();
+	context.moveTo(x, 					y);
+	context.lineTo(x + width, 			y);
+	context.lineTo(x + width + indent, 	center.y);
 	context.lineTo(x + width, 			y + height);
 	context.lineTo(x, 					y + height);
 	context.lineTo(x + indent, 			center.y);
@@ -175,6 +221,30 @@ function ribbonLines(context, x, y, width, height, indent) {
 			context.lineTo(x + i, y + ((width-i) * (height/2)/indent));
 			context.moveTo(x + i, y + height - ((width-i) * (height/2)/indent));
 			context.lineTo(x + i, y + height);
+		}
+		
+	}
+	context.stroke();
+}
+
+function arrowLines(context, x, y, width, height, indent) {
+	context.strokeStyle = COLOR_ARROW_LINES;
+	context.lineWidth = 2;
+	context.beginPath();
+	var centerY = y + height/2;
+	var offset = (width/2) % 6;
+	for (var i = offset; i < width + indent + offset; i+=6) {
+		if (i < indent) {
+			context.moveTo(x + i, y);
+			context.lineTo(x + i, y + (i * (height/2)/indent));
+			context.moveTo(x + i, y + height - (i * (height/2)/indent));
+			context.lineTo(x + i, y + height);
+		} else if (i <= width) {
+			context.moveTo(x + i, y);
+			context.lineTo(x + i, y + height);
+		} else {
+			context.moveTo(x + i, y + ((i-width) * (height/2)/indent));
+			context.lineTo(x + i, y + height - ((i-width) * (height/2)/indent));
 		}
 		
 	}

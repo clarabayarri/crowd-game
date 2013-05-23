@@ -9,6 +9,7 @@
 	<%@ include file="/resources/js/WordLayout.js" %>
 	<%@ include file="/resources/js/AnswerLayout.js" %>
 	<%@ include file="/resources/js/VerticalAnswerLayout.js" %>
+	<%@ include file="/resources/js/VisualArrow.js" %>
 	<%@ include file="/resources/js/VisualButton.js" %>
 	<%@ include file="/resources/js/Dialog.js" %>
 	<%@ include file="/resources/js/ContinueDialog.js" %>

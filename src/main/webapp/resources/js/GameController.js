@@ -52,6 +52,7 @@ function GameController()
     this.answerLayout = null;
     this.movingTile = null;
     this.dialog = null;
+    this.skipButton = null;
 
     this.instructions = null;
 
@@ -80,6 +81,7 @@ function GameController()
 
         if (this.problem != null && this.instructions != null) {
             this.loadInstructions();
+            this.loadSkipButton();
         }
         
         return this;        
@@ -91,6 +93,13 @@ function GameController()
         var instr = new VisualButton().startupVisualButton(instrBounds);
         instr.text = this.instructions;
         this.gameObjects.push(instr);
+    }
+
+    this.loadSkipButton = function() {
+        var arrowOrigin = new Point().init(this.canvas.width - 130, this.canvas.height - 40);
+        var arrowBounds = new Bounds().init(arrowOrigin, 100, 30);
+        this.skipButton = new VisualArrow().startupVisualArrow(arrowBounds, "saltar");
+        this.gameObjects.push(this.skipButton);
     }
     
     
@@ -134,11 +143,19 @@ function GameController()
     this.onClick = function(e) {
     	var clickPoint = this.getEventPosition(e);
     	
+        if (this.skipButton)
+            this.checkForSkip(clickPoint);
     	if (this.dialog) {
     		this.checkForContinue(clickPoint);
     	} else if (this.touchEnabled) {
     		this.onClickInternal(clickPoint);
     	}
+    }
+
+    this.checkForSkip = function(/**Point*/ clickPoint) {
+        if (this.skipButton.bounds.containsPoint(clickPoint)) {
+            this.applicationManager.onSkip();
+        }
     }
     
     this.onClickInternal = function(/**Point*/ clickPoint) {}
@@ -171,10 +188,10 @@ function GameController()
     this.onMouseUpInternal = function(/**Point*/ clickPoint) {}
     
     this.getEventPosition = function(e) {
-    	//var x = e.pageX - this.canvasOffsetX;
-        var x = e.x - this.canvas.offsetLeft - window.pageXOffset;
-    	//var y = e.pageY - this.canvasOffsetY;
-        var y = e.y - this.canvas.offsetTop + window.pageYOffset;
+    	var x = e.pageX - this.canvasOffsetX;
+        //var x = e.x - this.canvas.offsetLeft - window.pageXOffset;
+    	var y = e.pageY - this.canvasOffsetY;
+        //var y = e.y - this.canvas.offsetTop + window.pageYOffset;
     	return new Point().init(x, y);
     }
     

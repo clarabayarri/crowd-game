@@ -117,6 +117,13 @@ function ApplicationManager()
             _this.findProblem();
         }, 2000);
     }
+
+    this.onSkip = function() {
+        this.problem = null;
+        this.continue = true;
+        this.loadEmpty();
+        this.findProblem();
+    }
     
     this.onContinue = function() {
     	this.continue = true;
