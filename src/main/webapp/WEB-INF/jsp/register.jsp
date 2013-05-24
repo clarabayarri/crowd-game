@@ -102,7 +102,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="dyslexic"><fmt:message key="user.dyslexic"/>: </label></th>
+                                    <th><label for="dyslexic"><fmt:message key="user.dyslexic"/> </label></th>
                                     <td>
                                         <form:checkbox path="dyslexic" id="dyslexic" />
 
@@ -126,7 +126,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><label for="spanishSpeaker"><fmt:message key="user.spanishspeaker"/>: </label></th>
+                                    <th><label for="spanishSpeaker"><fmt:message key="user.spanishspeaker"/> </label></th>
                                     <td>
                                         <form:checkbox path="spanishSpeaker" id="spanishSpeaker" />
 
