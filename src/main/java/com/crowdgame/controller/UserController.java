@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
@@ -25,7 +24,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.PasswordResetData;
@@ -69,7 +69,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login")
-	public String loadLogin() {
+	public String loadLogin(Model model, @RequestParam(value="error", required=false) Boolean error) {
+		if (error != null) {
+			model.addAttribute("error", error);
+		}
 		return "login";
 	}
 	
@@ -118,8 +121,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value={"/forgot"}, method=RequestMethod.POST)
-	@ResponseStatus(HttpStatus.CREATED)
-	public void forgotPassword(String username) {
+	public @ResponseBody Boolean forgotPassword(String username) {
 		GameUser user = userService.getUserByUsernameOrEmail(username);
 		if (user != null) {
 			PasswordResetRequest request = new PasswordResetRequest();
@@ -129,9 +131,10 @@ public class UserController {
 			userService.saveGameUser(user);
 			
 			getMailSender().sendPasswordResetMail(user, request.getId());
-		} else {
-			System.out.println("UserController: Forgot password attempted with unexisting user '" + username + "'");
-		}
+			return true;
+		} 
+		System.out.println("UserController: Forgot password attempted with unexisting user '" + username + "'");
+		return false;
 	}
 	
 	@RequestMapping("/forgot/{uid}")

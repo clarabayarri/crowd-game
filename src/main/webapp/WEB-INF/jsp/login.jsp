@@ -72,8 +72,15 @@
                         <strong><fmt:message key="login.forgot.success"/></strong> <fmt:message key="login.forgot.successmessage"/>
                     </div>
 
+                    <div class="alert alert-error fade in hide" id="forgot-error" data-alert="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong><fmt:message key="login.forgot.error"/></strong> <fmt:message key="login.forgot.errormessage"/>
+                    </div>
+
                     <c:if test="${error}">
-                        <p><strong><fmt:message key="login.error"/></strong> <fmt:message key="login.error.message"/></p>
+                        <div class="center-area" id="login-error">
+                            <p><strong><fmt:message key="login.error"/></strong> <fmt:message key="login.error.message"/></p>
+                        </div>
                     </c:if>
             
                     <form method="post" class="center-box" action="/static/j_spring_security_check">
@@ -121,8 +128,16 @@
     <script type="text/javascript">
         document.getElementById('username_or_email').focus();
         $("#forgot-send").click(function() {
-            $.post("/forgot", $("#forgot-form").serialize());
-            $("#forgot-confirm").removeClass("hide");
+            $("#forgot-error").addClass("hide");
+            $("#forgot-confirm").addClass("hide");
+            $("#login-error").hide();
+            $.post("/forgot", $("#forgot-form").serialize(), function(data) {
+                if (data) {
+                    $("#forgot-confirm").removeClass("hide");
+                } else {
+                    $("#forgot-error").removeClass("hide");
+                }
+            });
         });
         $(".alert").alert();
     </script>

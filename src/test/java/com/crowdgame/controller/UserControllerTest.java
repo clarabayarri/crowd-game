@@ -50,7 +50,7 @@ public class UserControllerTest {
 	
 	@Test
 	public void testLoadLoginHandleRequestView() {
-		String result = controller.loadLogin();
+		String result = controller.loadLogin(null, null);
 		
 		assertEquals("login", result);
 	}
