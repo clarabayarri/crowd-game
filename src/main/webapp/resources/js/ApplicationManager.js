@@ -22,12 +22,11 @@ function ApplicationManager()
     
 	this.findProblem = function() {
 		var _this = this;
-        this.getRequest("http://mapuche.clarabayarri.com/game/problem",function(req) {_this.loadProblem(req);});
-        //this.getRequest("http://localhost:8080/game/problem",function(req) {_this.loadProblem(req);});
+        this.getRequest("/game/problem",function(req) {_this.loadProblem(req);});
 	};
 	
 	this.loadProblem = function(req) {
-        this.problem = JSON.parse(req.responseText);
+        this.problem = req;
 		
 		if (this.continue) this.loadGameController();
 	};
@@ -162,43 +161,27 @@ function ApplicationManager()
     	var coded = JSON.stringify(result);
     	
         var _this = this;
-    	postRequest(coded, "http://mapuche.clarabayarri.com/game/results", function(score) {
+    	postRequest(coded, "/game/results", function(score) {
             _this.newScore = score;
         });
     }
 
     this.getRequest = function(reqUri, callback) {
-        var req = new XMLHttpRequest();
-        req.open("GET", reqUri, true);
-    	//req.open("GET", "task.php", true);
-        req.onload = function() {
-            if (callback) {
-                try {
-                    callback(req);
-                } catch(e) {
-                    throw 'Req failed:\n' + reqUri + '\nException: ' + e + '\n';
-                }
-            }
-        };
-    
-        req.send();
+        $.getJSON(reqUri, callback);
     }
     
     function postRequest(contents, reqUri, callback) {
     	$.ajax({
-    	    type: "POST",
-    	    url: reqUri,
-    	    data: contents,
-    	    contentType: "application/json",      
-    	    error: function(xhr, status, error) { 
-    	        console.log("Error processing your request: \n" + status + " : " + error);
-    	    },
-    	    success: function(response){
-    	        if (callback) {
-    	        	callback(response);
-    	        }
-    	    }
-    	});
+            headers: { 
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' 
+            },
+            'type': 'POST',
+            'url': reqUri,
+            'data': contents,
+            'dataType': 'json',
+            'success': callback
+        });
     }
     
     // shim layer with setTimeout fallback

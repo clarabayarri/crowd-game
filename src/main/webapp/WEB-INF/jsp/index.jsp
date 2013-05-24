@@ -43,9 +43,11 @@
 
                         <p><fmt:message key="home.text2"/></p>
                         
-                        <div class="green-ribbon">
-                            <a href="/game"><fmt:message key="enter"/></a>
-                        </div>
+                        <a href="/game">
+                            <div class="green-ribbon">
+                                <p><fmt:message key="enter"/></p>
+                            </div>
+                        </a>
                     </div>
                     
                     
