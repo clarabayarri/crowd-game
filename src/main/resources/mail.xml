@@ -6,8 +6,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="crowdplatform" />
-		<property name="password" value="MapucheFringe" />
+		<property name="username" value="#{systemEnvironment['EMAIL_USERNAME']}" />
+		<property name="password" value="#{systemEnvironment['EMAIL_PASSWORD']}" />
 
 		<property name="javaMailProperties">
 			<props>
@@ -27,15 +27,15 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 		<property name="from" value="crowdplatform@gmail.com" />
 		<property name="to" value="to@no-spam.com" />
-		<property name="subject" value="Crowd Platform password recovery" />
+		<property name="subject" value="Recuperación de acceso a Mapuche" />
 		<property name="text">
 			<value>
 			<![CDATA[
-	Dear %s,
+	Querido %s,
 	
-To reset your password please click on the following link: http://mapuche.clarabayarri.com/forgot/%s
+Para acceder al juego sigue las instrucciones en el siguiente enlace: http://mapuche.clarabayarri.com/forgot/%s
 				
-	Mapuche Online Linguistic Game
+	Mapuche
 			]]>
 			</value>
 		</property>
