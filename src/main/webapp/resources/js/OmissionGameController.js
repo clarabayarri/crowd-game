@@ -37,7 +37,21 @@ function OmissionGameController()
             }
             ++cubeIndex;
         }
-        return count;
+        return count + (cubes.length - cubeIndex);
+    }
+
+    this.checkPartialSolution = function() {
+        var index = 0;
+        var word = this.problem.word;
+        var current = this.wordLayout.getDisplayedWord();
+        for (var i = 0; i < current.length; ++i) {
+            var currentLetter = current.substr(i,1);
+            var problemLetter = word.substr(index,1);
+            if (currentLetter == problemLetter) {
+                ++index;
+            }
+        }
+        return index == word.length;
     }
     
     this.loadChildren = function() {

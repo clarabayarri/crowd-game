@@ -129,8 +129,7 @@ function GameController()
         ++this.numMoves;
     	if (this.wordLayout.getDisplayedWord() == this.problem.word) {
     		this.success();
-    	} else if (this.numMoves >= this.maxMovesAllowed || 
-            !this.checkPartialSolution()) {
+    	} else if (!this.checkPartialSolution() || this.numMoves >= this.maxMovesAllowed) {
     		this.fail();
             this.numMoves = 0;
     	}
