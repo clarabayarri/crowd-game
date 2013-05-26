@@ -22,8 +22,8 @@ var COLOR_BACKGROUND_SHADOW = "rgba(42, 42, 42, 0.5)";
 
 var FONT_RIBBON_20 = "bold 20px 'Didact Gothic'";
 var FONT_RIBBON_24 = "bold 24px 'Didact Gothic'";
-var FONT_BOLD_46 = "bold 46px sans-serif";
-var FONT_BOLD_24 = "bold 24px sans-serif";
+var FONT_BOLD_46 = "bold 46px Helvetica, Arial, sans-serif";
+var FONT_BOLD_24 = "bold 24px Helvetica, Arial, sans-serif";
 
 function drawScrabbleBackground(context, x, y, width, height) {
 	// draw background

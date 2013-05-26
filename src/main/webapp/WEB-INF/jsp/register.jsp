@@ -104,7 +104,7 @@
                                 <tr>
                                     <th><label for="dyslexic"><fmt:message key="user.dyslexic"/> </label></th>
                                     <td>
-                                        <form:checkbox path="dyslexic" id="dyslexic" />
+                                        <form:checkbox path="dyslexic" id="dyslexic" /> <fmt:message key="yes"/>
 
                                         <div class="control-group error">
                                             <div class="controls">
@@ -128,7 +128,7 @@
                                 <tr>
                                     <th><label for="spanishSpeaker"><fmt:message key="user.spanishspeaker"/> </label></th>
                                     <td>
-                                        <form:checkbox path="spanishSpeaker" id="spanishSpeaker" />
+                                        <form:checkbox path="spanishSpeaker" id="spanishSpeaker" />  <fmt:message key="yes"/>
 
                                         <div class="control-group error">
                                             <div class="controls">
