@@ -61,6 +61,8 @@ public class GameControllerTest {
 	@Test
 	public void testSaveExecution() {
 		ExecutionResults results = new ExecutionResults();
+		results.setTimeSpent(300);
+		results.setFailedAttempts(0);
 		Mockito.when(userService.getCurrentUser()).thenReturn(new GameUser());
 		
 		controller.saveExecution(results);

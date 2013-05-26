@@ -53,10 +53,12 @@ public class GameController {
 	
 	@RequestMapping(value = "/game/results")
 	public @ResponseBody Integer saveExecution(@RequestBody ExecutionResults execution) {
-		executionService.saveExecutionResults(execution);
 		GameUser user = userService.getCurrentUser();
-		user.increaseScore(1);
-		userService.saveGameUser(user);
+		if (execution.getTimeSpent() > 0 && execution.getFailedAttempts() == execution.getWrongAnswers().size()) {
+			executionService.saveExecutionResults(execution);
+			user.increaseScore(1);
+			userService.saveGameUser(user);
+		}
 		return user.getScore();
 	}
 	
