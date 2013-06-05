@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.crowdgame.model.GameUser;
-import com.crowdgame.util.RemoteCommunicationService;
 
 @Service
 public class GameUserServiceImpl implements GameUserService {

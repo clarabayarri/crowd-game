@@ -18,8 +18,8 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import com.crowdgame.aux.Registration;
 import com.crowdgame.model.GameUser;
-import com.crowdgame.model.Registration;
 import com.crowdgame.service.GameUserService;
 import com.crowdgame.util.RegistrationValidator;
 

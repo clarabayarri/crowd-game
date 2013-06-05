@@ -3,8 +3,7 @@ package com.crowdgame.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.crowdgame.model.ExecutionResults;
-import com.crowdgame.util.RemoteCommunicationService;
+import com.crowdgame.aux.ExecutionResults;
 
 @Service
 public class ExecutionServiceImpl implements ExecutionService {

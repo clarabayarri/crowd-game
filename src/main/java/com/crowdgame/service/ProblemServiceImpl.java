@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
-import com.crowdgame.util.RemoteCommunicationService;
 import com.google.common.collect.Lists;
 
 @Service

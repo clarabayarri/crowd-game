@@ -1,7 +1,8 @@
-package com.crowdgame.model;
+package com.crowdgame.aux;
 
 import java.util.Map;
 
+import com.crowdgame.model.GameUser;
 import com.google.common.collect.Maps;
 
 public class GameUserInfo {

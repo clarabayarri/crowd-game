@@ -1,6 +1,8 @@
-package com.crowdgame.model;
+package com.crowdgame.aux;
 
 import java.util.List;
+
+import com.crowdgame.model.Problem;
 
 public class ProblemOutput {
 

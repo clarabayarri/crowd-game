@@ -13,7 +13,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
-import com.crowdgame.util.RemoteCommunicationService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProblemServiceImplTest {

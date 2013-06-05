@@ -16,18 +16,19 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.client.RestTemplate;
 
-import com.crowdgame.model.ExecutionInfo;
-import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.aux.ExecutionInfo;
+import com.crowdgame.aux.ExecutionResults;
+import com.crowdgame.aux.GameUserInfo;
+import com.crowdgame.aux.TaskInput;
 import com.crowdgame.model.GameUser;
-import com.crowdgame.model.GameUserInfo;
 import com.crowdgame.model.PlatformData;
 import com.crowdgame.model.ProblemCollection;
-import com.crowdgame.model.TaskInput;
 import com.crowdgame.service.GameUserService;
 import com.crowdgame.service.PlatformDataService;
 import com.crowdgame.service.ProblemCollectionService;
-import com.crowdgame.util.RemoteCommunicationServiceImpl.GameUserPost;
-import com.crowdgame.util.RemoteCommunicationServiceImpl.PostForTasks;
+import com.crowdgame.service.RemoteCommunicationServiceImpl;
+import com.crowdgame.service.RemoteCommunicationServiceImpl.GameUserPost;
+import com.crowdgame.service.RemoteCommunicationServiceImpl.PostForTasks;
 import com.google.common.collect.Maps;
 
 @RunWith(MockitoJUnitRunner.class)

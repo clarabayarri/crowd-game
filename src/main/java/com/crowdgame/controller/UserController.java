@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.crowdgame.aux.PasswordResetData;
+import com.crowdgame.aux.Registration;
 import com.crowdgame.model.GameUser;
-import com.crowdgame.model.PasswordResetData;
 import com.crowdgame.model.PasswordResetRequest;
-import com.crowdgame.model.Registration;
 import com.crowdgame.service.GameUserService;
 import com.crowdgame.util.MailSender;
 import com.crowdgame.util.PasswordResetDataValidator;

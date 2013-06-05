@@ -1,4 +1,4 @@
-package com.crowdgame.model;
+package com.crowdgame.aux;
 
 import java.util.List;
 

@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.aux.ExecutionResults;
+import com.crowdgame.aux.ProblemOutput;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.Problem;
-import com.crowdgame.model.ProblemOutput;
 import com.crowdgame.service.ExecutionService;
 import com.crowdgame.service.GameUserService;
 import com.crowdgame.service.ProblemService;
@@ -29,6 +29,7 @@ import com.crowdgame.service.ProblemService;
 @Controller
 public class GameController {
 
+	private static final int MAX_TIME = 150000;
 	@Autowired
 	private ProblemService problemService;
 	
@@ -54,7 +55,8 @@ public class GameController {
 	@RequestMapping(value = "/game/results")
 	public @ResponseBody Integer saveExecution(@RequestBody ExecutionResults execution) {
 		GameUser user = userService.getCurrentUser();
-		if (execution.getTimeSpent() > 0 && execution.getFailedAttempts() == execution.getWrongAnswers().size()) {
+		if (execution.getTimeSpent() > 0 && execution.getTimeSpent() < MAX_TIME && 
+				execution.getFailedAttempts() == execution.getWrongAnswers().size()) {
 			executionService.saveExecutionResults(execution);
 			user.increaseScore(1);
 			userService.saveGameUser(user);

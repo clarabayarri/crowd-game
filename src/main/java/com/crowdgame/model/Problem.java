@@ -10,6 +10,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.IndexColumn;
 
+import com.crowdgame.aux.TaskInput;
 import com.google.common.collect.Lists;
 
 @Entity

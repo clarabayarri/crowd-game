@@ -12,7 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 
-import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.aux.ExecutionResults;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.Problem;
 import com.crowdgame.service.ExecutionService;

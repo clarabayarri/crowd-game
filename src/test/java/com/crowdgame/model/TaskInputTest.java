@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.crowdgame.aux.TaskInput;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 

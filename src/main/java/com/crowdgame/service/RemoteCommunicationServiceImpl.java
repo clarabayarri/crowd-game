@@ -1,22 +1,19 @@
-package com.crowdgame.util;
+package com.crowdgame.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.crowdgame.model.ExecutionInfo;
-import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.aux.ExecutionInfo;
+import com.crowdgame.aux.ExecutionResults;
+import com.crowdgame.aux.GameUserInfo;
+import com.crowdgame.aux.TaskInput;
+import com.crowdgame.aux.TaskRequest;
 import com.crowdgame.model.GameUser;
-import com.crowdgame.model.GameUserInfo;
 import com.crowdgame.model.PlatformData;
 import com.crowdgame.model.Problem;
 import com.crowdgame.model.ProblemCollection;
-import com.crowdgame.model.TaskInput;
-import com.crowdgame.model.TaskRequest;
-import com.crowdgame.service.GameUserService;
-import com.crowdgame.service.PlatformDataService;
-import com.crowdgame.service.ProblemCollectionService;
 import com.google.common.annotations.VisibleForTesting;
 
 @Service

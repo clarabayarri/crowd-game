@@ -1,6 +1,6 @@
-package com.crowdgame.util;
+package com.crowdgame.service;
 
-import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.aux.ExecutionResults;
 import com.crowdgame.model.GameUser;
 
 public interface RemoteCommunicationService {

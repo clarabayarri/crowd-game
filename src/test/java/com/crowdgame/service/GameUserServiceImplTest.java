@@ -17,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.crowdgame.model.GameUser;
-import com.crowdgame.util.RemoteCommunicationService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameUserServiceImplTest {

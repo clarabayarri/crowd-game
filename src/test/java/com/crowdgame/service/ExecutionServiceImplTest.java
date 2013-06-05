@@ -9,8 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.crowdgame.model.ExecutionResults;
-import com.crowdgame.util.RemoteCommunicationService;
+import com.crowdgame.aux.ExecutionResults;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExecutionServiceImplTest {

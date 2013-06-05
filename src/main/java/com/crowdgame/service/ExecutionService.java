@@ -1,6 +1,6 @@
 package com.crowdgame.service;
 
-import com.crowdgame.model.ExecutionResults;
+import com.crowdgame.aux.ExecutionResults;
 
 public interface ExecutionService {
 

@@ -1,4 +1,4 @@
-package com.crowdgame.model;
+package com.crowdgame.aux;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

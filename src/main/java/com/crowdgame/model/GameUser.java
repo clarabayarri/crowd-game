@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.crowdgame.aux.Registration;
 import com.google.common.collect.Lists;
 
 @Entity
