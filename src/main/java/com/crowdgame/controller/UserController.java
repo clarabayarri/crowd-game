@@ -157,13 +157,14 @@ public class UserController {
 			System.out.println("UserController: Password reset attempted with unexisting request '" + data.getUid() + "' or wrong date.");
 		}
 		
-		if (user != null && user.getPasswordResetRequest().getGenerationDate().before(getDateForResetLimit())) {
+		if (!bindingResult.hasErrors() && user != null && user.getPasswordResetRequest().getGenerationDate().before(getDateForResetLimit())) {
 			bindingResult.reject("password.change.error");
 			System.out.println("UserController: Password reset attempted for user '" + user.getUsername() + "' wrong date.");
 		}
 
 		if (!bindingResult.hasErrors()) {
-			user.setPassword(passwordEncoder.encodePassword(data.getPassword(), null));
+			user.setPassword(passwordEncoder.encodePassword(
+					data.getPassword(), null));
 			user.setPasswordResetRequest(null);
 			userService.saveGameUser(user);
 

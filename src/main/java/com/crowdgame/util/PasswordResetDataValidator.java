@@ -9,10 +9,6 @@ import com.crowdgame.aux.PasswordResetData;
 @Component
 public class PasswordResetDataValidator {
 
-	public boolean supports(Class<?> klass) {
-		return PasswordResetData.class.isAssignableFrom(klass);
-	}
-	
 	public void validate(Object target, Errors errors) {
 		PasswordResetData data = (PasswordResetData) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password",

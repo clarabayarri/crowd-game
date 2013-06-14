@@ -6,8 +6,6 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 
-
-
 public class TaskInput {
 
 	private Integer batchId;

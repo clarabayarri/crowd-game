@@ -1,4 +1,4 @@
-package com.crowdgame.util;
+package com.crowdgame.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -23,10 +23,6 @@ import com.crowdgame.aux.TaskInput;
 import com.crowdgame.model.GameUser;
 import com.crowdgame.model.PlatformData;
 import com.crowdgame.model.ProblemCollection;
-import com.crowdgame.service.GameUserService;
-import com.crowdgame.service.PlatformDataService;
-import com.crowdgame.service.ProblemCollectionService;
-import com.crowdgame.service.RemoteCommunicationServiceImpl;
 import com.crowdgame.service.RemoteCommunicationServiceImpl.GameUserPost;
 import com.crowdgame.service.RemoteCommunicationServiceImpl.PostForTasks;
 import com.google.common.collect.Maps;
@@ -140,6 +136,21 @@ public class RemoteCommunicationServiceImplTest {
 		service.postExecutionResults(results);
 		
 		Mockito.verify(user, Mockito.atLeastOnce()).getPlatformId();
+	}
+	
+	@Test
+	public void testPostExecutionResultsCreatesPlatformUserIfNoPlatformId() {
+		ExecutionResults results = new ExecutionResults();
+		results.setBatchId(3);
+		results.setTaskId(1);
+		results.setFailedAttempts(0);
+		results.setTimeSpent(100);
+		GameUser user = new GameUser();
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		
+		service.postExecutionResults(results);
+		
+		Mockito.verify(taskExecutor).execute(Mockito.any(GameUserPost.class));
 	}
 	
 	@Test

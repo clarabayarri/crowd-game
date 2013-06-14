@@ -40,13 +40,23 @@ public class GameControllerTest {
 	}
 	
 	@Test
-	public void testHandleRequestView() {
+	public void testLoadGameHandleRequestView() {
 		Model model = Mockito.mock(Model.class);
-		Mockito.when(userService.getCurrentUser()).thenReturn(new GameUser());
 		
 		String result = controller.loadGame(model);
 		
 		assertEquals("game", result);
+	}
+	
+	@Test
+	public void testLoadGameAddsCurrentUserToModel() {
+		Model model = Mockito.mock(Model.class);
+		GameUser user = new GameUser();
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		
+		controller.loadGame(model);
+		
+		Mockito.verify(model).addAttribute("user", user);
 	}
 	
 	@Test
@@ -59,14 +69,69 @@ public class GameControllerTest {
 	}
 	
 	@Test
-	public void testSaveExecution() {
+	public void testSaveExecutionSavesExecution() {
 		ExecutionResults results = new ExecutionResults();
 		results.setTimeSpent(300);
 		results.setFailedAttempts(0);
-		Mockito.when(userService.getCurrentUser()).thenReturn(new GameUser());
+		GameUser user = new GameUser();
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
 		
 		controller.saveExecution(results);
 		
 		Mockito.verify(executionService).saveExecutionResults(results);
+	}
+	
+	@Test
+	public void testSaveExecutionDoesntSaveExecutionIfSuspiciousTimeData() {
+		ExecutionResults results = new ExecutionResults();
+		results.setTimeSpent(-300);
+		results.setFailedAttempts(0);
+		GameUser user = new GameUser();
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		
+		controller.saveExecution(results);
+		
+		Mockito.verify(executionService, Mockito.never()).saveExecutionResults(results);
+	}
+	
+	@Test
+	public void testSaveExecutionDoesntSaveExecutionIfSuspiciousTimeData2() {
+		ExecutionResults results = new ExecutionResults();
+		results.setTimeSpent(GameController.MAX_TIME + 1);
+		results.setFailedAttempts(0);
+		GameUser user = new GameUser();
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		
+		controller.saveExecution(results);
+		
+		Mockito.verify(executionService, Mockito.never()).saveExecutionResults(results);
+	}
+	
+	@Test
+	public void testSaveExecutionDoesntSaveExecutionIfSuspiciousAnswerData() {
+		ExecutionResults results = new ExecutionResults();
+		results.setTimeSpent(456);
+		results.setFailedAttempts(1);
+		GameUser user = new GameUser();
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		
+		controller.saveExecution(results);
+		
+		Mockito.verify(executionService, Mockito.never()).saveExecutionResults(results);
+	}
+	
+	@Test
+	public void testSaveExecutionIncreasesUserScore() {
+		ExecutionResults results = new ExecutionResults();
+		results.setTimeSpent(300);
+		results.setFailedAttempts(0);
+		GameUser user = new GameUser();
+		user.setScore(33);
+		Mockito.when(userService.getCurrentUser()).thenReturn(user);
+		
+		int result = controller.saveExecution(results);
+		
+		assertEquals(33 + 1, result);
+		assertEquals(33 + 1, user.getScore().intValue());
 	}
 }

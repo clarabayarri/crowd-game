@@ -14,5 +14,12 @@ public class HomeControllerTest {
 		
 		assertEquals("index", result);
 	}
+	
+	@Test
+	public void testFindIconHandleRequestView() {
+		String result = controller.findIcon();
+		
+		assertEquals("forward:/resources/img/favicon.ico", result);
+	}
 
 }

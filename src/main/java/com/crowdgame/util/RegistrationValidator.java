@@ -24,7 +24,7 @@ public class RegistrationValidator {
 		if (username.length() > 50) {
 			errors.rejectValue("username", "registration.username.lengthExceeded");
 		}
-		if (!registration.getPassword().equals(registration.getConfirmPassword())) {
+		if (registration.getPassword() == null || !registration.getPassword().equals(registration.getConfirmPassword())) {
 			errors.rejectValue("confirmPassword", "registration.password.noMatch");
 		}
 	}

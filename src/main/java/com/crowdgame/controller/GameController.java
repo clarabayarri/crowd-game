@@ -29,7 +29,8 @@ import com.crowdgame.service.ProblemService;
 @Controller
 public class GameController {
 
-	private static final int MAX_TIME = 150000;
+	public static final int MAX_TIME = 150000;
+	
 	@Autowired
 	private ProblemService problemService;
 	
