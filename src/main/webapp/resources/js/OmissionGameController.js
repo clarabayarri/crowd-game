@@ -6,6 +6,7 @@ function OmissionGameController()
 {
 
     this.instructions = "Sobran letras";
+    this.color = RIBBON_COLOR_YELLOW;
 
     /**
         Initialises this object

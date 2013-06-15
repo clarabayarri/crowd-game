@@ -4,6 +4,7 @@
 function VisualButton()
 {
     this.text = null;
+    this.color = COLOR_WHITE;
     
     this.startupVisualButton = function(/**Bounds*/ bounds, /**String*/ text) {
     	this.startupGameObject(bounds);
@@ -18,12 +19,12 @@ function VisualButton()
     {
     	if (this.visible) {
     		// draw tile
-    		drawRibbon(context, this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height);
+    		drawRibbon(context, this.bounds.origin.x, this.bounds.origin.y, this.bounds.width, this.bounds.height, this.color);
     		
             if (this.text) {
                 // draw text
                 var center = this.bounds.center();
-                drawText(context, this.text, center.x, center.y, FONT_RIBBON_24, COLOR_WHITE);
+                drawText(context, this.text, center.x, center.y, FONT_RIBBON_24, this.color);
             }
     		
     	}

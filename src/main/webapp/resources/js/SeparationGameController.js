@@ -6,6 +6,7 @@ function SeparationGameController()
 {
 
     this.instructions = "Corta en palabras";
+    this.color = RIBBON_COLOR_BLUE;
 
     /**
         Initialises this object

@@ -6,6 +6,7 @@ function DerivationGameController()
 {
 
     this.instructions="Escoge la terminación";
+    this.color = COLOR_WHITE;
 
     /**
         Initialises this object

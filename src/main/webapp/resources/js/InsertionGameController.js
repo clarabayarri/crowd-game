@@ -6,6 +6,7 @@ function InsertionGameController()
 {
 
     this.instructions = "Falta una letra";
+    this.color = RIBBON_COLOR_PINK;
 
     /**
         Initialises this object

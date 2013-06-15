@@ -6,6 +6,7 @@ function HardInsertionGameController()
 {
 
     this.instructions = "Pon la letra que falta";
+    this.color = RIBBON_COLOR_PINK;
 
     /**
         Initialises this object

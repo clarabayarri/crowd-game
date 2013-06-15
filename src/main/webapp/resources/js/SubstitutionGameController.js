@@ -6,6 +6,7 @@ function SubstitutionGameController()
 {
 
     this.instructions = "Cambia una letra";
+    this.color = RIBBON_COLOR_PURPLE;
 
     /**
         Initialises this object

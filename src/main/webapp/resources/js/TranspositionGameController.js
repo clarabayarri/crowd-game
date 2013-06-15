@@ -6,6 +6,7 @@ function TranspositionGameController()
 {
 
     this.instructions = "Reordena las letras";
+    this.color = RIBBON_COLOR_RED;
 
     /**
         Initialises this object

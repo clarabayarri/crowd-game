@@ -92,6 +92,7 @@ function GameController()
         var instrBounds = new Bounds().init(instrOrigin, 400, 50);
         var instr = new VisualButton().startupVisualButton(instrBounds);
         instr.text = this.instructions;
+        instr.color = this.color;
         this.gameObjects.push(instr);
     }
 
