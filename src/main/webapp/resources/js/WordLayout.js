@@ -130,7 +130,9 @@ function WordLayout()
     }
     
     this.getCutIndexForPoint = function(/**Point*/ point) {
-    	if (point.x >= this.bounds.origin.x && point.x <= this.bounds.origin.x + this.bounds.width) {
+        var bigOrigin = new Point().init(this.bounds.origin.x - this.children[0].bounds.width/2, this.bounds.origin.y);
+    	var bigBounds = new Bounds().init(bigOrigin, this.bounds.width + this.children[0].bounds.width, this.bounds.height);
+        if (bigBounds.containsPoint(point)) {
     		var index = 0;
     		for (var i = 0; i < this.children.length; ++i) {
     			if (point.x > this.children[i].bounds.origin.x + (this.children[i].bounds.width / 2)) {

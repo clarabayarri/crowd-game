@@ -6,7 +6,7 @@ function HardInsertionGameController()
 {
 
     this.instructions = "Pon la letra que falta";
-    this.color = RIBBON_COLOR_PINK;
+    this.color = RIBBON_COLOR_GREEN;
 
     /**
         Initialises this object
@@ -75,7 +75,9 @@ function HardInsertionGameController()
     			this.draw();
     			
     			this.checkForSuccess();
-    		}
+    		} else {
+                this.reload();
+            }
     		this.moving = false;
     		this.movingTile = null;
     	}

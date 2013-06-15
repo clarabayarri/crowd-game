@@ -15,8 +15,8 @@ var COLOR_DARK_GREY = "#191919";
 var COLOR_WHITE = "#ffffff";
 var COLOR_BACKGROUND_SHADOW = "rgba(42, 42, 42, 0.5)";
 
-var FONT_RIBBON_20 = "bold 20px 'Didact Gothic'";
-var FONT_RIBBON_24 = "bold 24px 'Didact Gothic'";
+var FONT_RIBBON_20 = "bold 20px Helvetica, Arial, sans-serif";
+var FONT_RIBBON_24 = "bold 24px Helvetica, Arial, sans-serif";
 var FONT_BOLD_46 = "bold 46px Helvetica, Arial, sans-serif";
 var FONT_BOLD_24 = "bold 24px Helvetica, Arial, sans-serif";
 
@@ -54,6 +54,9 @@ var COLOR_RIBBON_LINES_YELLOW = "#efdb89";
 var COLOR_RIBBON_GLOW_YELLOW = "#f2d351";
 var COLOR_RIBBON_OUTLINE_YELLOW = "#edba54";
 var COLOR_RIBBON_TEXT_YELLOW = COLOR_DARK_GREY;
+
+var RIBBON_COLOR_GREEN = "ribbon-yellow";
+var COLOR_RIBBON_TEXT_GREEN = COLOR_DARK_GREY;
 
 function drawScrabbleBackground(context, x, y, width, height) {
 	// draw background
@@ -134,6 +137,7 @@ function drawText(context, text, x, y, font, color) {
 	if (color === RIBBON_COLOR_PINK) context.fillStyle = COLOR_RIBBON_TEXT_PINK;
 	if (color === RIBBON_COLOR_RED) context.fillStyle = COLOR_RIBBON_TEXT_RED;
 	if (color === RIBBON_COLOR_YELLOW) context.fillStyle = COLOR_RIBBON_TEXT_YELLOW;
+	if (color === RIBBON_COLOR_GREEN) context.fillStyle = COLOR_RIBBON_TEXT_GREEN;
 	context.font = font;
 	context.textAlign = "center";
 	context.textBaseline = "middle";

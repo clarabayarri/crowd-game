@@ -190,6 +190,8 @@ function GameController()
     this.getEventPosition = function(e) {
         var ratio = this.canvas.offsetWidth/this.canvas.width;
     	var x = (e.pageX - this.applicationManager.canvasOrigin.x - 5) / ratio;
+        if (x < 1) x = 1;
+        if (x > this.canvas.width-1) x = this.canvas.width-1;
         //var x = e.x - this.canvas.offsetLeft - window.pageXOffset;
         var y = e.pageY - this.applicationManager.canvasOrigin.y - 5;
         //var y = e.y - this.canvas.offsetTop + window.pageYOffset;
