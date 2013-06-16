@@ -5,7 +5,7 @@
 function DerivationGameController()
 {
 
-    this.instructions="Escoge la terminación";
+    this.instructions="Escoge el final correcto";
     this.color = RIBBON_COLOR_PINK;
 
     /**

@@ -79,6 +79,15 @@ function ApplicationManager()
     	canvas.addEventListener('mousedown', function(e) {_this.onMouseDown(e);}, false);
     	canvas.addEventListener('mousemove', function(e) {_this.onMouseMove(e);}, false);
     	canvas.addEventListener('mouseup', function(e) {_this.onMouseUp(e);}, false);
+        canvas.addEventListener('touchstart', function(e) {
+            _this.onMouseDown(e.touches[0]);
+        });
+        canvas.addEventListener('touchmove', function(e) {
+            _this.onMouseMove(e.touches[0]);
+        });
+        canvas.addEventListener('touchend', function(e) {
+            _this.onMouseUp(e.touches[0]);
+        });
         this.loadPause();
         this.findProblem();
         this.canvasOrigin = findPos(canvas);
